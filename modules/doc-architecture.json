@@ -1,0 +1,242 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "doc-architecture",
+  "default_title": "Architecture — Technical Reference",
+  "landing_intro": "Meridian is a single-file frontend app (~7,400 lines of inline CSS/JS/HTML) backed by an optional FastAPI + PostgreSQL layer for live patient data. Clinical content flows from DOCX or JSON into a browser runtime that renders checklists, exports PPTX slides, and connects to EHRs via CDS Hooks and SMART on FHIR. This module distills the full architecture into four confirmable pillars, key risks, and deep-linked references.",
+  "checklist_section_label": "Architecture pillars — confirm all four",
+  "checklist": [
+    {
+      "item_id": "data-flow",
+      "position": 1,
+      "statement": "Data flow validated — DOCX → mammoth.js → sanitize → parse → JSON; modules/*.json fetched in parallel on load into moduleData{}",
+      "faq_ref": "content-pipeline"
+    },
+    {
+      "item_id": "content-pipeline",
+      "position": 2,
+      "statement": "Content pipeline functional — module registry (index.json) drives categories, triggers, and module routing; PPTX export via PptxGenJS, PDF via browser print",
+      "faq_ref": "content-pipeline"
+    },
+    {
+      "item_id": "interop-layer",
+      "position": 3,
+      "statement": "Interop layer implemented — trigger schema v1.2.0 consumed by frontend, /api/modules/match, and CDS Hooks patient-view service; SMART on FHIR launch reads Patient/Condition/MedicationRequest/Observation",
+      "faq_ref": "interop-surface"
+    },
+    {
+      "item_id": "patient-arch",
+      "position": 4,
+      "statement": "Patient data architecture working — API auto-detects on localhost:8090, falls back to 5 demo patients on Cloudflare; pre-computed JSONB cache eliminates SQL at read time",
+      "faq_ref": "patient-data"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Architecture validated — all layers operational",
+    "narrative_html": "The full stack is live: static frontend on Cloudflare Pages, FastAPI backend with PostgreSQL 16 (11 tables, 200 seeded patients), CDS Hooks 2.0 discovery endpoint, SMART on FHIR launch handler, Dragon Copilot agent stub, and <strong>Meridian Coach v1</strong> — a bottom-strip AI assistant backed by Anthropic Claude Haiku 4.5, served via a Cloudflare Pages Function in production and a mirror FastAPI endpoint on localhost. <strong>Module triggers are authored once in index.json and evaluated identically by the frontend, the REST API, and the CDS Hooks service.</strong>",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Technical risks and gaps",
+  "escalation": [
+    {
+      "item_id": "cors-open",
+      "position": 1,
+      "statement": "CORS is open (allow_origins=[\"*\"]) — must restrict to Meridian's domain before any production patient data flows through the API",
+      "faq_ref": "dependencies-and-gaps"
+    },
+    {
+      "item_id": "no-auth",
+      "position": 2,
+      "statement": "No authentication on API endpoints — /api/patient/{mrn} and /api/precompute are unprotected; Entra ID integration planned but not implemented",
+      "faq_ref": "dependencies-and-gaps"
+    },
+    {
+      "item_id": "cdn-deps",
+      "position": 3,
+      "statement": "CDN dependencies not self-hosted — mammoth.js 1.8.0 and PptxGenJS 3.12.0 loaded from jsdelivr with SRI hashes; enterprise deployment requires vendored copies",
+      "faq_ref": "dependencies-and-gaps"
+    },
+    {
+      "item_id": "inline-csp",
+      "position": 4,
+      "statement": "Inline JS/CSS in a single 7,400-line file — Content Security Policy cannot block inline scripts without breaking the app; refactoring to external files is a prerequisite for strict CSP",
+      "faq_ref": "dependencies-and-gaps"
+    },
+    {
+      "item_id": "localstorage-modules",
+      "position": 5,
+      "statement": "localStorage used for uploaded DOCX modules — no size limit enforcement, no encryption, no cross-device sync; acceptable for demo, not for PHI workflows",
+      "faq_ref": "dependencies-and-gaps"
+    },
+    {
+      "item_id": "single-file-scale",
+      "position": 6,
+      "statement": "Single-file frontend at ~7,400 lines — maintainable today but approaching the threshold where a build step or module splitting becomes necessary",
+      "faq_ref": "dependencies-and-gaps"
+    },
+    {
+      "item_id": "dragon-not-deployed",
+      "position": 7,
+      "statement": "Dragon Copilot agent is a stub — manifest and OpenAPI skills exist in dragon-agent/ but deployment requires BAA-covered hosting and Microsoft partner onboarding",
+      "faq_ref": "interop-surface"
+    },
+    {
+      "item_id": "coach-api-key",
+      "position": 11,
+      "statement": "Meridian Coach v1 runs on a free-tier Anthropic key — acceptable for synthetic-data demo but must be swapped for a BAA-covered key (Anthropic enterprise or Amazon Bedrock) before any PHI context flows through",
+      "faq_ref": "ai-coach"
+    },
+    {
+      "item_id": "smart-no-write",
+      "position": 8,
+      "statement": "SMART on FHIR is read-only by design — preserves FDA non-device CDS posture but limits future clinical workflow integration (e.g., order entry)",
+      "faq_ref": "interop-surface"
+    },
+    {
+      "item_id": "precompute-no-cron",
+      "position": 9,
+      "statement": "/api/precompute exists but has no scheduled job — patient summary cache must be triggered manually or via an external cron; stale cache = stale data",
+      "faq_ref": "api-backend"
+    },
+    {
+      "item_id": "no-test-backend",
+      "position": 10,
+      "statement": "Playwright smoke tests cover frontend only — no automated tests for FastAPI endpoints, database seeder, or CDS Hooks responses",
+      "faq_ref": "api-backend"
+    }
+  ],
+  "context_strip": {
+    "label": "Current deployment",
+    "text": "Production: https://meridian-3x6.pages.dev (Cloudflare Pages + Pages Function for /api/agent/message). Backend: localhost:8090 (FastAPI + PostgreSQL 16, also serves agent proxy). Deploy via Wrangler CLI. GitHub: noahschmuckler/meridian."
+  },
+  "footer_note": "Architecture reference current as of April 2026. Source: docs/ARCHITECTURE.md. This module is auto-generated from the living architecture document — re-generate when the source changes.",
+  "faqs": [
+    {
+      "faq_id": "content-pipeline",
+      "topic": "Content Pipeline",
+      "title": "How does content flow from authoring to rendering?",
+      "referenced_by": ["data-flow", "content-pipeline"],
+      "items": [
+        {
+          "question": "What is the DOCX upload pipeline?",
+          "answer_html": "<p>A <span class=\"pill\">.docx</span> file is read via <strong>FileReader</strong>, converted to HTML by <span class=\"pill\">mammoth.js 1.8.0</span> (CDN with SRI hash), sanitized by <span class=\"pill\">sanitizeHtml()</span> to strip scripts/styles/event handlers, then parsed by <span class=\"pill\">parseDocxHtml()</span> — a state-machine that walks H2 section markers (Introduction, Checklist Items, Green Zone, Escalation Items, Context, Footer, FAQ Reference, References) and emits a module JSON object conforming to schema v1.0.0.</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#frontend--docx-upload-pipeline\" target=\"_blank\">Full section</a></p>"
+        },
+        {
+          "question": "How are modules loaded on page start?",
+          "answer_html": "<p><span class=\"pill\">loadApp()</span> runs on page load: fetches <span class=\"pill\">modules/index.json</span> for the registry, then <span class=\"pill\">Promise.allSettled()</span> fetches all module JSON files in parallel. Successful modules are stored in <span class=\"pill\">moduleData[module_id]</span>. Any DOCX-uploaded modules are restored from <span class=\"pill\">localStorage</span>. Finally, the app routes to <span class=\"pill\">?module=X</span> or shows the landing page.</p>"
+        },
+        {
+          "question": "How do PPTX and PDF exports work?",
+          "answer_html": "<p><strong>PPTX</strong>: <span class=\"pill\">generatePPTX()</span> builds slides from module JSON using <span class=\"pill green\">PptxGenJS 3.12.0</span> — title slide, checklist slide (with FAQ ref badges), escalation slide, per-FAQ slides with overflow handling, and a footer slide. Layout is 13.333\" x 7.5\" in Segoe UI.</p><p><strong>PDF</strong>: No library — <span class=\"pill\">window.print()</span> renders the expanded view. Print-specific CSS (<span class=\"pill\">@media print</span>) controls layout. A print header is injected with title and date.</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#frontend--pptx-export\" target=\"_blank\">Full section</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "api-backend",
+      "topic": "API & Database",
+      "title": "How does the FastAPI backend work?",
+      "referenced_by": ["precompute-no-cron", "no-test-backend"],
+      "items": [
+        {
+          "question": "What are the API endpoints?",
+          "answer_html": "<p><span class=\"pill\">/api/patient/{mrn}</span> — reads from <span class=\"pill\">patient_summaries</span> cache (JSONB); falls back to <span class=\"pill\">build_patient_summary()</span> joining 8 tables. Returns <span class=\"pill\">X-Cache: HIT/MISS</span> header.</p><p><span class=\"pill\">/api/patients/search?q=</span> — ILIKE name search, top 20.</p><p><span class=\"pill\">/api/precompute</span> (POST) — batch pre-generates all patient summaries into cache.</p><p><span class=\"pill\">/api/modules/match</span> — runs trigger evaluation against patient context; shared contract with frontend.</p><p><span class=\"pill\">/cds-services</span> — HL7 CDS Hooks 2.0 discovery + patient-view handler.</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#api-server-fastapi\" target=\"_blank\">Full section</a></p>"
+        },
+        {
+          "question": "What is the database schema?",
+          "answer_html": "<p>PostgreSQL 16, database <span class=\"pill\">meridian_dashboard</span>. 11 tables: <strong>patients</strong> (demographics, payer), <strong>providers</strong>, <strong>problems</strong> (ICD-10), <strong>vitals</strong>, <strong>labs</strong>, <strong>medications</strong>, <strong>hard_stops</strong> (severity + linked module), <strong>opportunities</strong> (JSONB details), <strong>dashboard_metrics</strong> (trends), <strong>dashboard_patient_data</strong>, <strong>payer_rules</strong>, and <strong>patient_summaries</strong> (JSONB cache).</p><p>Indexes on <span class=\"pill\">patients.mrn</span>, all foreign keys, and <span class=\"pill\">payer_rules(payer, product, condition_key)</span>.</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#database-postgresql\" target=\"_blank\">Full section</a></p>"
+        },
+        {
+          "question": "How does the cache layer work?",
+          "answer_html": "<p>The <span class=\"pill\">patient_summaries</span> table stores pre-computed JSONB payloads keyed by MRN. <span class=\"pill\">/api/precompute</span> iterates all patients, runs <span class=\"pill\">build_patient_summary()</span> (8 sequential queries), and upserts the result. At read time, <span class=\"pill\">/api/patient/{mrn}</span> checks the cache first — if present, it returns the JSONB directly with no SQL joins.</p><p>Scale target: 1,000 providers x 30 patients/day = 30K cached JSONB reads. Dashboard source data is 2-3 days lagged, so cache staleness is acceptable.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "interop-surface",
+      "topic": "Interop Surface",
+      "title": "How does Meridian integrate with EHRs and external systems?",
+      "referenced_by": ["interop-layer", "dragon-not-deployed", "smart-no-write"],
+      "items": [
+        {
+          "question": "What is the trigger schema?",
+          "answer_html": "<p>Trigger schema <span class=\"pill green\">v1.2.0</span> (2026-04-18). Each module in <span class=\"pill\">modules/index.json</span> may carry a <span class=\"pill\">triggers</span> object with: <strong>priority</strong> (sort key), <strong>problems_keywords</strong> (case-insensitive substring match), <strong>meds_regex</strong> (case-insensitive regex), <strong>labs[]</strong> (id/op/value rules), and reason templates with <span class=\"pill\">{value}</span> substitution.</p><p>Evaluation order: labs → meds → problems; first hit wins. Single authoring source consumed by the frontend (<span class=\"pill\">evaluateModuleTriggers()</span>), REST API (<span class=\"pill\">/api/modules/match</span>), and CDS Hooks service.</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#trigger-schema-v120\" target=\"_blank\">Full section</a></p>"
+        },
+        {
+          "question": "How does the CDS Hooks integration work?",
+          "answer_html": "<p><span class=\"pill\">/cds-services</span> (GET) returns the HL7 CDS Hooks 2.0 discovery document listing the <span class=\"pill\">meridian-manifest</span> service. <span class=\"pill\">/cds-services/meridian-manifest</span> (POST) is a <span class=\"pill green\">patient-view</span> hook handler that consumes standard FHIR prefetch bundles, runs trigger evaluation, and returns cards with <span class=\"pill\">?module=&lt;id&gt;&amp;patient=&lt;id&gt;</span> deep-links.</p><p>EHR-agnostic: works with any CDS-Hooks-compliant EHR (Epic, Oracle Health, Meditech).</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#interop-surface-2026-04-18\" target=\"_blank\">Full section</a></p>"
+        },
+        {
+          "question": "What is the SMART on FHIR launch flow?",
+          "answer_html": "<p><span class=\"pill\">SmartLaunch.init()</span> runs on app start. If <span class=\"pill\">?iss=&amp;launch=</span> params are present, it performs SMART App Launch v2 discovery + PKCE OAuth2 code exchange, then fetches <strong>Patient</strong>, <strong>Condition</strong>, <strong>MedicationRequest</strong>, and <strong>Observation</strong> (category=laboratory) resources.</p><p>A LOINC code map (<span class=\"pill\">SMART_LAB_CODE_MAP</span>) translates standard lab codes into Meridian lab IDs consumed by the trigger evaluator. <span class=\"pill warn\">Read-only by design</span> — no write-back to preserve FDA non-device CDS posture.</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#smart-on-fhir-launch-read-only\" target=\"_blank\">Full section</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "patient-data",
+      "topic": "Patient Data",
+      "title": "How does the patient data pipeline work?",
+      "referenced_by": ["patient-arch"],
+      "items": [
+        {
+          "question": "How does the frontend resolve patient data?",
+          "answer_html": "<p>Two paths: <strong>Demo patients</strong> — 5 hardcoded patients in <span class=\"pill\">demoPatients{}</span>, always available as fallback. <strong>API patients</strong> — <span class=\"pill\">loadPatientFromAPI(mrn)</span> fetches from <span class=\"pill\">MERIDIAN_API_URL/api/patient/{mrn}</span>.</p><p>API auto-detection: <span class=\"pill\">MERIDIAN_API_URL</span> is set to <span class=\"pill\">http://localhost:8090</span> when running locally, <span class=\"pill\">null</span> on Cloudflare Pages. Override with <span class=\"pill\">?api=http://host:port</span>.</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#frontend--patient-data-pipeline\" target=\"_blank\">Full section</a></p>"
+        },
+        {
+          "question": "What does the patient panel render?",
+          "answer_html": "<p>After <span class=\"pill\">initPatientPanel(patient)</span>, six sections render in order:</p><p><strong>1. Anticipated Hard Stops</strong> — severity-coded alerts with module/OE links. <strong>2. Dashboard Insights</strong> — provider-level quality metrics with trend arrows. <strong>3. Patient-Specific Opportunities</strong> — payer-aware billing/documentation guidance with nested detail. <strong>4. Clinical data</strong> — problems, vitals, labs, medications with checkboxes. <strong>5. Suggested Modules</strong> — auto-generated from trigger evaluation. <strong>6. OpenEvidence query builder</strong> — pre-prompt assembled from checked items.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "dependencies-and-gaps",
+      "topic": "Dependencies & Security Gaps",
+      "title": "What are the dependencies and current security gaps?",
+      "referenced_by": ["cdn-deps", "single-file-scale", "cors-open", "no-auth", "inline-csp", "localstorage-modules"],
+      "items": [
+        {
+          "question": "What CDN and server dependencies does Meridian use?",
+          "answer_html": "<p><strong>CDN (browser)</strong>: <span class=\"pill\">mammoth.js 1.8.0</span> (DOCX conversion), <span class=\"pill\">PptxGenJS 3.12.0</span> (slide generation) — both from jsdelivr with SRI hashes. <span class=\"pill\">IBM Plex Sans/Mono</span> from Google Fonts.</p><p><strong>Server</strong>: <span class=\"pill\">FastAPI 0.136.0</span>, <span class=\"pill\">uvicorn 0.44.0</span>, <span class=\"pill\">psycopg2-binary 2.9.11</span> — all in <span class=\"pill\">api/.venv</span>. <span class=\"pill green\">PostgreSQL 16</span> as system package.</p><p><strong>Dev</strong>: <span class=\"pill\">Playwright</span> (npm devDep) for 12 smoke tests.</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#dependencies\" target=\"_blank\">Full section</a></p>"
+        },
+        {
+          "question": "What are the key files in the repository?",
+          "answer_html": "<p><span class=\"pill\">index-rendered.html</span> — entire frontend (~7,400 lines). <span class=\"pill\">index.html</span> — copy (must stay in sync). <span class=\"pill\">modules/index.json</span> — module registry. <span class=\"pill\">modules/*.json</span> — clinical content. <span class=\"pill\">api/server.py</span> — FastAPI backend. <span class=\"pill\">api/schema.sql</span> — PostgreSQL schema. <span class=\"pill\">api/seed.py</span> — 200-patient seeder. <span class=\"pill\">dragon-agent/</span> — Copilot Studio manifest. <span class=\"pill\">tests/smoke.spec.js</span> — Playwright tests.</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#key-files\" target=\"_blank\">Full section</a></p>"
+        },
+        {
+          "question": "What are the CORS, auth, and CSP security gaps?",
+          "answer_html": "<p><strong>CORS</strong>: FastAPI uses <span class=\"pill warn\">allow_origins=[\"*\"]</span> — any website can call the API. Must restrict to Meridian's domain before serving real patient data.</p><p><strong>No auth</strong>: All API endpoints are unprotected. <span class=\"pill\">/api/patient/{mrn}</span> returns data to any caller. Entra ID integration is planned but not implemented.</p><p><strong>Inline code</strong>: The single-file app embeds all JS/CSS inline, making strict CSP (<span class=\"pill\">script-src 'self'</span>) impossible without refactoring or nonces.</p><p><strong>localStorage</strong>: DOCX-uploaded modules stored unencrypted with no size enforcement. Acceptable for non-PHI demo content only.</p><p>See <a href=\"/docs/viewer.html?file=ENTERPRISE_SECURITY.md\" target=\"_blank\">docs/ENTERPRISE_SECURITY.md</a> for the full remediation plan.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "ai-coach",
+      "topic": "AI Coach",
+      "title": "Meridian Coach v1 — architecture",
+      "referenced_by": ["coach-api-key"],
+      "items": [
+        {
+          "question": "How is the AI coach wired into the app?",
+          "answer_html": "<p>A fixed strip at the bottom of every screen. Clicking it expands an upward drawer with a streaming chat. Model: <span class=\"pill\">claude-haiku-4-5-20251001</span>. Behavior: the <em>soft-steer</em> pattern — route clinical questions to the relevant module, refuse outright-clinical recommendations, redirect to OpenEvidence.</p><p>Two proxy endpoints speak the same contract (<span class=\"pill\">POST /api/agent/message</span>, SSE response): a Cloudflare Pages Function at <span class=\"pill\">functions/api/agent/message.js</span> for production, and a FastAPI route in <span class=\"pill\">api/server.py</span> for localhost. The frontend picks whichever is reachable.</p><p>System prompt is layered into four blocks — role, feature manual, module registry, per-turn dynamic context — with <span class=\"pill\">cache_control: ephemeral</span> on the first three so every turn after the first hits Anthropic's prompt cache.</p>"
+        },
+        {
+          "question": "What can the coach actually do? (Tool surface)",
+          "answer_html": "<p>Six tools, navigation-only. No clinical-state mutation:</p><p><strong>open_module(module_id)</strong> — switches to a module.<br/><strong>go_home()</strong> — returns to the landing page.<br/><strong>switch_patient(key_or_mrn)</strong> — swaps the active patient.<br/><strong>expand_patient_panel()</strong> — opens the collapsed patient panel.<br/><strong>highlight_element(selector, label?)</strong> — pulses a UI element for 4 seconds to point at where a feature lives.<br/><strong>build_oe_query(topic)</strong> — prefills the OpenEvidence query box for clinical-Q redirect.</p><p>Explicitly <em>not</em> in the tool set: checking checklist items, editing patient data, exporting documents. The coach gestures; the clinician does the work.</p>"
+        },
+        {
+          "question": "Is it ready for enterprise use?",
+          "answer_html": "<p>Almost. Code path is production-grade; the only remaining gate is the API key. Current demo uses a free-tier Anthropic credential — fine for synthetic data, not permissible for PHI. Swap to <strong>Anthropic enterprise with BAA</strong> or <strong>Claude on Amazon Bedrock</strong> and the v1 is enterprise-ready.</p><p>Swap is a single Cloudflare Pages secret rotation (<span class=\"pill\">wrangler pages secret put ANTHROPIC_API_KEY</span>) plus a redeploy — no code changes.</p>"
+        },
+        {
+          "question": "Can we swap the Anthropic backend for Copilot Studio?",
+          "answer_html": "<p>Yes. The frontend speaks a stable SSE event vocabulary (<span class=\"pill\">text</span>, <span class=\"pill\">tool_use</span>, <span class=\"pill\">done</span>, <span class=\"pill\">error</span>) to <span class=\"pill\">/api/agent/message</span>. Anything that implements that contract can be the backend — Copilot Studio, Bedrock, a different model family, even a self-hosted inference server.</p><p>Copilot Studio gives tighter M365 integration (SSO, Purview audit, Teams channel). Trade-off is less control over model choice and streaming. A Copilot Studio swap is a credible Phase 2 option if enterprise alignment demands it.</p>"
+        },
+        {
+          "question": "How does the coach scale as the module library grows?",
+          "answer_html": "<p>v1 is a single generalist agent with the full module registry in-prompt (~15 modules today). This remains comfortable to roughly 30–50 modules.</p><p>Beyond that, the planned path is <strong>sub-agents per subject area</strong> — one specialist for controlled substances, one for cardiovascular, one for urgent care, etc. A lightweight router agent triages the user's question and hands off to the right specialist, keeping each specialist's context focused and cacheable.</p><p>Not needed yet. Add when breadth actually creates context bloat or when subject-specific tone diverges.</p>"
+        },
+        {
+          "question": "Is there an agent for verifying module content against current literature?",
+          "answer_html": "<p>Planned as a separate initiative, distinct from Coach v1. Where Coach faces clinicians at the point of care, the verification agent runs background/authoring-side — periodically checking each module against OpenEvidence, PubMed, and current guidelines, and surfacing suggested updates when evidence shifts.</p><p><strong>Dr. Varun Malik has already built agents that perform exactly this literature-currency check</strong> in his own work. His implementation is the natural starting point — either directly reused or used as design inspiration for a Meridian-specific variant. Recommended next step: a working session with Varun to review his design and decide reuse vs. clean-room.</p>"
+        }
+      ]
+    }
+  ]
+}

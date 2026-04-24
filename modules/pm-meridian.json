@@ -1,0 +1,244 @@
+{
+  "schema_version": "1.3.0",
+  "module_type": "project",
+  "module_id": "pm-meridian",
+  "default_title": "Meridian Project — Status & Tracking",
+  "landing_intro": "Living project status for Meridian across seven workstreams. Updated after each stakeholder meeting via the transcript processing pipeline. Last updated: 2026-04-22.",
+  "last_updated": "2026-04-22T00:00:00Z",
+  "checklist_section_label": "Top priorities — current sprint",
+  "checklist": [
+    {
+      "item_id": "pri-hosting",
+      "position": 1,
+      "statement": "Resolve hosting target — identify BAA-covered infrastructure (Optum Azure or CRH tenancy) and begin procurement conversation",
+      "faq_ref": "workstream-overview"
+    },
+    {
+      "item_id": "pri-pilot-scope",
+      "position": 2,
+      "statement": "Scope Phase 1 pilot — define 1-3 patients on own panel, get written QI-exemption letter from CRH",
+      "faq_ref": "workstream-overview"
+    },
+    {
+      "item_id": "pri-soc2",
+      "position": 3,
+      "statement": "Start SOC 2 Type I readiness scoping — engage Drata/Vanta/Secureframe for initial assessment ($5-15K)",
+      "faq_ref": "workstream-overview"
+    },
+    {
+      "item_id": "pri-demo-prep",
+      "position": 4,
+      "statement": "Prepare executive presentation — demo live preview, export PPTX from strategy modules, schedule regional leadership session",
+      "faq_ref": "workstream-overview"
+    },
+    {
+      "item_id": "pri-coach-baa-key",
+      "position": 5,
+      "statement": "Secure BAA-covered Anthropic API key (enterprise tier or Amazon Bedrock) for Coach v1 — the only remaining gate for enterprise rollout of the assistant",
+      "faq_ref": "ai-coach-status"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "On track — strategic foundation complete, AI coach shipped",
+    "narrative_html": "<p>Seven strategic documents authored and published as Meridian modules. Architecture validated with interop layer (CDS Hooks, SMART on FHIR, Dragon agent stub). <strong>Meridian Coach v1 is live</strong> on the demo site (Anthropic Claude Haiku 4.5 via Cloudflare Pages Functions, soft-steer pattern). Demo generating executive interest. <strong>Next milestone: executive presentation and Phase 1 pilot kickoff.</strong></p>",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Active blockers & risks",
+  "escalation": [
+    {
+      "item_id": "block-baa",
+      "position": 1,
+      "statement": "Cloudflare Pages BAA gap — must resolve hosting before any real PHI (6-12 month procurement lead time)",
+      "faq_ref": "workstream-overview"
+    },
+    {
+      "item_id": "block-single-founder",
+      "position": 2,
+      "statement": "Single-founder dependency — all clinical authoring, engineering, and stakeholder management through one person",
+      "faq_ref": "workstream-overview"
+    },
+    {
+      "item_id": "block-no-evidence",
+      "position": 3,
+      "statement": "No outcomes evidence yet — need process-measure study design ready before Phase 1 kickoff",
+      "faq_ref": "workstream-overview"
+    }
+  ],
+  "project_status": {
+    "overall_status": "on-track",
+    "areas": [
+      {
+        "area_id": "architecture",
+        "label": "Architecture & Platform",
+        "status": "on-track",
+        "summary": "Single-file frontend, FastAPI backend, PostgreSQL cache layer all functional. Interop surface (CDS Hooks, SMART, Dragon stub) implemented and tested. Meridian Coach v1 shipped as a Cloudflare Pages Function backed by Anthropic Claude Haiku 4.5.",
+        "doc_ref": "docs/ARCHITECTURE.md",
+        "module_ref": "doc-architecture",
+        "tasks": [
+          { "task_id": "arch-1", "label": "Frontend app (index-rendered.html)", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "arch-2", "label": "FastAPI backend + PostgreSQL schema", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "arch-3", "label": "Module trigger schema v1.2.0", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "arch-4", "label": "CDS Hooks patient-view service", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "arch-5", "label": "SMART on FHIR launch (read-only)", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "arch-6", "label": "Backend auth + TLS", "status": "not-started", "owner": "Noah" },
+          { "task_id": "arch-7", "label": "Audit logging backend", "status": "not-started", "owner": "Noah" },
+          { "task_id": "arch-8", "label": "Self-host CDN deps (PptxGenJS, Mammoth, fonts)", "status": "not-started", "owner": "Noah" },
+          { "task_id": "arch-9", "label": "Meridian Coach v1 (Anthropic proxy, same-contract FastAPI + Cloudflare Pages Function)", "status": "done", "updated": "2026-04-22" },
+          { "task_id": "arch-10", "label": "Swap Coach to BAA-covered API key (Anthropic enterprise / Bedrock) for Phase 1", "status": "not-started", "owner": "Noah" }
+        ]
+      },
+      {
+        "area_id": "competitive",
+        "label": "Competitive Positioning",
+        "status": "on-track",
+        "summary": "2x2 positioning validated. JTBD anchor defined. Competitor stances mapped. 90-day priority list published.",
+        "doc_ref": "docs/COMPETITIVE_POSITIONING.md",
+        "module_ref": "doc-competitive",
+        "tasks": [
+          { "task_id": "comp-1", "label": "2x2 market map + SWOT", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "comp-2", "label": "JTBD anchor (4-min visit-velocity)", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "comp-3", "label": "Competitor-by-competitor stances", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "comp-4", "label": "Navina detailed teardown", "status": "not-started", "owner": "Noah" },
+          { "task_id": "comp-5", "label": "Visit-velocity positioning doc for demos", "status": "not-started", "owner": "Noah" },
+          { "task_id": "comp-6", "label": "Author + last-reviewed date on all modules", "status": "not-started", "owner": "Noah" }
+        ]
+      },
+      {
+        "area_id": "compliance",
+        "label": "Compliance & Regulatory",
+        "status": "at-risk",
+        "summary": "Seven-trigger model documented. Phase 0 actions identified but not all started. Hosting decision is the critical path — blocks everything downstream.",
+        "doc_ref": "docs/COMPLIANCE_ROADMAP.md",
+        "module_ref": "doc-compliance",
+        "tasks": [
+          { "task_id": "cmpl-1", "label": "Trigger model documented", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "cmpl-2", "label": "Clinical Content Governance policy", "status": "not-started", "owner": "Noah" },
+          { "task_id": "cmpl-3", "label": "Risk register (living markdown)", "status": "not-started", "owner": "Noah" },
+          { "task_id": "cmpl-4", "label": "Data classification note (synthetic only)", "status": "not-started", "owner": "Noah" },
+          { "task_id": "cmpl-5", "label": "CRH privacy officer soft-notify", "status": "not-started", "owner": "Noah" },
+          { "task_id": "cmpl-6", "label": "QI-exemption letter", "status": "not-started", "owner": "Noah" },
+          { "task_id": "cmpl-7", "label": "BAA signed with CRH", "status": "not-started", "owner": "Noah" }
+        ]
+      },
+      {
+        "area_id": "scaling",
+        "label": "Enterprise Scaling",
+        "status": "on-track",
+        "summary": "Three-phase roadmap documented with measurable gates. Executive framing drafted. Phase 1 org chart self-authorizable. Coach v1 is the first production agent in the agentic layer; additional pipelines (literature verification, transcript→ticket) queued.",
+        "doc_ref": "docs/ENTERPRISE_SCALING_ROADMAP.md",
+        "module_ref": "doc-scaling",
+        "tasks": [
+          { "task_id": "scale-1", "label": "Three-phase roadmap with gates", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "scale-2", "label": "Executive business case draft", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "scale-3", "label": "Agentic layer design (transcript pipeline)", "status": "in-progress", "owner": "Noah", "updated": "2026-04-18" },
+          { "task_id": "scale-4", "label": "Teams channel + Planner board setup", "status": "not-started", "owner": "Noah" },
+          { "task_id": "scale-5", "label": "Monthly executive memo template", "status": "not-started", "owner": "Noah" },
+          { "task_id": "scale-6", "label": "Provider sentiment survey design", "status": "not-started", "owner": "Noah" },
+          { "task_id": "scale-7", "label": "Literature/OE verification agent (evaluate Dr. Varun Malik's prior work for reuse or inspiration)", "status": "not-started", "owner": "Noah" }
+        ]
+      },
+      {
+        "area_id": "security",
+        "label": "Enterprise Security",
+        "status": "at-risk",
+        "summary": "Four architectural blockers documented with remediation sequencing. Near-term demo fixes identified (~1 day work). Hosting migration is the long pole.",
+        "doc_ref": "docs/ENTERPRISE_SECURITY.md",
+        "module_ref": "doc-security",
+        "tasks": [
+          { "task_id": "sec-1", "label": "Security posture documented", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "sec-2", "label": "DOMPurify swap (replace regex sanitizer)", "status": "not-started", "owner": "Noah" },
+          { "task_id": "sec-3", "label": "Drop ?api= param in production", "status": "not-started", "owner": "Noah" },
+          { "task_id": "sec-4", "label": "Add HSTS header", "status": "not-started", "owner": "Noah" },
+          { "task_id": "sec-5", "label": "Self-host IBM Plex fonts", "status": "not-started", "owner": "Noah" },
+          { "task_id": "sec-6", "label": "Hosting migration to BAA-covered infra", "status": "not-started", "owner": "Noah" },
+          { "task_id": "sec-7", "label": "HITRUST e1 readiness scoping", "status": "not-started", "owner": "Noah" }
+        ]
+      },
+      {
+        "area_id": "interop",
+        "label": "Interop & Integration",
+        "status": "on-track",
+        "summary": "Phase A (EHR-agnostic layer) mostly complete. Dragon agent stub ready but not deployed. Scribe-partner positioning defined. No partner outreach yet.",
+        "doc_ref": "docs/INTEROP_STRATEGY.md",
+        "module_ref": "doc-interop",
+        "tasks": [
+          { "task_id": "int-1", "label": "/api/modules/match endpoint", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "int-2", "label": "CDS Hooks discovery + patient-view service", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "int-3", "label": "SMART on FHIR launch handler", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "int-4", "label": "Dragon Copilot agent manifest + OpenAPI", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "int-5", "label": "Dragon agent deployment to Copilot Studio", "status": "not-started", "owner": "Noah" },
+          { "task_id": "int-6", "label": "Abridge partnership outreach", "status": "not-started", "owner": "Noah" },
+          { "task_id": "int-7", "label": "OpenEvidence relationship cultivation", "status": "not-started", "owner": "Noah" }
+        ]
+      },
+      {
+        "area_id": "opensource",
+        "label": "Open Source Strategy",
+        "status": "on-track",
+        "summary": "Decision analysis complete. Recommended posture: don't open-source yet, declare intent with three gated conditions. IP ownership question must be resolved first.",
+        "doc_ref": "docs/OPEN_SOURCE_STRATEGY.md",
+        "module_ref": "doc-opensource",
+        "tasks": [
+          { "task_id": "oss-1", "label": "Strategic analysis complete", "status": "done", "updated": "2026-04-18" },
+          { "task_id": "oss-2", "label": "IP ownership conversation with Optum", "status": "not-started", "owner": "Noah" },
+          { "task_id": "oss-3", "label": "Governance template draft", "status": "not-started", "owner": "Noah" }
+        ]
+      }
+    ]
+  },
+  "context_strip": {
+    "label": "Project management",
+    "text": "This module updates after each stakeholder meeting. Transcript is processed through Copilot with a structured prompt, and the output is merged into this module's project_status data."
+  },
+  "footer_note": "Meridian Project Status — Dr. Noah Schmuckler, Crystal Run Healthcare / Optum. Auto-updated via transcript processing pipeline.",
+  "faqs": [
+    {
+      "faq_id": "workstream-overview",
+      "topic": "Project Overview",
+      "title": "Workstream status and next steps",
+      "referenced_by": ["pri-hosting", "pri-pilot-scope", "pri-soc2", "pri-demo-prep", "block-baa", "block-single-founder", "block-no-evidence"],
+      "items": [
+        {
+          "question": "What is the overall project status?",
+          "answer_html": "<p>Meridian is in <span class=\"pill green\">Phase 0</span> — demo with synthetic data, generating executive interest. Seven strategic documents have been authored covering architecture, competitive positioning, compliance, scaling, security, interop, and open source. The interop layer (CDS Hooks, SMART on FHIR, Dragon agent stub) is implemented and tested.</p><p><strong>Critical path to Phase 1:</strong> hosting migration (BAA-covered infrastructure) and CRH privacy officer engagement. These have 4-8 month lead times.</p>"
+        },
+        {
+          "question": "What are the seven workstreams?",
+          "answer_html": "<p>1. <strong>Architecture & Platform</strong> — frontend, backend, content pipeline, interop surface<br/>2. <strong>Competitive Positioning</strong> — market analysis, JTBD, competitor stances<br/>3. <strong>Compliance & Regulatory</strong> — trigger model, HIPAA, FDA, state laws<br/>4. <strong>Enterprise Scaling</strong> — three-phase deployment, org growth, agentic layer<br/>5. <strong>Enterprise Security</strong> — four architectural blockers, remediation sequencing<br/>6. <strong>Interop & Integration</strong> — CDS Hooks, SMART, Dragon, scribe partnerships<br/>7. <strong>Open Source Strategy</strong> — IP ownership, licensing, governance</p>"
+        },
+        {
+          "question": "How is this module updated?",
+          "answer_html": "<p>After each stakeholder meeting:</p><p>1. Record the Teams meeting with transcription enabled<br/>2. Copy transcript into M365 Copilot with the structured prompt from <code>copilot/transcript-processor.md</code><br/>3. Copilot outputs structured JSON with action items, decisions, status updates, and blockers<br/>4. Run <code>python3 update_project_module.py</code> to merge the output into this module<br/>5. The checklist (top priorities), escalation (blockers), and project_status (area details) all update automatically</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "ai-coach-status",
+      "topic": "AI Coach",
+      "title": "Meridian Coach v1 — status and next moves",
+      "referenced_by": ["pri-coach-baa-key"],
+      "items": [
+        {
+          "question": "Is the AI coach live?",
+          "answer_html": "<p>Yes. <strong>Meridian Coach v1 is live</strong> on the demo site (meridian-3x6.pages.dev). It appears as a fixed strip at the bottom of the screen, expands into a chat drawer on click, and streams token-by-token responses.</p><p>Stack: <strong>Anthropic Claude Haiku 4.5</strong> via a Cloudflare Pages Function at <code>/api/agent/message</code> in production, with a matching FastAPI endpoint on localhost for development. Both use the same system prompt, the same six navigation tools, and the same SSE event vocabulary.</p><p>Behavior is the <em>soft-steer pattern</em>: answers app-usage questions directly, routes clinical questions to the relevant module, refuses clinical recommendations outright (redirecting to OpenEvidence). This preserves FDA non-device CDS posture.</p>"
+        },
+        {
+          "question": "What's the only remaining gate for enterprise use?",
+          "answer_html": "<p>A <strong>BAA-covered API key</strong>. The current demo key is a personal/free-tier Anthropic credential — fine for synthetic data, not permissible once patient context contains PHI.</p><p>Two acceptable paths: (a) Anthropic enterprise contract with BAA, or (b) Amazon Bedrock (Claude models under AWS BAA). Either option is a config change — set the new key as a Cloudflare Pages secret and redeploy; no code changes.</p><p>This is the only line item between v1 and Phase 1 pilot use.</p>"
+        },
+        {
+          "question": "Is there a non-Anthropic alternative?",
+          "answer_html": "<p>Yes — <strong>Copilot Studio</strong> is a viable drop-in. Because the frontend talks to <code>/api/agent/message</code> via a stable SSE contract, the backend can be swapped without touching the UI. A Copilot Studio agent mirroring the same system prompt, tools, and event format would slot in transparently.</p><p>Trade-off: Copilot Studio gives tighter M365 integration (SSO, Purview audit, Teams surfacing) but less control over model selection and streaming behavior. The Anthropic path was chosen for v1 because it's faster to iterate and better-suited to the soft-steer prompt. A Copilot Studio swap is a natural Phase 2 option if enterprise alignment demands it.</p>"
+        },
+        {
+          "question": "How does the coach scale as modules grow?",
+          "answer_html": "<p>Today the coach is a single generalist agent with the full module registry in its system prompt. This works comfortably at the current scale (~15 modules).</p><p>As the registry grows — say beyond 30–50 modules, or once specialty-specific content multiplies — we may split to <strong>sub-agents per subject area</strong> (e.g., one for controlled substances, one for cardiovascular, one for urgent care). A lightweight router agent would triage the user's question and hand off to the right specialist. This mirrors the pattern used in multi-skill agent frameworks and keeps each agent's context focused and its prompt cacheable.</p><p>No need to do this yet — single-agent is the right call until breadth actually creates context bloat.</p>"
+        },
+        {
+          "question": "Is there a related agent for verifying module content?",
+          "answer_html": "<p>Planned as a separate initiative: <strong>autonomous literature-verification agents</strong> that periodically check each module against OpenEvidence, PubMed, and current guidelines, surfacing suggested updates when evidence shifts.</p><p><strong>Dr. Varun Malik has already built agents that do exactly this</strong> for subject-matter currency in his own work. His design could be repurposed directly for Meridian modules, or used as inspiration for Meridian-specific variants. Recommended next step: a 30-minute conversation with Varun to review his implementation and decide between reuse vs. clean-room build.</p><p>Distinct from Coach v1 (which faces clinicians at the point of care), these verification agents are background/authoring-side and run on a cadence — nightly or weekly per module.</p>"
+        }
+      ]
+    }
+  ]
+}

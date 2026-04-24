@@ -1,0 +1,256 @@
+{
+  "schema_version": "1.2.0",
+  "generated_at": "2026-04-18T00:00:00.000000+00:00",
+  "categories": [
+    {
+      "id": "controlled-substances",
+      "label": "Controlled Substance Management",
+      "icon": "shield",
+      "order": 1
+    },
+    {
+      "id": "diagnostic-workup",
+      "label": "Diagnostic Workup",
+      "icon": "search",
+      "order": 2
+    },
+    {
+      "id": "cardiovascular",
+      "label": "Cardiovascular & Metabolic",
+      "icon": "heart",
+      "order": 3
+    },
+    {
+      "id": "urgent-care",
+      "label": "Urgent Care",
+      "icon": "alert",
+      "order": 4
+    },
+    {
+      "id": "enterprise-strategy",
+      "label": "Enterprise Strategy",
+      "icon": "briefcase",
+      "order": 5
+    },
+    {
+      "id": "internal",
+      "label": "Development",
+      "icon": "code",
+      "order": 99,
+      "hidden": true
+    }
+  ],
+  "modules": [
+    {
+      "module_id": "dev-view",
+      "title": "Developer View",
+      "subtitle": "Architecture & Roadmap",
+      "default_title": "Developer View — Architecture & Roadmap",
+      "status": "published",
+      "file": "dev-view.json",
+      "category": "internal"
+    },
+    {
+      "module_id": "adhd",
+      "title": "ADHD Stimulants",
+      "subtitle": "Inherited Patient",
+      "default_title": "ADHD Stimulants — Inherited Patient",
+      "status": "published",
+      "file": "adhd.json",
+      "category": "controlled-substances",
+      "triggers": {
+        "priority": 20,
+        "problems_keywords": [
+          "adhd",
+          "attention deficit"
+        ],
+        "meds_regex": "vyvanse|adderall|ritalin|concerta|focalin|dexedrine|methylphenidate|amphetamine|stimulant",
+        "reason_if_meds": "Active stimulant prescription",
+        "reason_if_problem": "ADHD on problem list"
+      }
+    },
+    {
+      "module_id": "ckd",
+      "title": "CKD & Cystatin C",
+      "subtitle": "Initial Workup",
+      "default_title": "CKD & Cystatin C — Initial Workup",
+      "status": "published",
+      "file": "ckd.json",
+      "category": "diagnostic-workup",
+      "triggers": {
+        "priority": 10,
+        "problems_keywords": [
+          "ckd",
+          "chronic kidney"
+        ],
+        "labs": [
+          {
+            "id": "egfr",
+            "op": "<",
+            "value": 60
+          }
+        ],
+        "reason_if_labs": "eGFR {value} — below 60 threshold",
+        "reason_if_problem": "CKD on problem list"
+      }
+    },
+    {
+      "module_id": "opiates",
+      "title": "Chronic Opiates",
+      "subtitle": "Inherited Patient",
+      "default_title": "Chronic Opiates — Inherited Patient",
+      "status": "published",
+      "file": "opiates.json",
+      "category": "controlled-substances",
+      "triggers": {
+        "priority": 15,
+        "meds_regex": "oxycodone|hydrocodone|morphine|fentanyl|methadone|tramadol|codeine|oxycontin|percocet|vicodin|opiate|opioid",
+        "reason_if_meds": "Active opioid prescription"
+      }
+    },
+    {
+      "module_id": "benzos",
+      "title": "Benzodiazepines",
+      "subtitle": "Inherited Patient",
+      "default_title": "Benzodiazepines — Inherited Patient",
+      "status": "published",
+      "file": "benzos.json",
+      "category": "controlled-substances",
+      "triggers": {
+        "priority": 15,
+        "meds_regex": "diazepam|valium|lorazepam|ativan|alprazolam|xanax|clonazepam|klonopin|benzodiazepine|temazepam|restoril",
+        "reason_if_meds": "Active benzodiazepine prescription"
+      }
+    },
+    {
+      "module_id": "anemia",
+      "title": "Anemia",
+      "subtitle": "Initial Workup Before Hematology",
+      "default_title": "Anemia — Initial Workup Before Hematology",
+      "status": "published",
+      "file": "anemia.json",
+      "category": "diagnostic-workup",
+      "triggers": {
+        "priority": 25,
+        "labs": [
+          {
+            "id": "hgb",
+            "op": "<",
+            "value": 12
+          }
+        ],
+        "reason_if_labs": "Hemoglobin {value} — below reference range"
+      }
+    },
+    {
+      "module_id": "lipid-management",
+      "title": "Lipid Management",
+      "subtitle": "CV Risk & Statin Prescribing",
+      "default_title": "Lipid Management — CV Risk & Statin Prescribing",
+      "status": "published",
+      "file": "lipids.json",
+      "category": "cardiovascular",
+      "triggers": {
+        "priority": 18,
+        "labs": [
+          {
+            "id": "ldl",
+            "op": ">",
+            "value": 130
+          }
+        ],
+        "reason_if_labs": "LDL {value} — above 130 threshold"
+      }
+    },
+    {
+      "module_id": "abd-pain",
+      "title": "Abdominal Pain",
+      "subtitle": "Can I discharge this patient?",
+      "default_title": "Abdominal Pain — Can I discharge this patient?",
+      "status": "published",
+      "file": "abd-pain.json",
+      "category": "urgent-care"
+    },
+    {
+      "module_id": "pm-meridian",
+      "title": "Meridian Project",
+      "subtitle": "Status & Tracking",
+      "default_title": "Meridian Project — Status & Tracking",
+      "status": "published",
+      "file": "pm-meridian.json",
+      "category": "enterprise-strategy"
+    },
+    {
+      "module_id": "exec-summary",
+      "title": "Executive Summary",
+      "subtitle": "Strategic Overview",
+      "default_title": "Executive Summary — Meridian Strategic Overview",
+      "status": "published",
+      "file": "exec-summary.json",
+      "category": "enterprise-strategy"
+    },
+    {
+      "module_id": "doc-architecture",
+      "title": "Architecture",
+      "subtitle": "Technical Reference",
+      "default_title": "Architecture — Technical Reference",
+      "status": "published",
+      "file": "doc-architecture.json",
+      "category": "enterprise-strategy"
+    },
+    {
+      "module_id": "doc-competitive",
+      "title": "Competitive Positioning",
+      "subtitle": "Strategic Analysis",
+      "default_title": "Competitive Positioning — Strategic Analysis",
+      "status": "published",
+      "file": "doc-competitive.json",
+      "category": "enterprise-strategy"
+    },
+    {
+      "module_id": "doc-compliance",
+      "title": "Compliance Roadmap",
+      "subtitle": "Regulatory Triggers & Sequencing",
+      "default_title": "Compliance Roadmap — Regulatory Triggers & Sequencing",
+      "status": "published",
+      "file": "doc-compliance.json",
+      "category": "enterprise-strategy"
+    },
+    {
+      "module_id": "doc-scaling",
+      "title": "Enterprise Scaling",
+      "subtitle": "Support-Structure Roadmap",
+      "default_title": "Enterprise Scaling — Support-Structure Roadmap",
+      "status": "published",
+      "file": "doc-scaling.json",
+      "category": "enterprise-strategy"
+    },
+    {
+      "module_id": "doc-security",
+      "title": "Enterprise Security",
+      "subtitle": "Deployment Blockers & Remediation",
+      "default_title": "Enterprise Security — Deployment Blockers & Remediation",
+      "status": "published",
+      "file": "doc-security.json",
+      "category": "enterprise-strategy"
+    },
+    {
+      "module_id": "doc-interop",
+      "title": "Interop Strategy",
+      "subtitle": "Dragon Copilot & Scribe-CDS Convergence",
+      "default_title": "Interop Strategy — Dragon Copilot & Scribe-CDS Convergence",
+      "status": "published",
+      "file": "doc-interop.json",
+      "category": "enterprise-strategy"
+    },
+    {
+      "module_id": "doc-opensource",
+      "title": "Open Source Strategy",
+      "subtitle": "IP Ownership & Licensing Decision",
+      "default_title": "Open Source Strategy — IP Ownership & Licensing Decision",
+      "status": "published",
+      "file": "doc-opensource.json",
+      "category": "enterprise-strategy"
+    }
+  ]
+}

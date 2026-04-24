@@ -1,0 +1,160 @@
+MERIDIAN DOCX FORMATTING GUIDE
+================================
+
+This document describes the exact structure a Word (.docx) file must follow
+to be parsed correctly by Meridian's DOCX upload feature. Apply these rules
+when creating or converting clinical content for Meridian modules.
+
+
+GENERAL RULES
+-------------
+- The document is parsed by section. Sections are defined by Heading 2 (H2)
+  markers with specific names listed below.
+- Sections must appear in the order listed.
+- Lines beginning with ">>>" are treated as instructions and are skipped.
+- Lines consisting of 5+ horizontal-bar characters (─────) are skipped.
+- Empty paragraphs are skipped.
+- Bold and italic formatting inside FAQ answers is preserved.
+
+
+DOCUMENT STRUCTURE
+------------------
+
+1. TITLE (Heading 1)
+   - Exactly one H1 at the top of the document.
+   - Format: "Module Name" or "Module Name — Subtitle"
+   - The module_id is auto-generated from the text before any em-dash.
+     Example: "ADHD — Stimulant Prescribing" produces module_id "adhd".
+
+2. INTRODUCTION (Heading 2: "Introduction")
+   - One paragraph immediately after the H2.
+   - This becomes the landing page intro text for the module.
+
+3. CHECKLIST ITEMS (Heading 2: "Checklist Items")
+   - Each item is a Heading 3 (H3) with format: [item-id] Statement text
+     Example: ### [diagnosis] Diagnosis is confirmed and documented
+   - The [item-id] in brackets becomes the item's unique identifier and
+     is also used to link to the corresponding FAQ section.
+   - Items are numbered automatically in the order they appear.
+   - No body text under each H3 is needed (the FAQ section provides detail).
+
+4. GREEN ZONE (Heading 2: "Green Zone")
+   - Three paragraphs, each on its own line, with a field prefix:
+       Label: Green Zone label text
+       Narrative: Narrative paragraph text
+       SmartPhrase: .smartphrasename
+   - The SmartPhrase field is optional. Set it to empty or omit it for
+     non-clinical modules.
+
+5. ESCALATION ITEMS (Heading 2: "Escalation Items")
+   - Same format as Checklist Items: H3 headings with [item-id] prefix.
+     Example: ### [cardiac] Cardiac history or QTc concerns
+   - These appear in the "Escalate if any apply" section.
+
+6. CONTEXT (Heading 2: "Context")
+   - Two paragraphs with field prefixes:
+       Label: Context strip label
+       Text: Context strip body text
+
+7. FOOTER (Heading 2: "Footer")
+   - One paragraph of footer text (e.g., disclaimers, version info).
+
+8. FAQ REFERENCE (Heading 2: "FAQ Reference")
+   - Each FAQ group starts with an H3: [faq-id] Topic Name
+     The [faq-id] should match a checklist or escalation item-id to
+     create the cross-reference link.
+   - Immediately after the H3, include:
+       FAQ Title: Display title for this FAQ group
+   - Then one or more Q&A pairs:
+       Question: The question text?
+       (followed by one or more plain paragraphs as the answer)
+   - Bold and italic formatting in answer paragraphs is preserved.
+   - You can have multiple Question/answer blocks under one FAQ group.
+
+9. REFERENCES (Heading 2: "References")  [OPTIONAL]
+   - One citation per paragraph, plain text.
+   - No special formatting required — each paragraph becomes one entry
+     in the references list.
+   - These render as a collapsible "References" section in expanded view
+     and appear automatically in PDF output.
+   - Omit this section entirely if the module has no references.
+
+
+COMPLETE EXAMPLE
+----------------
+
+# Opiates — Safe Prescribing
+
+## Introduction
+
+Clinical decision support for safe opioid prescribing in primary care.
+
+## Checklist Items
+
+### [diagnosis] Diagnosis supports opioid therapy
+
+### [risk-screen] Risk screening completed (ORT or equivalent)
+
+### [consent] Informed consent and treatment agreement signed
+
+### [pdmp] PDMP checked within 72 hours
+
+## Green Zone
+
+Label: Proceed with prescribing
+Narrative: All checklist items confirmed. Patient meets criteria for safe initiation or continuation of opioid therapy.
+SmartPhrase: .opiateclearance
+
+## Escalation Items
+
+### [high-risk] ORT score indicates high risk
+
+### [aberrant] Aberrant behaviors identified
+
+### [respiratory] Respiratory risk factors present
+
+## Context
+
+Label: Regulatory Context
+Text: DEA Schedule II requirements apply. State-specific PDMP query mandates vary.
+
+## Footer
+
+Clinical content last reviewed 2026-03-15. Not a substitute for clinical judgment.
+
+## FAQ Reference
+
+### [diagnosis] Diagnosis
+FAQ Title: When opioid therapy is appropriate
+Question: What diagnoses support opioid prescribing?
+Chronic pain conditions with documented functional impairment where non-opioid therapies have been trialed and found insufficient. This includes conditions such as **severe osteoarthritis**, **neuropathic pain syndromes**, and **cancer-related pain**.
+
+Question: What about acute pain?
+Short-course opioid therapy (3-7 days) may be appropriate for acute pain from surgery, trauma, or dental procedures when non-opioid alternatives are insufficient.
+
+### [risk-screen] Risk Screening
+FAQ Title: Risk assessment tools
+Question: Which screening tools are accepted?
+The **Opioid Risk Tool (ORT)** is the primary validated instrument. SOAPP-R is an acceptable alternative. Document the score and interpretation in the chart.
+
+### [high-risk] High Risk Patients
+FAQ Title: Managing high-risk patients
+Question: What defines a high-risk patient?
+ORT score >= 8, history of substance use disorder, concurrent benzodiazepine use, or age > 65 with renal impairment.
+
+## References
+
+CDC Clinical Practice Guideline for Prescribing Opioids for Pain, 2022.
+Dowell D, Ragan KR, Jones CM, Baldwin GT, Chou R. CDC Clinical Practice Guideline for Prescribing Opioids for Pain. MMWR Recomm Rep. 2022;71(No. RR-3):1-95.
+FDA Blueprint for Prescriber Education: Extended-Release and Long-Acting Opioid Analgesics, 2023.
+
+
+NOTES
+-----
+- Section headings are case-insensitive ("FAQ Reference" = "faq reference").
+- The [item-id] brackets in H3 headings are required for cross-referencing.
+  If omitted, an id is auto-generated from the heading text.
+- A module cannot be uploaded if one with the same name already exists.
+  Rename or delete the existing module first.
+- Download an existing module's DOCX template from expanded view to see
+  a working example.

@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "abd-pain",
+  "default_title": "Abdominal Pain — Can I discharge this patient?",
+  "landing_intro": "A patient presents to urgent care with abdominal pain. Our job — in 15–20 minutes — is to decide between safe discharge, close-interval re-evaluation, or ER transfer. This checklist supports that decision after a focused H&P and any reasonable rapid testing. ER referral with a reasonable workup is always appropriate and is never penalized. The only penalty is no workup at all.",
+  "checklist_section_label": "Before you discharge — verify all four",
+  "checklist": [
+    {
+      "item_id": "abd-vitals",
+      "position": 1,
+      "statement": "Vitals and clinical appearance are reassuring — no fever > 101.3°F, not persistently tachycardic, tolerates oral intake, ambulates, and pain is controlled on oral analgesia",
+      "faq_ref": "abd-vitals"
+    },
+    {
+      "item_id": "abd-peritoneal",
+      "position": 2,
+      "statement": "No peritoneal signs on exam — no rebound, involuntary guarding, rigidity, marked distention, or pulsatile mass",
+      "faq_ref": "abd-peritoneal"
+    },
+    {
+      "item_id": "abd-labs",
+      "position": 3,
+      "statement": "Labs, if drawn, are reassuring — no severe leukocytosis or left shift, CRP < 50 mg/L, lipase < 3× upper limit of normal — or labs were not clinically indicated",
+      "faq_ref": "abd-labs"
+    },
+    {
+      "item_id": "abd-imaging",
+      "position": 4,
+      "statement": "Imaging, if performed, shows no findings requiring urgent intervention — or imaging was not clinically indicated for this presentation",
+      "faq_ref": "abd-imaging"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "All four boxes checked — Discharge with ER precautions and 24-hour re-evaluation",
+    "narrative_html": "<p>Disposition supported: <strong>discharge home with ER-precautions return instructions</strong> and a scheduled re-evaluation within 24–30 hours (in-house PCP visit, structured telephone callback, or a planned UC return). The follow-up is not optional — it's the safety net that makes same-visit discharge defensible. Roughly <strong>20–25% of non-specific abdominal pain patients have a diagnostic change at re-evaluation</strong> (Boendermaker 2018), and that structured return is what catches the ones the first visit missed.</p><p><strong>Explicit return precautions</strong> — written and read back: worsening or migrating pain, vomiting blood, bloody or black stools, new fever, inability to tolerate fluids, fainting, or any change in mental status. Any of these → ER, not back to UC.</p><p><strong>Documentation</strong>: use the SmartPhrase below — it captures the four-point rubric, the negatives, the return precautions, and the follow-up arrangement. <em>ER referral with a reasonable workup is always appropriate. The only penalty is no workup.</em></p>",
+    "smartphrase": ".UCABDPAINDC"
+  },
+  "escalation_section_label": "Transfer to ER or call surgeon immediately if any apply",
+  "escalation": [
+    {
+      "item_id": "abd-hemodynamic",
+      "position": 1,
+      "statement": "Hemodynamic instability — hypotension, persistent tachycardia despite fluids, altered mental status, or signs of sepsis",
+      "faq_ref": "abd-hemodynamic"
+    },
+    {
+      "item_id": "abd-peritonitis",
+      "position": 2,
+      "statement": "Peritoneal signs or rigid abdomen — suspected perforation, peritonitis, or ischemic bowel",
+      "faq_ref": "abd-peritonitis"
+    },
+    {
+      "item_id": "abd-mesenteric",
+      "position": 3,
+      "statement": "Pain out of proportion to exam — especially in elderly, atrial fibrillation, or post-prandial patterns (mesenteric ischemia)",
+      "faq_ref": "abd-mesenteric"
+    },
+    {
+      "item_id": "abd-sudden",
+      "position": 4,
+      "statement": "Sudden-onset excruciating pain — perforation, AAA rupture, aortic dissection, ovarian or testicular torsion",
+      "faq_ref": "abd-sudden"
+    }
+  ],
+  "context_strip": {
+    "label": "Urgent care throughput",
+    "text": "Target visit 15–20 minutes. Current average ~30. ER referral with a reasonable workup is never penalized — over-workup is the hidden cost."
+  },
+  "footer_note": "First-draft v1 — dedicated sub-modules for pregnancy / women of childbearing age, pediatric, and geriatric abdominal pain are planned. Iteration welcomed.",
+  "faqs": [
+    {
+      "faq_id": "abd-vitals",
+      "topic": "Vitals & appearance",
+      "title": "What 'reassuring' actually means — and why pediatrics is different",
+      "referenced_by": ["abd-vitals"],
+      "items": [
+        {
+          "question": "What counts as reassuring vitals and appearance?",
+          "answer_html": "<p><strong>Temperature</strong>: no fever > 101.3°F (38.5°C). A low-grade temp in a well-appearing adult is not a discharge-blocker on its own, but document and factor it in.</p><p><strong>Heart rate</strong>: not persistently tachycardic after analgesia and fluids. Pain and anxiety drive HR; a tachycardia that does not respond to a reasonable intervention is a yellow flag.</p><p><strong>Blood pressure</strong>: at baseline. Normotension with the patient's known baseline counts.</p><p><strong>Appearance</strong>: tolerating oral intake, ambulating, pain controlled on oral analgesia. The patient who can't sit up for a pretzel and a sip of water is not going home on oral ibuprofen.</p><p>The underlying principle is <em>trajectory</em>: the patient you're about to discharge should look better than they did walking in, not the same.</p>"
+        },
+        {
+          "question": "A single borderline vital — does it flip the decision?",
+          "answer_html": "<p>Not on its own. One isolated vital needs a reason and a recheck:</p><p><span class=\"pill neutral\">HR 105 on arrival</span> — recheck after analgesia + 500 mL NS. If it normalizes, that's a pain/volume signal, not a disease signal.</p><p><span class=\"pill warn\">Temp 100.9°F</span> — combine with the rest of the picture. Febrile + RLQ pain + elevated WBC is a different patient than febrile + URI + diffuse abdominal discomfort.</p><p><span class=\"pill warn\">Persistent tachycardia despite intervention</span> — move toward the red zone. This is the signal that shouldn't be ignored.</p><p>Document the recheck. A single captured vital without a second look is a malpractice exposure, not a clinical decision.</p>"
+        },
+        {
+          "question": "What about children? (stub — dedicated pediatric module planned)",
+          "answer_html": "<p><strong>The adult rubric does not apply directly to children.</strong> A pediatric abdominal pain module is on the roadmap. Key differences to keep in mind in the meantime:</p><p>• <strong>Pediatric vitals are age-dependent</strong> — a HR of 140 is different at 2 years old than at 20. Use age-normed tables, not adult ranges.</p><p>• <strong>Classic pediatric red flags</strong>: bilious emesis (any age → surgical until proven otherwise), the intussusception triad (intermittent colicky pain, vomiting, currant-jelly stools — though most cases don't show the full triad), testicular exam in any boy with abdominal pain (torsion presents as abdominal pain), Henoch-Schönlein purpura with palpable purpura + abdominal pain.</p><p>• <strong>Dehydration assessment</strong> weighs heavier than in adults — capillary refill, mucous membranes, urine output, activity level.</p><p>• <strong>Lower threshold for PCP/ED handoff</strong>. If the in-house pediatrician is available, that's your partner; if not, a warm handoff to ED is the safer path in v1.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "abd-peritoneal",
+      "topic": "Exam",
+      "title": "Reading the abdomen — guarding, rigidity, and what the cough test tells you",
+      "referenced_by": ["abd-peritoneal"],
+      "items": [
+        {
+          "question": "How do I differentiate voluntary from involuntary guarding?",
+          "answer_html": "<p><strong>Voluntary guarding</strong> softens with distraction. Talk to the patient, ask about their kids, bend their knees, re-approach the exam. If the abdominal wall relaxes when they're not thinking about it, it's voluntary — that's pain avoidance, not peritonitis.</p><p><strong>Involuntary guarding</strong> does not relax. The abdominal wall stays tight regardless of distraction or positioning. That's a reflex arc from an irritated peritoneum — it's a sign, not a behavior.</p><p><strong>Rigidity</strong> is the extreme end: a board-like abdomen that doesn't move with respiration. That patient is not going home — they're going to the ER or to your in-house surgeon.</p>"
+        },
+        {
+          "question": "What's the cough test, and why does it matter for urgent care?",
+          "answer_html": "<p>Ask the patient to cough, or to jump/hop if they can tolerate it. Reproduction of focal abdominal pain with cough or jar is a reliable indicator of peritoneal irritation — it's the cheapest, fastest peritoneal-signs screen available and does not require you to touch the abdomen.</p><p>In a time-pressured UC environment, it's an efficient triage tool. A patient who jumps off the exam table cleanly is not peritonitic. A patient who winces and grabs their side with cough deserves a closer look.</p>"
+        },
+        {
+          "question": "Elderly and immunocompromised patients don't always mount a classic exam — what then?",
+          "answer_html": "<p><strong>Lower your threshold.</strong> Elderly, diabetic, and immunocompromised patients can have surgical abdomens without fever, without marked tenderness, and without classic guarding. The literature is consistent: atypical presentations are the norm, not the exception.</p><p>If the patient is age &gt; 65, immunocompromised, on chronic steroids, or significantly obese, a normal-looking exam is <em>less</em> reassuring than it would be in a 30-year-old. Weight imaging more heavily, lower the bar for ER transfer, and do not let an unimpressive exam override the rest of the clinical picture.</p><p>See the elderly/immunocompromised stub under 'Pain out of proportion to exam' for more detail.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "abd-labs",
+      "topic": "Labs",
+      "title": "What to order, what the thresholds mean, and the pregnancy question",
+      "referenced_by": ["abd-labs"],
+      "items": [
+        {
+          "question": "When are labs actually required vs. optional?",
+          "answer_html": "<p>Labs are a tool, not a ritual. A well-appearing patient with a benign exam and a clear benign etiology (gastroenteritis that's improving, musculoskeletal wall tenderness, constipation with relief after bowel movement) does not automatically need a CBC + BMP + lipase + CRP. Order labs when they will change disposition, not to paper-chart a workup.</p><p><strong>Order labs when:</strong></p><p>• The diagnosis is uncertain and you're entertaining a surgical or infectious cause.</p><p>• The patient is in a higher-risk group (elderly, immunocompromised, diabetic) where the exam may underestimate severity.</p><p>• You need a negative result to support a discharge decision that would otherwise feel borderline.</p><p><strong>Consider skipping labs when:</strong></p><p>• The history and exam point convincingly to a benign etiology.</p><p>• The patient is well-appearing and the clinical trajectory is improving during observation.</p><p>A documented reasonable workup does not require every box checked — it requires the right boxes for this patient.</p>"
+        },
+        {
+          "question": "Where do the CRP < 50 and lipase < 3× ULN thresholds come from?",
+          "answer_html": "<p><strong>CRP &lt; 50 mg/L</strong>: derived from emergency-medicine literature on non-specific abdominal pain discharge safety — values above 50 correlate with surgical pathology at meaningfully higher rates. This is an <em>institution-calibrated</em> number and should be treated as a decision aid, not a rule. A CRP of 55 in a well-appearing patient with an otherwise benign workup is different from a CRP of 55 with peritoneal signs.</p><p><strong>Lipase &lt; 3× ULN</strong>: the standard cutoff for excluding acute pancreatitis. Elevations in the 1–3× range can reflect non-specific inflammation, renal dysfunction, or other causes; &gt; 3× is the action threshold. Pair with clinical picture — a painful patient with lipase 2.5× ULN still deserves a conversation with imaging or surgery.</p><p>Caveat: these thresholds are derived from adult, non-pregnant, general UC/ED populations. Special populations need different calibration.</p>"
+        },
+        {
+          "question": "Pregnancy / women of childbearing age — urine β-hCG vs. serum (stub — dedicated module planned)",
+          "answer_html": "<p><strong>Urine β-hCG is the workhorse in UC.</strong> Results in minutes, adequate sensitivity for the discharge-decision timeframe. A <em>negative</em> urine β-hCG in a woman of childbearing age with lower abdominal pain is generally sufficient to proceed down the general-adult discharge rubric, provided the rest of the picture is reassuring.</p><p><strong>Serum quantitative β-hCG is orderable in-house, but turnaround is measured in hours.</strong> If ordered later in the day it may not result until the next day — it is <em>not</em> a real-time UC decision aid. Use serum when:</p><p>• Urine is positive and you need viability / ectopic workup (pair with pelvic US).</p><p>• Urine is negative but clinical suspicion for very early pregnancy is high enough that the sensitivity gap matters (i.e., you need a number, not a yes/no).</p><p><strong>Document</strong>: what you ordered, the result, and whether the turnaround was compatible with a same-visit disposition. If you ordered serum late in the day knowing it wouldn't return, that needs a management plan (recheck tomorrow, ED referral, or scheduled return).</p><p><strong>Ectopic must be actively considered</strong> in any positive-pregnancy woman with lower abdominal pain — in-house OB/GYN consult or ER transfer before discharge. A pregnant patient with abdominal pain is not a general-adult discharge case.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "abd-imaging",
+      "topic": "Imaging",
+      "title": "When to image, when not to, and how to document the choice",
+      "referenced_by": ["abd-imaging"],
+      "items": [
+        {
+          "question": "When is imaging actually indicated?",
+          "answer_html": "<p>Imaging is indicated when the result will change disposition. Common UC scenarios where it will:</p><p>• <strong>RLQ pain with any concern for appendicitis</strong> — US first in children and thin adults; CT if US non-diagnostic or patient is obese.</p><p>• <strong>Flank pain with hematuria</strong> — non-contrast CT for stone evaluation.</p><p>• <strong>RUQ pain with Murphy's sign</strong> — US for cholecystitis.</p><p>• <strong>Suspected AAA</strong> — bedside US if available, CT with contrast otherwise.</p><p>• <strong>Post-operative or known-anatomy patients</strong> (hernias, prior bowel surgery) with pain — imaging nearly always indicated.</p><p>• <strong>Any patient where your gestalt is unsure and the patient is in a higher-risk group</strong> — elderly, immunocompromised, diabetic.</p>"
+        },
+        {
+          "question": "How do I document the rationale for NOT imaging?",
+          "answer_html": "<p>The documentation for not imaging is as important as the documentation for imaging. Record:</p><p>• The differential you considered.</p><p>• The exam and lab findings that made a surgical or life-threatening cause unlikely.</p><p>• The specific return precautions given.</p><p>• The follow-up arrangement (who, when, how).</p><p>Example phrasing: <em>\"Considered appendicitis, cholecystitis, and diverticulitis; given benign exam without peritoneal signs, reassuring labs, and improvement with observation, imaging deferred. Patient instructed to return immediately for worsening pain, fever, vomiting, or inability to tolerate fluids; scheduled 24-hour phone re-evaluation.\"</em></p><p>A documented thought process is a defense. A sparse note is not.</p>"
+        },
+        {
+          "question": "What about the throughput cost of CT?",
+          "answer_html": "<p>A same-visit CT with contrast in UC typically adds 45–90 minutes to the visit (IV placement, labs for creatinine if not already drawn, the scan itself, the read, and the clinician review). That's the difference between a 20-minute visit and a 90-minute visit.</p><p>CT is the right call when it will change disposition. It is the wrong call when it's being ordered to generate a negative result that wasn't going to change your plan anyway. 'Defensive imaging' is expensive — in time, in radiation, in patient throughput — and the cumulative cost at the clinic level is real.</p><p>If the question is 'do I need imaging to safely discharge,' the right answer is often a thoughtful re-exam and a scheduled re-evaluation rather than a scan.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "abd-hemodynamic",
+      "topic": "ER escalation",
+      "title": "Hemodynamic instability — logistics and stabilization",
+      "referenced_by": ["abd-hemodynamic"],
+      "items": [
+        {
+          "question": "What are the logistics of ER transfer from UC?",
+          "answer_html": "<p><strong>Call EMS early.</strong> Don't wait for the patient to decompensate further. Once you've identified instability, the clock starts and the next task is transfer, not workup.</p><p>While EMS is en route: maintain IV access (two large-bore if possible), start fluid resuscitation, place on monitors (pulse ox, BP cycling, rhythm if available), obtain a focused last-round of vitals and a point-of-care glucose, and start the transfer documentation.</p><p><strong>Call the receiving ER</strong> with a concise handoff: demographics, presentation, vitals trend, what you've done, what they're walking into. A 90-second phone call saves 30 minutes on the other end.</p>"
+        },
+        {
+          "question": "What can I actually do in UC before EMS arrives?",
+          "answer_html": "<p>Available in most UCs: IV fluids (NS or LR boluses), supplemental O₂, broad-spectrum antibiotics if sepsis is the concern (don't wait for the ED to draw cultures — one dose started now is better than three hours later), analgesia appropriate to the picture, anti-emetics.</p><p>Not available: blood products, vasopressors, ICU-level monitoring, operative intervention, prolonged observation. If the patient needs any of those, the transfer is already the correct call.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "abd-peritonitis",
+      "topic": "Surgical escalation",
+      "title": "Peritoneal signs — ER vs. in-house surgical path",
+      "referenced_by": ["abd-peritonitis"],
+      "items": [
+        {
+          "question": "Do I call our in-house general surgeon or send straight to the ER?",
+          "answer_html": "<p><strong>If the patient is unstable</strong>: ER. The in-house surgeon does not have ICU, anesthesia, or OR resources in our UC footprint.</p><p><strong>If the patient is stable with clear surgical pathology</strong> (e.g., appendicitis on imaging, well-appearing, tolerating oral intake): a direct-to-surgeon conversation is reasonable and often faster. The surgeon can decide between same-day outpatient OR, ER admission via their service, or scheduled next-day surgery.</p><p>Err toward the ER when the picture is unclear or the patient's trajectory is uncertain. A surgical consult pathway is not a substitute for ED-level resources.</p>"
+        },
+        {
+          "question": "What can our in-house surgical capability actually do?",
+          "answer_html": "<p><strong>Available in-house</strong>: outpatient endoscopy, outpatient OR for elective or same-day straightforward cases, specialty consults (GI, urology, gynecology, general surgery) for same-day phone or in-person evaluation.</p><p><strong>Not available in-house</strong>: cath lab, IR, ICU, regular hospital beds for observation or routine medical admission, blood banking, anesthesia support for emergent cases.</p><p>Translation: anything that needs admission, blood products, interventional radiology, or ICU-level monitoring goes to the ER regardless of how tightly coupled the surgical consult is.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "abd-mesenteric",
+      "topic": "Mesenteric ischemia",
+      "title": "Pain out of proportion — the one we miss",
+      "referenced_by": ["abd-mesenteric"],
+      "items": [
+        {
+          "question": "Why is mesenteric ischemia the classic 'miss' in abdominal pain?",
+          "answer_html": "<p>Because the exam doesn't match the pain. Patients report severe, often excruciating pain — but the abdomen on exam is soft, minimally tender, no peritoneal signs. The reflex is to reassure: 'the exam is benign.' The reflex is wrong.</p><p><strong>The classic triad</strong> — pain out of proportion to exam + a risk factor (AFib, recent MI, heart failure, hypercoagulable state, vasculopathy, age &gt; 65) + metabolic acidosis on labs (if drawn) — is a transfer. Lactate, if available, is helpful but absence of elevation does not rule it out.</p><p><strong>Post-prandial pattern</strong> — worse after eating, often with weight loss from food avoidance — suggests chronic mesenteric ischemia. Still a transfer for workup, just a different urgency profile.</p><p>If your gestalt is that the patient is more uncomfortable than the exam suggests, and they have a vascular risk profile: transfer. Don't let a soft belly reassure you.</p>"
+        },
+        {
+          "question": "Elderly, immunocompromised, obese — lower threshold across the board (stub — dedicated geriatric module planned)",
+          "answer_html": "<p><strong>These three groups all fail the classic rubric</strong>: atypical presentations, muted exams, normal-range vitals masking real pathology.</p><p>• <strong>Age &gt; 65</strong>: vascular causes (mesenteric ischemia, AAA), perforated viscus without classic peritoneal signs, diverticulitis with atypical location. Mortality for a missed surgical abdomen in elderly patients is substantially higher than in younger patients — the discharge threshold should reflect that.</p><p>• <strong>Immunocompromised</strong> (chronic steroids, active chemo, transplant, advanced HIV, uncontrolled diabetes): can have surgical abdomens without fever, without leukocytosis, without marked tenderness. Treat exam and labs as less sensitive than in the general adult population.</p><p>• <strong>Obese patients</strong>: exam is genuinely harder, imaging is more often necessary, and BMI &gt; 35 is independently associated with delayed diagnosis in abdominal pain literature.</p><p>Practical rule in v1: in any of these groups, imaging has a lower threshold, a negative workup is less reassuring, and 'discharge with 24-hour follow-up' needs a tighter follow-up loop (phone call, not hope). A dedicated geriatric/immunocompromised module is on the roadmap.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "abd-sudden",
+      "topic": "Sudden-onset pain",
+      "title": "Thunderclap abdominal pain — the differential",
+      "referenced_by": ["abd-sudden"],
+      "items": [
+        {
+          "question": "What's the differential for sudden-onset, excruciating abdominal pain?",
+          "answer_html": "<p>Pain that starts at maximum intensity — the patient can name the minute it began — is a different animal from pain that built up over hours.</p><p><strong>Vascular catastrophes</strong>: AAA rupture (older patient, male, hypotension, pulsatile mass or back pain), aortic dissection (tearing pain, often radiating to the back, pulse differential between arms).</p><p><strong>Perforated viscus</strong>: perforated ulcer, perforated diverticulum, perforated appendicitis. Pain often generalizes rapidly from a focal onset; free air on imaging.</p><p><strong>Torsion</strong>: ovarian torsion (reproductive-age female, sudden pelvic pain ± nausea/vomiting), testicular torsion (any male with abdominal pain — check the testicles), volvulus in elderly patients.</p><p><strong>Acute mesenteric ischemia</strong>: can present as sudden onset in embolic disease (AFib patient with sudden severe pain).</p><p><strong>Ruptured ectopic</strong>: reproductive-age female with positive β-hCG, sudden pain, hemodynamic changes. See the pregnancy stub under Labs.</p><p>All of these are ER transfers — not UC workups.</p>"
+        },
+        {
+          "question": "How is this different from gradual-onset severe pain?",
+          "answer_html": "<p>Gradual-onset severe pain still has a differential that includes surgical emergencies (appendicitis, cholecystitis, bowel obstruction), but the tempo allows more of a UC workup — imaging, labs, observation — before committing to disposition.</p><p><strong>Sudden-onset does not.</strong> The tempo itself is diagnostic, and the workup needs to happen in an environment with full resources. Transfer, then workup.</p><p>Document the timeline carefully: time of onset, what the patient was doing, whether pain was at maximum intensity immediately. That single data point — 'pain started suddenly at maximum intensity at 2:15 PM' — is often what drives the escalation decision.</p>"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Yew KS, George MK, Allred HB. Acute Abdominal Pain in Adults: Evaluation and Diagnosis. American Family Physician. May 31, 2023.",
+    "Bréchet H, Vanquaethem H, Mestiri R, et al. Factors Associated With Hospitalization or Surgery for Abdominal Pain: A Retrospective Study. Internal and Emergency Medicine. 2026.",
+    "Rogers SO, Kirton OC. Acute Abdomen in the Modern Era. The New England Journal of Medicine. 2024.",
+    "Boendermaker AE, Coolsma CW, Emous M, Ter Avest E. Efficacy of Scheduled Return Visits for Emergency Department Patients With Non-Specific Abdominal Pain. Emergency Medicine Journal: EMJ. 2018.",
+    "Panwar Y, Shan S, Owels L, Kang C, Hodgson R. Inefficient Admissions for Abdominal Pain Under an Acute General Surgical Unit. World Journal of Surgery. 2023.",
+    "Broder JS, Oliveira J E Silva L, Bellolio F, et al. Guidelines for Reasonable and Appropriate Care in the Emergency Department 2 (GRACE-2): Low-Risk, Recurrent Abdominal Pain in the Emergency Department. Academic Emergency Medicine. 2022."
+  ]
+}

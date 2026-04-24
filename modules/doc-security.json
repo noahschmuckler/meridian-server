@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "doc-security",
+  "default_title": "Enterprise Security — Deployment Blockers & Remediation",
+  "landing_intro": "Five architectural decisions with 6–12 month lead times stand between Meridian's current static demo and enterprise PHI deployment. Today's risk is low (demo data only, no PHI). But plumbing already in the repo becomes high-risk the moment real patient data flows. Meridian Coach v1 (AI assistant) is live on the demo and adds one specific gate: the Anthropic API key must be rotated to a BAA-covered credential before Coach sees PHI context. This module maps the blockers, near-term fixes, and suggested sequencing.",
+  "checklist_section_label": "Security posture — confirm all four",
+  "checklist": [
+    {
+      "item_id": "blockers-identified",
+      "position": 1,
+      "statement": "4 architectural blockers identified — Cloudflare BAA, audit backend, CDN self-host, HITRUST readiness (OE clipboard downgraded)",
+      "faq_ref": "five-blockers"
+    },
+    {
+      "item_id": "nearterm-prioritized",
+      "position": 2,
+      "statement": "Near-term fixes prioritized — DOMPurify swap, drop ?api= in prod, HSTS header, self-host fonts (~1 day of work)",
+      "faq_ref": "near-term"
+    },
+    {
+      "item_id": "baa-path",
+      "position": 3,
+      "statement": "BAA path chosen — Optum Azure / Kaiser AWS tenancy, or Cloudflare Enterprise written inclusion",
+      "faq_ref": "five-blockers"
+    },
+    {
+      "item_id": "remediation-sequenced",
+      "position": 4,
+      "statement": "Remediation sequenced — now (before demo), before pilot conversation, before Epic sandbox",
+      "faq_ref": "sequencing"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Current demo risk is low — blockers are about the next phase",
+    "narrative_html": "Today's deployment is a static site with demo patients only — no PHI, no real data. Near-term risks are reputational and supply-chain, not compliance. <strong>The five blockers matter because they have 6–12 month lead times</strong> and must be resolved <em>before</em> Epic integration, not retrofitted. Quick wins (DOMPurify, HSTS, drop ?api=) are ≤1 day each and should ship before the next demo.",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Blockers & findings — remediation required",
+  "escalation": [
+    {
+      "item_id": "blocker-baa",
+      "position": 1,
+      "statement": "Blocker 1: Cloudflare Pages has no BAA — Pages, Workers, D1 not in scope; Enterprise tier covers CDN/WAF only",
+      "faq_ref": "five-blockers"
+    },
+    {
+      "item_id": "blocker-oe-clipboard",
+      "position": 2,
+      "statement": "Downgraded: OE clipboard pre-prompt contains no HIPAA identifiers (no name, MRN, DOB) — low-severity risk register item, not a blocker",
+      "faq_ref": "five-blockers"
+    },
+    {
+      "item_id": "blocker-audit",
+      "position": 3,
+      "statement": "Blocker 3: No audit backend — 2025 HHS OCR NPRM requires tamper-evident audit logs with 6-year retention, MFA, annual pen test, 72-hour critical patch SLA",
+      "faq_ref": "five-blockers"
+    },
+    {
+      "item_id": "blocker-cdn",
+      "position": 4,
+      "statement": "Blocker 4: CDN-loaded dependencies — PptxGenJS, Mammoth.js, Google Fonts will be flagged by Kaiser/Optum procurement; produce SBOM",
+      "faq_ref": "five-blockers"
+    },
+    {
+      "item_id": "blocker-hitrust",
+      "position": 5,
+      "statement": "Blocker 5: HITRUST/OWASP readiness — HITRUST i1 + OWASP ASVS 5.0 Level 2 needed for 2027 Epic pilot; 6–12 month lead time",
+      "faq_ref": "five-blockers"
+    },
+    {
+      "item_id": "finding-sanitizer",
+      "position": 6,
+      "statement": "High: Regex-only DOCX sanitizer — HTML-entity bypass possible via innerHTML decoding; swap for DOMPurify",
+      "faq_ref": "near-term"
+    },
+    {
+      "item_id": "finding-api-param",
+      "position": 7,
+      "statement": "High: ?api= URL param accepts any endpoint — no allowlist; SSRF-adjacent once a backend exists",
+      "faq_ref": "near-term"
+    },
+    {
+      "item_id": "finding-email",
+      "position": 8,
+      "statement": "Medium: FEEDBACK_EMAIL hardcoded in public source — move behind /config indirection",
+      "faq_ref": "near-term"
+    },
+    {
+      "item_id": "finding-csp",
+      "position": 9,
+      "statement": "Medium: CSP carries unsafe-inline for script/style — justified by single-file app, but an enterprise review finding",
+      "faq_ref": "near-term"
+    },
+    {
+      "item_id": "finding-supply-chain",
+      "position": 10,
+      "statement": "Biggest actual risk now: supply-chain compromise of CDN deps — SRI hashes mitigate for pinned versions; audit on every bump",
+      "faq_ref": "near-term"
+    },
+    {
+      "item_id": "coach-api-key",
+      "position": 11,
+      "statement": "Meridian Coach v1 is live on Cloudflare Pages backed by Anthropic — current key is free-tier, acceptable only for synthetic demo; must be rotated to BAA-covered credential (Anthropic enterprise or Amazon Bedrock) before any PHI context flows through Coach",
+      "faq_ref": "ai-coach-security"
+    }
+  ],
+  "context_strip": {
+    "label": "Current state",
+    "text": "Static site on Cloudflare Pages. Demo patient data only. No PHI, no real EHR integration. Meridian Coach v1 (AI assistant) is live as a Cloudflare Pages Function using a free-tier Anthropic API key — synthetic data only until a BAA-covered key is provisioned. API backend (api/server.py) exists in repo but is not deployed to production. CORS is allow_origins=[\"*\"], no auth middleware."
+  },
+  "footer_note": "Source: docs/ENTERPRISE_SECURITY.md — April 2026. Full document includes HHS OCR NPRM references, SMART App Launch v2 requirements, and supply-chain incident history.",
+  "faqs": [
+    {
+      "faq_id": "five-blockers",
+      "topic": "Architectural Blockers",
+      "title": "What are the five far-term blockers?",
+      "referenced_by": [
+        "blockers-identified",
+        "baa-path",
+        "blocker-baa",
+        "blocker-oe-clipboard",
+        "blocker-audit",
+        "blocker-cdn",
+        "blocker-hitrust"
+      ],
+      "items": [
+        {
+          "question": "Why is the Cloudflare BAA gap the top blocker?",
+          "answer_html": "<p>Cloudflare's BAA covers CDN / WAF / Bot Management on <strong>Enterprise tier only</strong>. Pages, Workers, and D1 are not in scope. The production PHI instance must either:</p><p><span class=\"pill green\">Option A</span> — Move to Optum Azure or Kaiser AWS tenancy (both have BAAs).<br><span class=\"pill\">Option B</span> — Obtain written Pages inclusion from Cloudflare Enterprise sales.</p><p>The public demo can stay on Pages. This decision has 6–12 month procurement lead time.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SECURITY.md#1-cloudflare-pages-has-no-baa\">BAA gap details on GitHub</a></p>"
+        },
+        {
+          "question": "Why was the OE clipboard concern downgraded?",
+          "answer_html": "<p><span class=\"pill green\">Downgraded</span> — The OE pre-prompt contains <strong>no HIPAA identifiers</strong>: no patient name, MRN, DOB, address, or dates of service. Content is age, sex, problem list, vitals, labs, and medications in natural language. Under HIPAA Safe Harbor de-identification (§164.514(b)(2)), this does not constitute PHI.</p><p><strong>Residual risk (low):</strong> In small panels, the clinical combination could theoretically be re-identifiable. OS clipboard sync services transit content through uncontrolled channels. Document in risk register; consider server-side OE API integration at Phase 2+ as a UX improvement, not a compliance gate.</p>"
+        },
+        {
+          "question": "What does the HHS OCR NPRM require?",
+          "answer_html": "<p>Published January 6, 2025 (<a href=\"https://www.federalregister.gov/documents/2025/01/06/2024-30983/hipaa-security-rule-to-strengthen-the-cybersecurity-of-electronic-protected-health-information\">Federal Register 2024-30983</a>). Key deltas from current HIPAA Security Rule:</p><p><span class=\"pill warn\">Encryption</span> at rest/transit effectively mandatory (\"addressable\" loophole gone).<br><span class=\"pill warn\">MFA</span> explicit.<br><span class=\"pill warn\">Annual pen test</span>, 6-month vulnerability scans, 72-hour critical patch SLA.<br><span class=\"pill warn\">Tamper-evident audit logs</span> with ≥6 year retention.<br><span class=\"pill warn\">Annual BA attestations</span> in writing.</p><p>Meridian's \"no backend\" architecture doesn't survive this. The FastAPI + PostgreSQL direction is correct — but ship it <strong>before</strong> Epic enablement, with auth, TLS, and audit logging on day one.</p>"
+        },
+        {
+          "question": "Why self-host CDN dependencies?",
+          "answer_html": "<p>Kaiser and Optum procurement will flag CDN-loaded code. Vendor IBM Plex, PptxGenJS, and Mammoth.js into the repo. Produce an SBOM (CycloneDX or SPDX) on request.</p><p>Context: Change Healthcare (190M records, Feb 2024) was breached via a single unpatched Citrix CVE with no MFA. <strong>72% of 2025 healthcare breaches</strong> traced to third-party vendors (Censinet benchmarking). SRI hashes mitigate for pinned versions but procurement wants self-hosting.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SECURITY.md#4-self-host-critical-dependencies-before-enterprise-review\">CDN dependency details on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "near-term",
+      "topic": "Near-Term Findings",
+      "title": "What should be fixed before the next demo?",
+      "referenced_by": [
+        "nearterm-prioritized",
+        "finding-sanitizer",
+        "finding-api-param",
+        "finding-email",
+        "finding-csp",
+        "finding-supply-chain"
+      ],
+      "items": [
+        {
+          "question": "What are the quick wins?",
+          "answer_html": "<p>Each ≤1 day of work:</p><p><span class=\"pill green\">1.</span> Swap regex DOCX sanitizer for <strong>DOMPurify</strong> (HTML-entity bypass risk via innerHTML).<br><span class=\"pill green\">2.</span> Move <code>FEEDBACK_EMAIL</code> behind <code>/config</code> indirection (currently hardcoded in public source).<br><span class=\"pill green\">3.</span> Add <strong>HSTS header</strong> (currently missing).<br><span class=\"pill green\">4.</span> Drop <code>?api=</code> URL override in production builds (accepts any endpoint, SSRF-adjacent).<br><span class=\"pill green\">5.</span> Self-host IBM Plex fonts (Google Fonts loaded without SRI).</p>"
+        },
+        {
+          "question": "What is the biggest actual risk right now?",
+          "answer_html": "<p><strong>Supply-chain compromise</strong> of PptxGenJS or Mammoth.js. Reference incidents: Polyfill.io (June 2024), npm \"shai-hulud\" (Sept 2025), axios (March 2026). SRI hashes mitigate this for pinned versions — keep them and audit on every version bump.</p><p>The 31+ <code>innerHTML</code> assignments are tolerable today because input is trusted JSON, but the DOCX upload path feeds them — hence the DOMPurify urgency.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SECURITY.md#near-term-findings-demo-phase\">Near-term findings on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "sequencing",
+      "topic": "Remediation Sequencing",
+      "title": "What is the suggested fix order?",
+      "referenced_by": [
+        "remediation-sequenced"
+      ],
+      "items": [
+        {
+          "question": "What is the three-phase remediation sequence?",
+          "answer_html": "<p><span class=\"pill green\">Phase 1 — Now, before next demo (~1 day):</span> DOMPurify swap, drop ?api= in prod, HSTS header, self-host fonts.</p><p><span class=\"pill\">Phase 2 — Before first Optum/Kaiser pilot conversation:</span> BAA path decision (host migration vs. Cloudflare Enterprise), FEEDBACK_EMAIL indirection. (OE clipboard downgraded — pre-prompt has no HIPAA identifiers.)</p><p><span class=\"pill warn\">Phase 3 — Before Epic sandbox pilot:</span> Audit-logging backend shipped with auth + TLS, HITRUST i1 readiness engagement started, SMART v2 scaffolding, SBOM.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SECURITY.md#suggested-sequencing\">Full sequencing on GitHub</a></p>"
+        },
+        {
+          "question": "What compliance framework should we target?",
+          "answer_html": "<p><span class=\"pill\">HITRUST i1 readiness</span> + <span class=\"pill\">OWASP ASVS 5.0 Level 2 self-attestation</span> is the defensible posture for a 2027 Epic pilot. 6–12 month lead time.</p><p>Full <strong>HITRUST r2 certification</strong> is $60–250K and 9–18 months — pursue only if an Optum/Kaiser contract demands it.</p><p><strong>Epic Showroom</strong> (formerly App Orchard) review is per-app and includes architecture review plus pen test. Requires SMART App Launch v2.2.0 (PKCE, granular v2 scopes, tokens never in URLs or localStorage).</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "supply-chain",
+      "topic": "Supply Chain Risk",
+      "title": "How serious is the third-party dependency risk?",
+      "referenced_by": [],
+      "items": [
+        {
+          "question": "What is the current dependency posture?",
+          "answer_html": "<p>Two CDN-loaded libraries with SRI hashes: <span class=\"pill\">PptxGenJS 3.12.0</span> and <span class=\"pill\">Mammoth.js 1.8.0</span>. Google Fonts (IBM Plex Sans/Mono) loaded without SRI.</p><p>SRI hashes ensure pinned versions cannot be silently replaced. But the broader healthcare supply-chain picture is sobering: Change Healthcare (190M records), 72% of 2025 breaches via third-party vendors, and three major npm incidents in 18 months.</p><p>Recommendation: self-host all dependencies before enterprise review. Produce a CycloneDX or SPDX SBOM on request.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "cors-auth",
+      "topic": "Authentication Gap",
+      "title": "What about the current API authentication posture?",
+      "referenced_by": [],
+      "items": [
+        {
+          "question": "What auth gaps exist in the API backend?",
+          "answer_html": "<p>The FastAPI backend in <code>api/server.py</code> currently runs with <code>allow_origins=[\"*\"]</code> and no authentication middleware. This is acceptable for local development and demo purposes but <span class=\"pill warn\">must be resolved before any PHI flows</span>.</p><p>Auth design decision pending: static API key vs. OAuth2 client credentials vs. tenant-scoped JWT vs. Entra ID integration. Epic's CDS Hooks spec allows unauthenticated services for non-PHI contexts, but this is likely a demo-only stance.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SECURITY.md#3-the-2025-hhs-ocr-nprm-requires-a-real-audit-backend\">Audit backend requirements on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "ai-coach-security",
+      "topic": "AI Coach",
+      "title": "Meridian Coach v1 — security posture",
+      "referenced_by": [
+        "coach-api-key"
+      ],
+      "items": [
+        {
+          "question": "What is Coach v1 sending to Anthropic today?",
+          "answer_html": "<p>The client-side agent redacts patient context before the fetch: <span class=\"pill\">name</span>, <span class=\"pill\">MRN</span>, and <span class=\"pill\">DOB</span> are stripped. What is sent: age, sex, problem list, vitals, labs, and medications — the same shape as the OpenEvidence pre-prompt, which was previously downgraded under HIPAA Safe Harbor.</p><p>There is a <code>window.MERIDIAN_ALLOW_PHI</code> flag (default false) that will gate inclusion of identifiers if and when a future workflow needs it — but today, no identifiers ever leave the browser.</p><p>Conversation history lives in <code>sessionStorage</code> client-side only. The server proxy does not log message content (only timestamps + token counts + model).</p>"
+        },
+        {
+          "question": "What changes for enterprise / PHI use?",
+          "answer_html": "<p>Two gates, both one-line changes:</p><p><span class=\"pill warn\">1. Swap to BAA-covered API key.</span> Two acceptable paths: (a) Anthropic enterprise contract with BAA, or (b) Claude on Amazon Bedrock (inherits AWS BAA). Rotate the <code>ANTHROPIC_API_KEY</code> Cloudflare Pages secret and redeploy.</p><p><span class=\"pill warn\">2. Restrict CORS on <code>/api/agent/message</code>.</span> Same remediation as the rest of the API surface — allowlist the Meridian domain only.</p><p>No code changes are required for the swap. The Anthropic dependency is deliberately thin: a proxy that adds cached system blocks + the six-tool schema and streams SSE. Anything that speaks that contract (Copilot Studio, Bedrock, self-hosted) slots in.</p>"
+        },
+        {
+          "question": "Does Coach preserve the FDA non-device CDS posture?",
+          "answer_html": "<p>Yes — by design, not by hope. The system prompt enforces the <em>soft-steer pattern</em>: Coach refuses to generate clinical recommendations, routes clinical questions to the relevant module (which the clinician independently reviews), and redirects pure-clinical questions (dosing, diagnosis) to OpenEvidence via the <code>build_oe_query</code> tool.</p><p>This satisfies FDA CDS criterion #4 (source-reviewability) because Coach doesn't generate the clinical content — it points at modules the clinician can read in full. Every future expansion of Coach behavior must preserve this; drift toward generating recommendations would trigger device CDS reclassification.</p>"
+        },
+        {
+          "question": "Copilot Studio as an alternative backend?",
+          "answer_html": "<p>Credible. The frontend speaks a stable SSE contract to <code>/api/agent/message</code>, so the backend is swappable without UI changes. A Copilot Studio agent mirroring the same system prompt and tool schema would slot in transparently.</p><p><strong>Security trade-off:</strong> Copilot Studio inherits Microsoft's enterprise controls (Entra ID, Purview audit trail, Teams channel surfacing) — arguably stronger enterprise fit than a direct Anthropic proxy. The cost is less control over model choice, streaming behavior, and prompt caching. Phase 2+ decision.</p>"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "doc-compliance",
+  "default_title": "Compliance Roadmap — Regulatory Triggers & Sequencing",
+  "landing_intro": "Meridian’s compliance obligations activate in discrete step-functions tied to product state, not gradually. Missing a trigger by months can cost 6–18 months in HITRUST readiness, BAA renegotiation, or Epic security review queues. This module distills the full compliance roadmap into the mental model, phase checklists, blind spots, and critical-path actions needed to stay ahead of each trigger. Tap any item for detail.",
+  "checklist_section_label": "Compliance readiness — confirm all four",
+  "checklist": [
+    {
+      "item_id": "trigger-model",
+      "position": 1,
+      "statement": "Trigger model understood — 7 event triggers activate regulatory obligations simultaneously, not by company size or revenue",
+      "faq_ref": "triggers"
+    },
+    {
+      "item_id": "phase-0-started",
+      "position": 2,
+      "statement": "Phase 0 actions started — governance policy, risk register, data classification, SOC 2 scoping underway despite no current obligation",
+      "faq_ref": "phase-0"
+    },
+    {
+      "item_id": "phi-scope-narrow",
+      "position": 3,
+      "statement": "PHI path scoped narrowly — first pilot limited to you + 1–3 own patients on CRH infrastructure to compress the control surface",
+      "faq_ref": "scope-compression"
+    },
+    {
+      "item_id": "lead-times-identified",
+      "position": 4,
+      "statement": "Lead times identified — HITRUST e1 (4–6 mo), SOC 2 Type II (6 mo observation), Epic App Orchard (3–6 mo queue) cannot be compressed",
+      "faq_ref": "critical-path"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Compliance posture mapped — no registrations required today",
+    "narrative_html": "Meridian currently handles <strong>synthetic data only</strong> and satisfies all four FDA non-device CDS criteria. No government body needs to be notified. However, seven long-lead items (governance policy, risk register, data classification, CDN self-hosting, SOC 2 scoping, module versioning, and CRH counsel introduction) should start now to avoid retrofitting under procurement pressure. <a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#phase-0--today-demo-synthetic-data-1-user\" target=\"_blank\">Full Phase 0 checklist →</a>",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Regulatory triggers & blind spots",
+  "escalation": [
+    {
+      "item_id": "trigger-1-phi",
+      "position": 1,
+      "statement": "Trigger 1 — First real PHI touch: HIPAA fully activates (Privacy + Security + Breach Notification), BAA required, audit backend required, 4–8 month lead time",
+      "faq_ref": "phase-1"
+    },
+    {
+      "item_id": "trigger-2-external",
+      "position": 2,
+      "statement": "Trigger 2 — First external user outside your CDO: vendor security review, HITRUST e1 certification, SOC 2 Type II, inter-entity DUA required",
+      "faq_ref": "phase-2"
+    },
+    {
+      "item_id": "trigger-3-epic",
+      "position": 3,
+      "statement": "Trigger 3 — First Epic production launch: App Orchard listing, SMART-on-FHIR v2 compliance, FHIR R4 minimum, 6–9 month lead time",
+      "faq_ref": "phase-3"
+    },
+    {
+      "item_id": "trigger-4-ai",
+      "position": 4,
+      "statement": "Trigger 4 — First uncited generative AI output: Meridian Coach v1 is the first generative AI surface; it ships with soft-steer design (refuses clinical recommendations, routes to modules) so FDA non-device posture is preserved; BAA-covered API key (Anthropic enterprise or Amazon Bedrock) is required before Phase 1 PHI use; Colorado AI Act exposure if CO residents are subjects",
+      "faq_ref": "phase-4"
+    },
+    {
+      "item_id": "trigger-5-commercial",
+      "position": 5,
+      "statement": "Trigger 5 — First paying customer outside Optum: FTC Act, state consumer health data laws, product liability insurance, Trust Center required",
+      "faq_ref": "triggers"
+    },
+    {
+      "item_id": "trigger-6-international",
+      "position": 6,
+      "statement": "Trigger 6 — First non-US user: GDPR, UK GDPR + MHRA, PIPEDA, EU AI Act high-risk classification — geo-fence until deliberately pursued",
+      "faq_ref": "triggers"
+    },
+    {
+      "item_id": "trigger-7-harm",
+      "position": 7,
+      "statement": "Trigger 7 — First harm-related decision influenced: professional liability exposure, learned intermediary doctrine applies only while clinician review is meaningful",
+      "faq_ref": "blind-spots"
+    },
+    {
+      "item_id": "blind-1557",
+      "position": 8,
+      "statement": "Blind spot — §1557 ACA nondiscrimination: applies to “patient care decision support tools” at Phase 1, requires bias mitigation documentation",
+      "faq_ref": "blind-spots"
+    },
+    {
+      "item_id": "blind-part2",
+      "position": 9,
+      "statement": "Blind spot — 42 CFR Part 2: opioid/benzo modules may encounter SUD treatment records with consent rules stricter than HIPAA",
+      "faq_ref": "blind-spots"
+    },
+    {
+      "item_id": "blind-stark",
+      "position": 10,
+      "statement": "Blind spot — Stark / Anti-Kickback: payer-aware opportunities that influence billing or suggest higher E&M levels need compliance review before deployment",
+      "faq_ref": "blind-spots"
+    }
+  ],
+  "context_strip": {
+    "label": "Current posture",
+    "text": "Phase 0 — demo/synthetic data, no PHI, no users. Real-PHI pilot targeted in 0–3 months. Meridian Coach v1 is live on the demo site (soft-steer pattern preserves FDA non-device posture); BAA-covered API key is the only gate before Coach can be used with PHI. Commercialization path undecided. Full roadmap in docs/COMPLIANCE_ROADMAP.md."
+  },
+  "footer_note": "Advisory reference distilled from docs/COMPLIANCE_ROADMAP.md (April 2026). Not legal advice — binding opinions must come from Optum/CRH privacy counsel and compliance officers.",
+  "faqs": [
+    {
+      "faq_id": "triggers",
+      "topic": "Mental Model",
+      "title": "Why triggers, not tiers?",
+      "referenced_by": [
+        "trigger-model",
+        "trigger-5-commercial",
+        "trigger-6-international"
+      ],
+      "items": [
+        {
+          "question": "What is the trigger model?",
+          "answer_html": "<p>There is no “size threshold” like GDPR’s 250-employee rule for most US health IT. Instead, <strong>7 discrete events</strong> activate regulatory obligations simultaneously:</p><p><span class=\"pill\">1</span> First real PHI touch <span class=\"pill\">2</span> First external user outside your CDO <span class=\"pill\">3</span> First Epic production launch <span class=\"pill\">4</span> First uncited generative AI output <span class=\"pill\">5</span> First paying customer outside Optum <span class=\"pill\">6</span> First non-US user <span class=\"pill\">7</span> First harm-related decision influenced</p><p>Missing a trigger by months can cost <strong>6–18 months</strong> in HITRUST readiness, BAA renegotiation, or Epic security review queues. The roadmap is keyed to these triggers, not to company maturity stages. <a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#the-mental-model-triggers-not-tiers\" target=\"_blank\">Full trigger model →</a></p>"
+        },
+        {
+          "question": "Do I need to notify anyone today?",
+          "answer_html": "<p><span class=\"pill green\">No government registrations or notifications required today.</span> HIPAA is enforced by complaint/audit, not registration. FDA only applies if chatbot violates CDS criterion #4. ONC certification is voluntary.</p><p>The one action: <span class=\"pill warn\">soft-notify CRH/Optum compliance + legal now</span> to keep Meridian on their radar so future opinions are not cold. <a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#quick-reference-do-i-need-to-notify-anyone-now\" target=\"_blank\">Full notification table →</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "phase-0",
+      "topic": "Phase 0",
+      "title": "What should we do now despite no current obligation?",
+      "referenced_by": [
+        "phase-0-started"
+      ],
+      "items": [
+        {
+          "question": "What are the Phase 0 long-lead items?",
+          "answer_html": "<p>Seven items to start now — all are cheap today and load-bearing for every later review:</p><p><strong>1. Clinical Content Governance policy</strong> — one page: who authors, who reviews, versioning, feedback triage. Required for FDA criterion #4, §1557, Joint Commission.</p><p><strong>2. Risk Register</strong> — living document listing identified risks with owner/status/mitigation. HITRUST and SOC 2 both require history.</p><p><strong>3. Data Classification note</strong> — declare “synthetic only, no PHI.” The change triggers Phase 1.</p><p><strong>4. Self-host CDN deps</strong> — PptxGenJS, Mammoth.js, Google Fonts. One-day job now vs. blocking review later.</p><p><strong>5. SOC 2 Type I readiness scoping</strong> — Drata/Vanta/Secureframe (~$5–15K). Do not start audit; just scope controls.</p><p><strong>6. Tag module JSONs</strong> with <span class=\"pill\">version</span>, <span class=\"pill\">last_reviewed</span>, <span class=\"pill\">reviewer</span>.</p><p><strong>7. CRH counsel introduction</strong> — put Meridian on their radar as an emerging internal tool. <a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#phase-0--today-demo-synthetic-data-1-user\" target=\"_blank\">Full Phase 0 →</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "phase-1",
+      "topic": "Phase 1 — First PHI",
+      "title": "What must be in place before the first real PHI touch?",
+      "referenced_by": [
+        "trigger-1-phi"
+      ],
+      "items": [
+        {
+          "question": "What does Phase 1 activate?",
+          "answer_html": "<p>The moment a real patient’s name or MRN is loaded — even for one screen — these activate <strong>simultaneously</strong>:</p><p><span class=\"pill warn\">HIPAA Privacy + Security + Breach Notification</span> — Meridian becomes a Business Associate of CRH. Requires a signed BAA.</p><p><span class=\"pill warn\">2025 HHS OCR NPRM controls</span> — MFA, encryption at rest + in transit, audit logs (6-year retention), written incident response, 72-hour critical patch SLA, annual pen test.</p><p><span class=\"pill warn\">§1557 nondiscrimination</span> — the CE using Meridian must identify and mitigate discrimination risk in the tool.</p><p><span class=\"pill\">State privacy overlay</span> — CMIA (CA), WMHMDA (WA), Colorado Privacy Act, NY SHIELD depending on patient residence.</p>"
+        },
+        {
+          "question": "What is the Phase 1 pre-flight checklist?",
+          "answer_html": "<p>All must be in place <strong>before</strong> first PHI touch, not after:</p><p><span class=\"pill warn\">BAA signed</span> with CRH • <span class=\"pill warn\">Hosting migrated</span> off Cloudflare Pages (no BAA on Pages tier) • <span class=\"pill warn\">Audit logging live</span> (append-only, 6-year retention) • <span class=\"pill warn\">SSO + MFA</span> for all users • <span class=\"pill warn\">Encryption</span> at rest + TLS 1.2+ • <span class=\"pill green\">OE clipboard (downgraded)</span> — pre-prompt has no HIPAA identifiers; risk register item only • Written HIPAA policies (Privacy, Security, Breach, IR, Sanction, Access, Training, Retention, BCP/DR) • Designated Privacy + Security Officers • Risk Assessment document • Breach-response runbook (60-day clock)</p><p><strong>Lead time: 4–8 months.</strong> Start 6 months before intended Phase 1 date. <a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#phase-1--first-real-phi-single-pilot-internal-crh-12-users\" target=\"_blank\">Full Phase 1 checklist →</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "phase-2",
+      "topic": "Phases 2–4",
+      "title": "What do the next triggers activate?",
+      "referenced_by": [
+        "trigger-2-external",
+        "trigger-3-epic",
+        "trigger-4-ai"
+      ],
+      "items": [
+        {
+          "question": "Phase 2 — Multi-site: what gates cross-CDO deployment?",
+          "answer_html": "<p>Any user outside your own CDO triggers <strong>vendor security review</strong> by the second CDO’s InfoSec team. Standard asks:</p><p><span class=\"pill warn\">HITRUST e1 certification</span> (~$15–30K, 4–6 months) • <span class=\"pill warn\">SOC 2 Type I minimum</span> • Recent pen test • Evidence of incident response • Inter-entity DUA</p><p>These artifacts take 6–12 months and <strong>cannot be produced reactively</strong>. Start HITRUST e1 readiness and SOC 2 Type I at Phase 1 kickoff, not Phase 2. <a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#phase-2--multi-site-pilot-beyond-crh-eg-scott-freibergs-cdo\" target=\"_blank\">Full Phase 2 →</a></p>"
+        },
+        {
+          "question": "Phase 3 — Epic: what does production launch require?",
+          "answer_html": "<p><span class=\"pill\">Epic App Orchard / Showroom</span> listing with security + FHIR + UX review (queue time 3–6 months) • <span class=\"pill\">SMART-on-FHIR v2</span> compliance • <span class=\"pill\">FHIR R4</span> minimum. ONC CEHRT certification is still <strong>voluntary</strong> — defer unless a customer demands it. No FDA/ONC filings required. <a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#phase-3--epic-production-launch-deep-link-with-patient-context-from-epic\" target=\"_blank\">Full Phase 3 →</a></p>"
+        },
+        {
+          "question": "Phase 4 — Gen AI: what puts FDA status at risk?",
+          "answer_html": "<p><strong>Meridian Coach v1 is the first generative AI surface and it is already live</strong> on the demo site (<a href=\"https://meridian-3x6.pages.dev\" target=\"_blank\">meridian-3x6.pages.dev</a>). It is designed to hold the FDA non-device CDS line: the system prompt refuses clinical recommendations, routes clinical questions to the relevant module (which the clinician can independently review), and redirects unanswered questions to OpenEvidence. This satisfies criterion #4 by construction.</p><p><strong>The single gate before PHI use:</strong> <span class=\"pill warn\">BAA-covered API key</span> — Anthropic enterprise contract with BAA, or Claude models on Amazon Bedrock (inherits AWS BAA). Either is a Cloudflare secret rotation plus redeploy. No code changes.</p><p><strong>Alternative path:</strong> Copilot Studio agent behind the same <code>/api/agent/message</code> contract. Tighter M365 integration (SSO, Purview audit, Teams) trading off model choice and streaming control. Credible Phase 2 option if enterprise alignment demands it.</p><p><strong>Design rule preserved from original roadmap:</strong> every future expansion of Coach behavior must keep citations surfaceable. Soft-steer is the regulatory insurance policy; don't drop it.</p><p>Additional obligations still apply: <span class=\"pill warn\">Anthropic/Bedrock BAA</span> before PHI reaches Claude • <span class=\"pill warn\">Colorado AI Act</span> impact assessment if CO residents are subjects • <span class=\"pill\">§1557 bias mitigation log</span> (quarterly updates) • <span class=\"pill\">CA AB 3030</span> disclosure if patient-facing. <a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#phase-4--generative-ai-features-per-module-chatbot-deep-docs\" target=\"_blank\">Full Phase 4 →</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "blind-spots",
+      "topic": "Blind Spots",
+      "title": "What non-obvious compliance risks exist?",
+      "referenced_by": [
+        "trigger-7-harm",
+        "blind-1557",
+        "blind-part2",
+        "blind-stark"
+      ],
+      "items": [
+        {
+          "question": "What are the critical blind spots?",
+          "answer_html": "<p>Fifteen non-obvious items worth planning for. The highest-impact:</p><p><strong>Professional liability / learned intermediary:</strong> the clinician is the legal shield. Any feature that shortens or automates their review (auto-applied smartphrases, one-click order bundles) erodes the shield. Payer-aware opportunities must stay in <em>suggestive framing only</em> posture.</p><p><strong>§1557 nondiscrimination (2024 Final Rule):</strong> applies to “patient care decision support tools” used by CEs receiving federal funds. Activates at Phase 1. Requires bias mitigation documentation.</p><p><strong>42 CFR Part 2:</strong> opioid/benzo modules may encounter SUD treatment records from Part 2 programs with consent rules <strong>stricter than HIPAA</strong>. Activates with real PHI.</p><p><strong>Stark / Anti-Kickback:</strong> if Meridian suggests higher E&M levels based on payer, compliance review is required before deployment.</p>"
+        },
+        {
+          "question": "What other blind spots should be tracked?",
+          "answer_html": "<p><span class=\"pill\">CLIA</span> — if Meridian ever interprets lab values as diagnostic (it currently displays, doesn’t interpret — preserve that line).</p><p><span class=\"pill\">HIPAA minimum necessary</span> — pulling full patient summaries may violate minimum-necessary if only a subset is needed. Plan field-level access controls before Phase 2.</p><p><span class=\"pill\">SBOM + cybersecurity disclosure</span> — procurement questionnaires will ask about open-source CVEs, data storage, retention. Start maintaining an SBOM now.</p><p><span class=\"pill\">Records retention</span> — HIPAA = 6 years, CA = 7 years, ONC audit = 10 years for certified products. Decide before first PHI.</p><p><span class=\"pill\">OIG exclusion screening</span> — quarterly checks on any workforce member with PHI access.</p><p><a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#blind-spots--non-obvious-items-worth-planning-for\" target=\"_blank\">All 15 blind spots →</a></p>"
+        }
+      ]
+    }
+  ]
+}

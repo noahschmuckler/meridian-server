@@ -1,0 +1,212 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "exec-summary",
+  "default_title": "Executive Summary — Meridian Strategic Overview",
+  "landing_intro": "Meridian is a clinical decision-support platform that delivers a patient-specific, action-oriented visit-start manifest in under 4 minutes. Seven strategic documents define the path from demo to enterprise deployment. This module distills their key findings, cross-cutting risks, and recommended sequencing for executive review.",
+  "checklist_section_label": "Strategic readiness — verify all four",
+  "checklist": [
+    {
+      "item_id": "architecture-validated",
+      "position": 1,
+      "statement": "Architecture validated — single-file frontend, FastAPI backend, PostgreSQL cache, CDS Hooks interop layer all functional and tested",
+      "faq_ref": "architecture-interop"
+    },
+    {
+      "item_id": "security-gaps-mapped",
+      "position": 2,
+      "statement": "Security gaps identified with remediation plan — five architectural blockers documented with 6–12 month lead times and sequenced resolution",
+      "faq_ref": "security-compliance"
+    },
+    {
+      "item_id": "compliance-sequenced",
+      "position": 3,
+      "statement": "Compliance roadmap sequenced to triggers — seven regulatory events activate obligations; Phase 0–1 critical path defined for 0–3 month real-PHI window",
+      "faq_ref": "security-compliance"
+    },
+    {
+      "item_id": "scaling-phased",
+      "position": 4,
+      "statement": "Enterprise scaling phased with measurable gates — three deployment phases from local prototype to regional rollout, 8–11 FTE at steady state with 30–50% agentic load",
+      "faq_ref": "scaling-strategy"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Strategic foundation documented — ready for stakeholder review",
+    "narrative_html": "<p>All seven strategic documents are complete and internally consistent. The architecture is functional, the competitive positioning is defensible, the compliance path is sequenced, the scaling plan is phased with gates, and the interop layer future-proofs against ambient AI commoditization. <strong>The next step is executive alignment on hosting migration and Phase 1 pilot scope.</strong></p>",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Cross-cutting risks requiring executive attention",
+  "escalation": [
+    {
+      "item_id": "esc-baa-gap",
+      "position": 1,
+      "statement": "Cloudflare Pages has no BAA — production PHI instance must migrate to Optum Azure or Kaiser AWS before any real patient data flows",
+      "faq_ref": "security-compliance"
+    },
+    {
+      "item_id": "esc-single-founder",
+      "position": 2,
+      "statement": "Single-founder risk — no institutional backing for enterprise sale; Phase 2 evidence must earn executive sponsorship and director FTE reallocation",
+      "faq_ref": "scaling-strategy"
+    },
+    {
+      "item_id": "esc-no-outcomes",
+      "position": 3,
+      "statement": "No outcomes evidence — no pilot data, no process-measure improvement study; CDS literature is clear that 'plausibly helpful' doesn't sell",
+      "faq_ref": "competitive-position"
+    },
+    {
+      "item_id": "esc-hitrust-leadtime",
+      "position": 4,
+      "statement": "HITRUST e1 and SOC 2 Type II have 6–12 month lead times — these gate Phase 2 (cross-CDO pilot) and cannot be compressed",
+      "faq_ref": "security-compliance"
+    },
+    {
+      "item_id": "esc-scribe-convergence",
+      "position": 5,
+      "statement": "Scribe-CDS convergence is the most important industry shift — Dragon Copilot, Abridge CRE, and Epic native AI all moving toward patient-specific CDS",
+      "faq_ref": "architecture-interop"
+    },
+    {
+      "item_id": "esc-ip-question",
+      "position": 6,
+      "statement": "IP ownership is unresolved — Optum likely owns Meridian IP under employment agreement; open-source decision cannot proceed without this clarity",
+      "faq_ref": "opensource-ip"
+    },
+    {
+      "item_id": "esc-fda-chatbot",
+      "position": 7,
+      "statement": "FDA non-device CDS status is at risk if the chatbot drifts into generating clinical recommendations — Meridian Coach v1 addresses this by design (soft-steer routing to modules, refusal of clinical recommendations); posture must be preserved if behavior is ever expanded",
+      "faq_ref": "security-compliance"
+    },
+    {
+      "item_id": "esc-coach-enterprise-key",
+      "position": 8,
+      "statement": "Meridian Coach v1 is live on the demo site; the only remaining gate for enterprise use is a BAA-covered API key (Anthropic enterprise or Amazon Bedrock) — alternative path is a Copilot Studio swap behind the same /api/agent/message contract",
+      "faq_ref": "ai-coach"
+    }
+  ],
+  "context_strip": {
+    "label": "Strategic anchor",
+    "text": "Every feature, demo, and messaging decision should ladder to the 4-minute visit-velocity JTBD: 'Help me move this visit forward in 4 minutes with nothing missed.' Meridian isn't adding interruptions — it's replacing them with a single pre-visit manifest."
+  },
+  "footer_note": "Meridian Executive Strategy Overview — synthesized from 7 strategic documents, April 2026. Dr. Noah Schmuckler, Crystal Run Healthcare / Optum. For executive review — not for clinical use.",
+  "faqs": [
+    {
+      "faq_id": "competitive-position",
+      "topic": "Competitive Positioning",
+      "title": "Where Meridian sits in the CDS market and why it wins",
+      "referenced_by": ["esc-no-outcomes"],
+      "items": [
+        {
+          "question": "What is Meridian's competitive position?",
+          "answer_html": "<p>The CDS market sorts on two axes: <strong>reference vs. action</strong> and <strong>generic vs. patient-specific</strong>. Meridian occupies the <span class=\"pill green\">action + patient-specific</span> quadrant — a genuinely thin field. Epic BPAs technically occupy this cell but earn 49–96% override rates — a category failure that creates the opening.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#1-the-competitive-map-22\" target=\"_blank\">Full analysis in source document</a></p>"
+        },
+        {
+          "question": "What is the core Jobs-to-be-Done anchor?",
+          "answer_html": "<p><strong>\"Help me move this visit forward in 4 minutes with nothing missed.\"</strong> This is the uncontested job. 'Help me decide' competes with UpToDate and OpenEvidence (crowded). 'Help me defend my decision' drifts into Navina's coding territory. Visit-velocity is the anchor for all positioning.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#5-jobs-to-be-done-framing\" target=\"_blank\">Full JTBD analysis</a></p>"
+        },
+        {
+          "question": "Who are the real threats?",
+          "answer_html": "<p><span class=\"pill warn\">Navina</span> — closest head-on competitor in VBC primary care. Pre-visit summary + coding/risk-adjustment. Compete by differentiating on visit-velocity vs. coding-capture.</p><p><span class=\"pill warn\">Abridge CRE</span> — deployed across Kaiser (25K physicians, 40 hospitals). Highest-value scribe-partnership target AND most direct threat. Pursue 'Meridian-after-Abridge' positioning.</p><p><span class=\"pill\">Epic native AI</span> — will commoditize patient-specific action lists for Epic shops by 2027. Compete by contrast: cross-EHR, non-interruptive, provider-customizable.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#9-competitor-by-competitor-partner--compete--ignore\" target=\"_blank\">Full competitor analysis</a></p>"
+        },
+        {
+          "question": "What is the authoring pipeline moat?",
+          "answer_html": "<p>Meridian's durable moat is the <strong>clinician authoring pipeline</strong>, not the code. A physician can ship a module from a Word doc in an afternoon. UpToDate needs editors; Epic BPAs need a Chronicles committee. Code is a commodity — the ability to ship modules faster than UpToDate can author them, with clinical credibility backing every one, is the real defensibility.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#6-wardley-take--where-the-moat-goes\" target=\"_blank\">Wardley analysis</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "security-compliance",
+      "topic": "Security & Compliance",
+      "title": "Five blockers, seven triggers, and the path to real PHI",
+      "referenced_by": ["security-gaps-mapped", "compliance-sequenced", "esc-baa-gap", "esc-hitrust-leadtime", "esc-fda-chatbot"],
+      "items": [
+        {
+          "question": "What are the architectural blockers?",
+          "answer_html": "<p>Four decisions have 6–12 month lead times and must be made before Epic integration:</p><p><span class=\"pill warn\">1. Cloudflare Pages BAA gap</span> — Pages tier has no BAA; must migrate to Optum Azure or Kaiser AWS.</p><p><span class=\"pill warn\">2. Audit backend required</span> — 2025 HHS OCR NPRM mandates tamper-evident audit logs with 6-year retention.</p><p><span class=\"pill warn\">3. Self-host CDN deps</span> — PptxGenJS, Mammoth.js, Google Fonts must be vendored before enterprise security review.</p><p><span class=\"pill warn\">4. HITRUST readiness</span> — e1 certification is the entry tier ($15–30K, 4–6 months); r2 is $60–250K / 9–18 months.</p><p><span class=\"pill green\">OE clipboard (downgraded)</span> — the pre-prompt contains no HIPAA identifiers (no name, MRN, DOB). Low-severity risk register item, not a blocker.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SECURITY.md#far-term-blockers-epic-integration-multi-tenant-phi\" target=\"_blank\">Full security analysis</a></p>"
+        },
+        {
+          "question": "How does the compliance trigger model work?",
+          "answer_html": "<p>Regulatory obligations appear in <strong>discrete step-functions tied to product state</strong>, not gradually. Seven triggers:</p><p>1. First real PHI touch → HIPAA fully activates<br/>2. First external user → vendor security review<br/>3. First Epic production launch → App Orchard + SMART-on-FHIR<br/>4. First generative AI without citations → FDA device-CDS risk<br/>5. First paying customer outside Optum → commercial obligations<br/>6. First EU/UK/Canada user → GDPR / MHRA / PIPEDA<br/>7. First harm-related decision influenced → professional liability / §1557</p><p><a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#the-mental-model-triggers-not-tiers\" target=\"_blank\">Full compliance roadmap</a></p>"
+        },
+        {
+          "question": "What is the honest path to real PHI in 0–3 months?",
+          "answer_html": "<p>Compress scope, don't skip controls: <strong>you + 1–3 of your own patients</strong> on CRH-provisioned infrastructure (inherits their controls). OE handoff is usable (pre-prompt contains no HIPAA identifiers). Meridian Coach v1 is usable in the first pilot <em>once the BAA-covered API key is provisioned</em> (Anthropic enterprise or Amazon Bedrock); until then, Coach runs on synthetic data only. BAA signed with CRH, SSO + MFA, audit logging live, encryption at rest + in transit, written HIPAA policies. Broader pilot (multiple clinicians, cross-CDO) is a 9–12 month path.</p><p><a href=\"/docs/viewer.html?file=COMPLIANCE_ROADMAP.md#scope-compression-recommendation\" target=\"_blank\">Scope compression recommendation</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "ai-coach",
+      "topic": "AI Coach",
+      "title": "Meridian Coach v1 — deployed, next moves",
+      "referenced_by": ["esc-coach-enterprise-key", "esc-fda-chatbot"],
+      "items": [
+        {
+          "question": "What's the status of the AI assistant?",
+          "answer_html": "<p><span class=\"pill green\">Live on demo</span>. Meridian Coach v1 is shipped on <a href=\"https://meridian-3x6.pages.dev\" target=\"_blank\">meridian-3x6.pages.dev</a> — a bottom-strip assistant backed by Anthropic Claude Haiku 4.5, served via a Cloudflare Pages Function. It answers app-usage questions, routes clinical questions to the relevant module, and refuses to generate clinical recommendations (redirects to OpenEvidence). This behavior explicitly preserves the FDA non-device CDS posture.</p>"
+        },
+        {
+          "question": "What is the only remaining gate for enterprise use?",
+          "answer_html": "<p>A <strong>BAA-covered API key</strong>. Two acceptable paths: (a) Anthropic enterprise contract with BAA, or (b) Claude models on Amazon Bedrock (inherits AWS BAA). Either is a Cloudflare secret rotation and redeploy — no code changes.</p><p>This is the single line item between Coach v1 as demo and Coach v1 as Phase 1 tool.</p>"
+        },
+        {
+          "question": "Alternative path — Copilot Studio?",
+          "answer_html": "<p>Credible. The frontend speaks a stable SSE contract to <code>/api/agent/message</code>, so the backend is swappable. A Copilot Studio agent mirroring the same system prompt, tool set, and event vocabulary can slot in transparently.</p><p>Trade-off: Copilot Studio gives tighter M365 integration (SSO, Purview audit, Teams surfacing) but less control over model choice and streaming. Anthropic was chosen for v1 because iteration is faster and the soft-steer prompt is better-suited to a controllable model. Copilot Studio becomes more attractive in Phase 2+ if enterprise alignment demands M365-native tooling.</p>"
+        },
+        {
+          "question": "How does the coach scale as modules grow, and where does literature verification fit?",
+          "answer_html": "<p><strong>Scaling:</strong> single generalist agent today; at ~30–50+ modules the natural move is sub-agents per subject area (controlled substances, cardiovascular, urgent care, etc.) with a lightweight router in front. Not needed yet.</p><p><strong>Literature verification:</strong> planned as a separate, background agent — distinct from Coach v1. It would check each module on a cadence against OpenEvidence/PubMed and surface suggested updates when evidence shifts. <strong>Dr. Varun Malik has already built agents that do exactly this</strong>; his work is the natural starting point for reuse or design inspiration.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "scaling-strategy",
+      "topic": "Enterprise Scaling",
+      "title": "Three phases from prototype to regional deployment",
+      "referenced_by": ["scaling-phased", "esc-single-founder"],
+      "items": [
+        {
+          "question": "What are the three deployment phases?",
+          "answer_html": "<p><span class=\"pill green\">Phase 1 (0–4 months)</span> — Local prototype with Noah's CDO. 2–3 providers. Live dashboard data. Noah at 0.4 FTE admin (self-authorized). Weekly recorded 1:1s. Agentic transcript→ticket pipeline.</p><p><span class=\"pill\">Phase 2 (4–12 months)</span> — Single CDO, ~10 providers. Content Change Board. Biweekly 1:1s. Monthly executive readout. Enterprise security cutover begins.</p><p><span class=\"pill\">Phase 3 (12–18+ months)</span> — 4 CDOs, 100s→1000s providers. The big ask: 4 regional medical directors at 0.3 FTE each. Full agentic pipeline. HITRUST certified. 8–11 FTE at steady state.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SCALING_ROADMAP.md\" target=\"_blank\">Full scaling roadmap</a></p>"
+        },
+        {
+          "question": "How should the Phase 3 director FTE ask be framed?",
+          "answer_html": "<p><strong>Do NOT pitch as 'give medical directors admin time.'</strong> Pitch as: <em>'A tracked, measurable attrition-prevention program that gives every employed provider guaranteed executive-visibility of their concerns, with Meridian as the delivery vehicle and measurement instrument.'</em> The cost is 4 × 0.3 FTE of director clinical time. The return is measured against regional attrition rate, provider CSAT/eNPS, quality metric performance, and clinician hours-saved-per-visit.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SCALING_ROADMAP.md#executive-business-case-for-the-phase-3-ask-draft-in-phase-1-pitch-in-phase-2\" target=\"_blank\">Executive business case</a></p>"
+        },
+        {
+          "question": "How much can be handled agentically?",
+          "answer_html": "<p><strong>Conservative 30%, stretch 50%</strong> of operational load at steady state. Six high-value pipelines: transcript→ticket, content-change drafting, test generation, audit surveillance, usage narration, executive-memo drafting. At 50%, the 8–11 FTE envelope effectively performs 15–17 FTE of work. The agentic layer must mature during Phase 1-2, not after — the Phase 3 headcount math only works if it's already proven.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SCALING_ROADMAP.md#agentic-handleable-fraction\" target=\"_blank\">Agentic analysis</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "architecture-interop",
+      "topic": "Architecture & Interop",
+      "title": "The platform layer and scribe-CDS convergence defense",
+      "referenced_by": ["architecture-validated", "esc-scribe-convergence"],
+      "items": [
+        {
+          "question": "What is the interop layer and why does it matter?",
+          "answer_html": "<p>Meridian publishes a single module-matching contract that every integration honors. Three surfaces consume it: the <strong>frontend patient panel</strong> (suggested modules), the <strong>Dragon Copilot agent</strong> (pre-encounter cards), and <strong>scribe partner APIs</strong> (post-encounter module triggers). The contract: given patient context, return ranked modules + hard stops.</p><p>Key endpoints: <code>/api/modules/match</code> (POST/GET), <code>/cds-services/meridian-manifest</code> (CDS Hooks 2.0), SMART on FHIR launch (read-only).</p><p><a href=\"/docs/viewer.html?file=ARCHITECTURE.md#interop-surface-2026-04-18\" target=\"_blank\">Architecture details</a></p>"
+        },
+        {
+          "question": "What are the five durable differentiators against ambient AI?",
+          "answer_html": "<p>1. <strong>Push-based visit-start manifest</strong> — fires before encounter; Dragon/Abridge are pull/ambient<br/>2. <strong>Per-provider/org authoring</strong> — clinician authors in an afternoon; not IT-governed<br/>3. <strong>Cross-EHR agnostic</strong> — works with Oracle, Meditech, Athena, not Epic-coupled<br/>4. <strong>Scribe-downstream</strong> — 'Meridian-after-Abridge' positioning; modules triggered from scribe output<br/>5. <strong>Citation-traceable, FDA non-device CDS</strong> — source-reviewable; preserves regulatory moat</p><p><a href=\"/docs/viewer.html?file=INTEROP_STRATEGY.md#3-five-durable-differentiators\" target=\"_blank\">Full differentiator analysis</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "opensource-ip",
+      "topic": "Open Source & IP",
+      "title": "The ownership question and recommended licensing posture",
+      "referenced_by": ["esc-ip-question"],
+      "items": [
+        {
+          "question": "Should Meridian be open-sourced?",
+          "answer_html": "<p><strong>Not yet.</strong> No buyers, no external contributors asking, no regulatory clarity, no IP resolution with Optum. Recommended posture: declare intent to open-source the framework layer when three conditions are met: (a) Optum IP signoff, (b) first non-Optum pilot site, (c) stable module schema v2.</p><p>When ready: <strong>Apache 2.0</strong> for framework (permissive, maximum adoption), <strong>CC-BY-SA 4.0</strong> for clinical content JSON (edits flow back), Optum-specific modules kept private. This is the open-core pattern. Avoid AGPL — Bahmni's 2025 reversal is current-year evidence that AGPL costs adoption.</p><p>The realistic downside of OS is <strong>obscurity, not theft</strong>. The realistic upside is <strong>survival beyond your tenure</strong>.</p><p><a href=\"/docs/viewer.html?file=OPEN_SOURCE_STRATEGY.md\" target=\"_blank\">Full open-source analysis</a></p>"
+        }
+      ]
+    }
+  ]
+}

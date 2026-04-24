@@ -1,0 +1,214 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "doc-scaling",
+  "default_title": "Enterprise Scaling — Support-Structure Roadmap",
+  "landing_intro": "Meridian's path from single-user demo to regional enterprise deployment across four CDOs. Three phased gates, agentic automation targets, and the executive framing that earns director FTE through evidence rather than asking up front. This module distills the full scaling roadmap into decision-ready checkpoints.",
+  "checklist_section_label": "Scaling readiness — confirm all four",
+  "checklist": [
+    {
+      "item_id": "phase1-scoped",
+      "position": 1,
+      "statement": "Phase 1 scoped — Noah's CDO, 2–3 early adopters, 0.4 FTE admin, self-authorized clinical reduction, live dashboard data",
+      "faq_ref": "phase-design"
+    },
+    {
+      "item_id": "gates-defined",
+      "position": 2,
+      "statement": "Phase gates defined — measurable exit criteria at each boundary, two consecutive months of signal required before advancing",
+      "faq_ref": "phase-gates"
+    },
+    {
+      "item_id": "agentic-designed",
+      "position": 3,
+      "statement": "Agentic layer designed — first production agent (Meridian Coach v1) shipped; next: transcript-to-ticket, content-change drafting, test generation, plus a literature-verification agent (Dr. Varun Malik prior art). Targeting 30–50% operational load at steady state.",
+      "faq_ref": "agentic-layer"
+    },
+    {
+      "item_id": "exec-framing",
+      "position": 4,
+      "statement": "Executive framing ready — pitched as attrition-prevention program with Meridian as delivery vehicle, not a “give directors admin time” ask",
+      "faq_ref": "exec-case"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Roadmap validated — Phase 1 can begin",
+    "narrative_html": "Three-phase architecture is defined with measurable gates, fallback paths, and an agentic layer designed to move in <em>before</em> the human layer scales. <strong>Meridian Coach v1 is the first production agent</strong> — a user-facing assistant that validates the agentic-layer pattern and earns early adopter goodwill. The executive business case is framed around attrition prevention, with the director FTE ask earned through Phase 1–2 evidence. <strong>Monthly scorecard begins month 1.</strong> Steady-state envelope is 8–11 FTE for ~1,000 providers, with agentic automation handling 30–50% of operational load.",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Scaling risks — monitor and mitigate",
+  "escalation": [
+    {
+      "item_id": "phase1-unmanageable",
+      "position": 1,
+      "statement": "Phase 1 unmanageability — Noah exceeds 0.4 FTE admin, ticket p90 age >2 weeks, or 1:1 skip rate >10%",
+      "faq_ref": "phase-gates"
+    },
+    {
+      "item_id": "phase2-unmanageable",
+      "position": 2,
+      "statement": "Phase 2 unmanageability — >30 open tickets, CSAT declines 2 consecutive months, or any pilot-provider attrition event",
+      "faq_ref": "phase-gates"
+    },
+    {
+      "item_id": "fte-timing",
+      "position": 3,
+      "statement": "FTE ask timing — director reallocation pitch must land at month 10–12 with credible Phase 2 data; too early lacks evidence, too late stalls Phase 3",
+      "faq_ref": "exec-case"
+    },
+    {
+      "item_id": "fallback-needed",
+      "position": 4,
+      "statement": "Fallback architecture — if director FTE denied, federated-champions + centralized-PM model carries Phase 3 at ~60% velocity",
+      "faq_ref": "exec-case"
+    },
+    {
+      "item_id": "agentic-drift",
+      "position": 5,
+      "statement": "Agentic drift — quality of agent-drafted tickets/PRs declines over time; monitor acceptance rate, requires retraining/prompt tuning",
+      "faq_ref": "agentic-layer"
+    },
+    {
+      "item_id": "security-parallel",
+      "position": 6,
+      "statement": "Security track runs in parallel — BAA hosting, audit backend, HITRUST have 6–12 month lead times and must begin in Phase 2",
+      "faq_ref": "phase-design"
+    },
+    {
+      "item_id": "content-governance-bottleneck",
+      "position": 7,
+      "statement": "Content governance bottleneck — if >1 month to publish a provider-requested change, trust erodes and the attrition story breaks",
+      "faq_ref": "phase-design"
+    },
+    {
+      "item_id": "director-burnout",
+      "position": 8,
+      "statement": "Director burnout — 1:1 skip rate climbs in Phase 3, weakening the executive-visibility mechanism that justifies the program",
+      "faq_ref": "phase-gates"
+    },
+    {
+      "item_id": "scorecard-degradation",
+      "position": 9,
+      "statement": "Scorecard degradation — any metric declining 2 consecutive months triggers written root-cause investigation before phase-advance decision",
+      "faq_ref": "phase-gates"
+    },
+    {
+      "item_id": "single-sponsor-risk",
+      "position": 10,
+      "statement": "Single-sponsor risk — if Noah changes roles before Phase 3, no succession plan exists; recorded 1:1 corpus + indexed transcripts are the hedge",
+      "faq_ref": "agentic-layer"
+    }
+  ],
+  "context_strip": {
+    "label": "Timeline",
+    "text": "Phase 1: 0–4 months (Noah solo + 2–3 adopters). Phase 2: 4–12 months (~10 providers, single CDO). Phase 3: 12–18+ months (4 CDOs, 100s–1000s providers). Steady state: ~8–11 FTE for ~1,000 providers."
+  },
+  "footer_note": "Source: docs/ENTERPRISE_SCALING_ROADMAP.md — April 2026. Full document includes org charts, process artifacts, and the Phase 3 executive memo template.",
+  "faqs": [
+    {
+      "faq_id": "phase-design",
+      "topic": "Phase Design",
+      "title": "How are the three phases structured?",
+      "referenced_by": [
+        "phase1-scoped",
+        "security-parallel",
+        "content-governance-bottleneck"
+      ],
+      "items": [
+        {
+          "question": "What does Phase 1 look like concretely?",
+          "answer_html": "<p><strong>Phase 1 (0–4 months)</strong> is Noah's CDO with 2–3 early-adopter providers. Self-authorized 0.4 FTE admin time. Live dashboard data piping in (starting with Corey's diabetes dashboard per the Lasko strategy). Hard-stop front-loading visible in the patient panel.</p><p>Key artifacts: Teams channel for feedback, weekly 30-min recorded 1:1s with each adopter, Planner board for tickets, monthly executive memo to Dr. Schechter drafted from the transcript corpus.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SCALING_ROADMAP.md#phase-1--local-prototype-with-live-data-now--4-months\">Phase 1 details on GitHub</a></p>"
+        },
+        {
+          "question": "How does Phase 2 expand?",
+          "answer_html": "<p><strong>Phase 2 (4–12 months)</strong> expands to all UC providers in Noah's CDO (~10). First formal FTE ask to exec leadership (Noah 0.5 FTE admin). Adds an ops dyad partner (0.3 FTE), a compliance/security liaison (0.2 FTE), and introduces a <span class=\"pill\">Content Change Board</span> — Noah + ops partner + 1 provider rep, biweekly, signs off on module content changes before publish.</p><p>Enterprise security cutover work begins in parallel: BAA hosting, audit backend, self-host CDN deps, HITRUST readiness assessment.</p>"
+        },
+        {
+          "question": "What is Phase 3?",
+          "answer_html": "<p><strong>Phase 3 (12–18+ months)</strong> is regional rollout across all 4 CDOs. The preferred org chart requires 4 regional medical directors at 0.3 FTE each (the big ask), plus a Clinical PM, Medical Informaticist, 4–5 engineers, and dedicated compliance. Monthly Clinical Content Board governs all content changes.</p><p>If the director FTE is denied, a <strong>fallback architecture</strong> uses 4 volunteer Clinical Champions (0.1 FTE stipend each) plus a centralized PM. This carries Phase 3 at <span class=\"pill warn\">~60% velocity</span> with a significantly weaker attrition-prevention story. <strong>Do not block Phase 3 on director FTE.</strong></p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SCALING_ROADMAP.md#phase-3--regional-rollout-12--18-months-4-cdos-100s--1000s\">Phase 3 org chart on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "phase-gates",
+      "topic": "Phase Gates",
+      "title": "What are the measurable phase gates?",
+      "referenced_by": [
+        "gates-defined",
+        "phase1-unmanageable",
+        "phase2-unmanageable",
+        "director-burnout",
+        "scorecard-degradation"
+      ],
+      "items": [
+        {
+          "question": "What are the Phase 1 → Phase 2 gates?",
+          "answer_html": "<p>All four required:</p><p><span class=\"pill green\">1.</span> Live data flowing reliably for ≥30 days (no >24hr outages).<br><span class=\"pill green\">2.</span> 100% of critical bugs closed within 48hr for 4 consecutive weeks.<br><span class=\"pill green\">3.</span> ≥2 provider advocates willing to recruit peers.<br><span class=\"pill green\">4.</span> At least one measurable quality-metric delta (even small) on the pilot cohort.</p>"
+        },
+        {
+          "question": "What are the Phase 2 → Phase 3 gates?",
+          "answer_html": "<p>All five required:</p><p><span class=\"pill green\">1.</span> 2 consecutive months of bug-SLA compliance (>95%) at 10-provider load.<br><span class=\"pill green\">2.</span> Attrition-intent + quality-metric signals both statistically suggestive.<br><span class=\"pill green\">3.</span> Executive sign-off on director FTE reallocation OR approved fallback architecture.<br><span class=\"pill green\">4.</span> Backend on BAA-covered hosting, audit log live, HITRUST e1 roadmap approved.<br><span class=\"pill green\">5.</span> Content Change Board has published ≥10 provider-requested changes with full traceability.</p>"
+        },
+        {
+          "question": "How is the monthly scorecard structured?",
+          "answer_html": "<p>Five signal categories, visible to Dr. Schechter:</p><p><span class=\"pill\">Provider signal</span> — CSAT, eNPS, attrition-intent, 1:1 completion rate.<br><span class=\"pill\">Operational signal</span> — ticket p50/p90 age, bug SLA compliance, content-change cycle time.<br><span class=\"pill\">Quality signal</span> — dashboard metric deltas vs control cohort, hours-saved-per-visit.<br><span class=\"pill\">Agentic signal</span> — % of tickets/PRs drafted by agent and accepted without material edit.<br><span class=\"pill\">Compliance signal</span> — open audit findings, days-since-last-P0, HITRUST milestone progress.</p><p>Any metric degrading 2 consecutive months triggers a written root-cause investigation.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SCALING_ROADMAP.md#verification-how-youll-know-the-support-structure-is-actually-working\">Scorecard details on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "agentic-layer",
+      "topic": "Agentic Layer",
+      "title": "What does the agentic automation layer handle?",
+      "referenced_by": [
+        "agentic-designed",
+        "agentic-drift",
+        "single-sponsor-risk"
+      ],
+      "items": [
+        {
+          "question": "What are the six high-value agentic pipelines?",
+          "answer_html": "<p><span class=\"pill green\">0. Meridian Coach v1 (shipped)</span> — user-facing bottom-strip assistant, Anthropic Claude Haiku 4.5 behind <code>/api/agent/message</code>. Answers app-usage questions, routes clinical questions to the relevant module, refuses clinical recommendations. First production agent; proves the pattern for the pipelines below.</p><p><span class=\"pill green\">1. Transcript → ticket</span> — ingests Teams 1:1 transcripts, drafts Planner tickets with category (bug/content/enhancement/training/praise), dedup against existing.<br><span class=\"pill green\">2. Content-change drafting</span> — reads transcripts tagged \"content,\" proposes diffs against module JSON, submits to Content Change Board.<br><span class=\"pill green\">3. Test generation</span> — reads bug tickets, drafts Playwright tests, opens PR.<br><span class=\"pill green\">4. Audit surveillance</span> — flags unusual access patterns in audit logs.<br><span class=\"pill green\">5. Usage-analytics narration</span> — who's using what, where friction lives.<br><span class=\"pill green\">6. Executive-memo drafting</span> — auto-drafts monthly memo from transcript index + ticket board + metric dashboards.<br><span class=\"pill green\">7. Literature/OE verification</span> — periodically checks each module against current evidence (OpenEvidence, PubMed, guidelines) and suggests updates when the literature shifts. <strong>Dr. Varun Malik has already built agents that perform this exact task</strong> — his implementation is the natural starting point for reuse or design inspiration.</p>"
+        },
+        {
+          "question": "Why must the agentic layer deploy during Phase 1–2?",
+          "answer_html": "<p>The Phase 3 headcount math only works if 30–50% of operational load is already handled by agents. At stretch 50%, the 8–11 FTE envelope effectively performs the work of ~15–17 FTE. <strong>Deploy and harden the agent pipeline during Phase 1–2, not after.</strong></p><p>Meridian Coach v1 is the first step on this curve — a user-facing agent that validates the authoring, deployment, caching, and cost-per-turn patterns the other pipelines will reuse.</p><p><strong>Scaling consideration:</strong> as the module registry grows beyond ~30–50 modules, expect to split Coach into sub-agents per subject area (controlled substances, cardiovascular, urgent care) with a lightweight router in front. Not needed yet at ~15 modules, but a credible architectural path as breadth increases.</p><p>Human-required work that cannot be automated: final clinical signoff on content, provider-relationship/trust work, regulatory attestation, novel bug root-cause, executive communications, crisis response, hiring.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SCALING_ROADMAP.md#agentic-handleable-fraction\">Agentic fraction details on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "exec-case",
+      "topic": "Executive Business Case",
+      "title": "How is the director FTE ask framed?",
+      "referenced_by": [
+        "exec-framing",
+        "fte-timing",
+        "fallback-needed"
+      ],
+      "items": [
+        {
+          "question": "What is the executive framing?",
+          "answer_html": "<p><strong>Critical:</strong> do NOT pitch as \"give medical directors admin time.\" Pitch as:</p><p><em>\"A tracked, measurable attrition-prevention program that gives every employed provider guaranteed executive-visibility of their concerns, with Meridian as the delivery vehicle and measurement instrument. The cost is 4 × 0.3 FTE of director clinical time. The return is measured against regional attrition rate, provider CSAT/eNPS, quality metric performance, and clinician hours-saved-per-visit.\"</em></p><p>The monthly executive memo from Phase 1 onward is the recurring artifact that builds the case. <span class=\"pill warn\">By month 10, it needs to be credible enough to convince executives to reassign 4 × 0.3 FTE of director time.</span></p>"
+        },
+        {
+          "question": "What does the Phase 3 memo structure look like?",
+          "answer_html": "<p>Delivered at month 10–12, five sections:</p><p><span class=\"pill\">1. The attrition risk</span> — current eNPS/attrition-intent trend; cost per provider lost.<br><span class=\"pill\">2. The Phase 2 signal</span> — 10 pilot providers' data: CSAT, attrition-intent, quality deltas, hours saved.<br><span class=\"pill\">3. The mechanism</span> — recorded biweekly 1:1s with guaranteed executive readout; Meridian as the visible artifact.<br><span class=\"pill\">4. The ask</span> — 4 × 0.3 FTE director reallocation; fallback if partially approved.<br><span class=\"pill\">5. The accountability</span> — monthly executive dashboard; 6-month review with go/no-go.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SCALING_ROADMAP.md#executive-business-case-for-the-phase-3-ask-draft-in-phase-1-pitch-in-phase-2\">Executive business case on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "steady-state",
+      "topic": "Steady State",
+      "title": "What does steady state look like at 1,000+ providers?",
+      "referenced_by": [],
+      "items": [
+        {
+          "question": "What is the FTE envelope?",
+          "answer_html": "<p>Estimated steady-state staffing for ~1,000 providers:</p><p><span class=\"pill\">Clinical oversight</span> ~1.8 FTE (4 directors × 0.2 + Noah 0.5 + informaticist 0.5)<br><span class=\"pill\">Clinical PM</span> 1.0 FTE<br><span class=\"pill\">Engineering</span> 3–4 FTE (maintenance, content, integrations, SRE)<br><span class=\"pill\">Compliance/security</span> 1–2 FTE<br><span class=\"pill\">Tier-1 support</span> 1–2 FTE<br><strong>Total: ~8–11 humans.</strong></p>"
+        },
+        {
+          "question": "What are the steady-state degradation signals?",
+          "answer_html": "<p>Four watch items that indicate the support structure is breaking down:</p><p><span class=\"pill warn\">Content governance bottleneck</span> — >1 month to publish a change, providers lose trust.<br><span class=\"pill warn\">Regulatory finding</span> — pause feature releases until resolved.<br><span class=\"pill warn\">Director burnout</span> — 1:1 skip rate climbs, attrition story breaks.<br><span class=\"pill warn\">Agentic drift</span> — quality of agent-drafted tickets/PRs declines, requires retraining.</p><p><a href=\"/docs/viewer.html?file=ENTERPRISE_SCALING_ROADMAP.md#when-steady-state-degrades-watch-these\">Degradation signals on GitHub</a></p>"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "dev-view",
+  "default_title": "Developer View — Architecture & Roadmap",
+  "landing_intro": "Meridian's Developer View adds browser-based editing, collaborative annotation, and schema-enforced content management on top of the existing clinical reference framework. This module summarizes the architecture, the implementation roadmap, and the key decisions that need leadership input. Tap any item for detail.",
+  "checklist_section_label": "Core architecture pillars — confirm all four",
+  "checklist": [
+    {
+      "item_id": "schema-driven",
+      "position": 1,
+      "statement": "Schema-driven content model — fixed templates enforce structural quality at the database layer",
+      "faq_ref": "content-schema"
+    },
+    {
+      "item_id": "view-model",
+      "position": 2,
+      "statement": "Three-tier view model — Standard for clinicians, Expanded for reviewers, Developer for editors",
+      "faq_ref": "view-modes"
+    },
+    {
+      "item_id": "ref-pools",
+      "position": 3,
+      "statement": "Shared reference pools — FAQs, SmartPhrases, and Resources linked by UUID, eliminating duplication",
+      "faq_ref": "content-schema"
+    },
+    {
+      "item_id": "db-truth",
+      "position": 4,
+      "statement": "Database as source of truth — markdown becomes import/export only; PostgreSQL + FastAPI backend",
+      "faq_ref": "architecture"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Architecture validated — ready for implementation",
+    "narrative_html": "All five production modules (ADHD, CKD, Opiates, Benzos, Anemia) already conform to the proposed template schema. The content model, view system, and reference architecture are defined and validated against existing content. <strong>Implementation can begin with Sprint 0.</strong>",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Implementation roadmap — 10 sprints",
+  "escalation": [
+    {
+      "item_id": "sprint-0",
+      "position": 1,
+      "statement": "Sprint 0 — Architecture & scaffolding: PostgreSQL schema, FastAPI backend, Docker Compose, OpenAPI contract",
+      "faq_ref": "architecture"
+    },
+    {
+      "item_id": "sprint-1",
+      "position": 2,
+      "statement": "Sprint 1 — Expanded View: production toggle, full outline rendering, superscript reference links",
+      "faq_ref": "view-modes"
+    },
+    {
+      "item_id": "sprint-2",
+      "position": 3,
+      "statement": "Sprint 2 — Annotation system: threaded comments anchored to item UUIDs, invite-token auth, soft-delete guard",
+      "faq_ref": "architecture"
+    },
+    {
+      "item_id": "sprint-3",
+      "position": 4,
+      "statement": "Sprint 3 — Template editor: schema-driven section panels, constraint enforcement, preview toggle",
+      "faq_ref": "content-schema"
+    },
+    {
+      "item_id": "sprint-4",
+      "position": 5,
+      "statement": "Sprint 4 — Reference pool management: FAQ, SmartPhrase, and Resource CRUD with markdown import",
+      "faq_ref": "content-schema"
+    },
+    {
+      "item_id": "sprint-5",
+      "position": 6,
+      "statement": "Sprint 5 — Versioned content store: snapshots on every save, history browser, restore, DB-to-filesystem sync",
+      "faq_ref": "design-decisions"
+    },
+    {
+      "item_id": "sprint-6",
+      "position": 7,
+      "statement": "Sprint 6 — Branch management: create, switch, merge; collaborator draft branches; FastAPI git wrapper",
+      "faq_ref": "design-decisions"
+    },
+    {
+      "item_id": "sprint-7",
+      "position": 8,
+      "statement": "Sprint 7 — Publish workflow: DB sync → git push → Cloudflare build with inline status",
+      "faq_ref": "architecture"
+    },
+    {
+      "item_id": "sprint-8",
+      "position": 9,
+      "statement": "Sprint 8 — MS List feedback panel: per-module triage, Graph API integration, link to annotation threads",
+      "faq_ref": "open-questions"
+    },
+    {
+      "item_id": "sprint-9",
+      "position": 10,
+      "statement": "Sprint 9 — Branch tree visualizer + auth hardening: three-role middleware, HMAC invite links, Entra ID prep",
+      "faq_ref": "open-questions"
+    }
+  ],
+  "context_strip": {
+    "label": "Target environment",
+    "text": "Azure hosting within the Optum tenant + Entra ID authentication. Current state: Cloudflare Pages (static frontend) plus Linux VPS (backend). All components designed to be containerizable for clean migration."
+  },
+  "footer_note": "Spec v3 — April 2026. This module summarizes a 636-line technical specification. Full document available on request.",
+  "faqs": [
+    {
+      "faq_id": "view-modes",
+      "topic": "View Modes",
+      "title": "What are the three view modes?",
+      "referenced_by": ["view-model", "sprint-1"],
+      "items": [
+        {
+          "question": "What does each mode provide?",
+          "answer_html": "<p><strong>Mode 1 — Standard View</strong> (current production). Collapsed by default, click-through to reference layers, no authentication, available to all clinical end users. Includes a Compact / Expanded toggle so any user can switch into Mode 2.</p><p><strong>Mode 2 — Expanded View</strong>. Full module rendered as a single scrollable, collapsible outline. All FAQs, SmartPhrases, and Resources visible inline via superscript reference numbers. Inline annotation badges. Reading is open; submitting an annotation requires a lightweight invite token.</p><p><strong>Mode 3 — Developer View</strong>. Full editing interface: schema-driven template editor, branch management, publish workflow, branch tree visualizer, MS List feedback panel. Restricted to the Editor role.</p>"
+        },
+        {
+          "question": "Who uses each mode?",
+          "answer_html": "<p><span class=\"pill green\">Mode 1</span> is for clinical end users at point of care — the existing audience.</p><p><span class=\"pill neutral\">Mode 2</span> is for reviewers and collaborators doing content review. It is a production feature, not developer-only — every clinical user has access via the toggle.</p><p><span class=\"pill warn\">Mode 3</span> is for editors managing content and publishing. Currently a single editor; collaborators get a sandboxed editor scoped to a personal draft branch.</p>"
+        },
+        {
+          "question": "Is Expanded View authenticated?",
+          "answer_html": "<p>Reading is fully open. Annotation submission requires a short-lived HMAC-signed invite token — no account creation needed. This is intentional: lower the barrier for reviewer feedback while still attributing comments and protecting against spam.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "content-schema",
+      "topic": "Content Schema",
+      "title": "How does the schema-driven content model work?",
+      "referenced_by": ["schema-driven", "ref-pools", "sprint-3", "sprint-4"],
+      "items": [
+        {
+          "question": "What is a module template?",
+          "answer_html": "<p>A module is an instance of a fixed template with hard structural constraints:</p><p><span class=\"pill neutral\">Checkbox items</span> — maximum 4. <span class=\"pill neutral\">Middle block</span> — exactly 1. <span class=\"pill neutral\">Escalation items</span> — maximum 10 (the iPhone screen budget). <span class=\"pill neutral\">FAQ pool</span> — up to 5 entries in v1. <span class=\"pill neutral\">SmartPhrase and Resource pools</span> — no hard limit.</p><p>Constraints are enforced at the API layer (saves rejected) and the UI layer (Add buttons disabled at max). No editor — human or otherwise — can produce a module that breaks the layout.</p>"
+        },
+        {
+          "question": "How do shared reference pools work?",
+          "answer_html": "<p>FAQs, SmartPhrases, and Resources are <strong>module-level shared pools</strong>, not children of individual items. Each Checkbox and Escalation item carries a UUID array that tags into the pools. A single FAQ can be referenced by multiple checkboxes and multiple escalation items simultaneously. This eliminates duplication and makes cross-cutting clinical concerns explicit.</p><p>Reference convention: <span class=\"pill green\">F#</span> for FAQs, <span class=\"pill green\">S#</span> for SmartPhrases, <span class=\"pill green\">R#</span> for Resources. They render as superscript inline links in the Expanded View.</p>"
+        },
+        {
+          "question": "Why is markdown no longer the source of truth?",
+          "answer_html": "<p>Markdown cannot enforce structural constraints. The database validates schema compliance on every save and provides stable UUIDs that annotations can anchor to across reorderings and edits.</p><p>Markdown remains useful as an <strong>import/export format</strong>: a new module drafted in Claude Chat can be output as structured markdown, uploaded, and parsed into the database. Any module can be exported back out for backup or handoff. But the live workflow is database-first.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "architecture",
+      "topic": "System Architecture",
+      "title": "What is the system architecture?",
+      "referenced_by": ["db-truth", "sprint-0", "sprint-2", "sprint-7"],
+      "items": [
+        {
+          "question": "What is the backend stack?",
+          "answer_html": "<p><strong>Python / FastAPI</strong> backend, <strong>PostgreSQL</strong> database, <strong>Docker Compose</strong> for local development. API routes: <span class=\"pill neutral\">/api/modules</span>, <span class=\"pill neutral\">/api/references</span>, <span class=\"pill neutral\">/api/versions</span>, <span class=\"pill neutral\">/api/annotations</span>, <span class=\"pill neutral\">/api/branches</span>, <span class=\"pill neutral\">/api/publish</span>, <span class=\"pill neutral\">/api/feedback</span>.</p><p>Everything is containerized so the v2 migration to Azure (Azure Database for PostgreSQL + Azure static hosting + Entra ID) is a hosting move, not a rebuild.</p>"
+        },
+        {
+          "question": "How does multi-user access work?",
+          "answer_html": "<p><strong>End users hit static Cloudflare Pages — no backend, no Tailscale, no VPN.</strong> The clinical experience is unchanged.</p><p>Only editors and collaborators touch the backend, and only via Tailscale to the Linux PostgreSQL host. Three roles: <span class=\"pill green\">Reviewer</span> (open reading + invite-token annotation), <span class=\"pill neutral\">Collaborator</span> (scoped to a personal draft branch), <span class=\"pill warn\">Editor</span> (full access including merge and publish). Pluggable auth middleware so v2 swaps tokens for Entra ID with no route refactoring.</p>"
+        },
+        {
+          "question": "What is the deployment pipeline?",
+          "answer_html": "<p>Publish action triggers: <strong>DB → filesystem sync → git push → Cloudflare Pages build</strong>. Build status is polled and displayed inline (pending → building → deployed/failed). Each branch gets its own preview URL automatically.</p><p>The DB-to-filesystem sync is an explicit action, not automatic, so editors decide when a draft becomes a deployment artifact.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "design-decisions",
+      "topic": "Design Decisions",
+      "title": "What are the key design decisions?",
+      "referenced_by": ["sprint-5", "sprint-6"],
+      "items": [
+        {
+          "question": "Why schema-driven templates instead of free-form editing?",
+          "answer_html": "<p>Clinical content must fit within an iPhone screen budget. Structural constraints (max 4 checkboxes, max 10 escalation items, max 5 FAQs) are <strong>design requirements, not limitations</strong>. The template enforces them automatically so authors cannot accidentally produce overlong content that breaks the in-office experience.</p><p>This is the same insight Meridian itself was built on: a constraint that forces editorial discipline produces better artifacts than a blank canvas.</p>"
+        },
+        {
+          "question": "Why anchor annotations to item_id instead of content?",
+          "answer_html": "<p>Annotations attach to stable UUIDs, never to text content or position. This means:</p><p>Reordering items via up/down arrows never orphans annotations. Editing the statement text never orphans annotations. Duplicating an item creates a new UUID — annotations stay with the original. Soft-deleting an item with unresolved annotations is blocked; the editor must resolve or reassign each thread first.</p><p>The result: annotation integrity is preserved across the entire content lifecycle.</p>"
+        },
+        {
+          "question": "What other decisions are baked into the spec?",
+          "answer_html": "<p><strong>Unified FAQ object type</strong> — FAQs and what used to be \"escalation sub-items\" are the same object. Difference is only which items reference them.</p><p><strong>SmartPhrases include e-consult language</strong> as a first-class field, not a separate concept.</p><p><strong>Soft delete with annotation guard</strong> — deletion blocked when unresolved threads exist.</p><p><strong>Expanded View is a production feature</strong>, not developer-only. Every clinical user can toggle into it.</p><p><strong>Versioned content store</strong> — every save creates a JSONB snapshot with author and commit message. Restore is one click.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "open-questions",
+      "topic": "Open Questions",
+      "title": "What decisions need leadership input?",
+      "referenced_by": ["sprint-8", "sprint-9"],
+      "items": [
+        {
+          "question": "Frontend repo structure — subdirectory or separate repo?",
+          "answer_html": "<p>The Developer View frontend can live as a subdirectory of the existing Meridian repo (shared CSS access, tighter coupling) or as a separate repository (clean separation of concerns, must manage CSS import strategy). Tradeoff is convenience vs. modularity. <span class=\"pill warn\">Recommendation needed.</span></p>"
+        },
+        {
+          "question": "Annotation branch scoping — branch-local or global?",
+          "answer_html": "<p>If a collaborator creates an annotation on their draft branch, should the editor see it when viewing main? <strong>Branch-local</strong> annotations preserve a clean main view but may hide important feedback. <strong>Globally visible</strong> annotations with branch metadata surface everything but risk noise. <span class=\"pill warn\">Impacts collaboration workflow significantly.</span></p>"
+        },
+        {
+          "question": "Azure migration timing — when do we containerize?",
+          "answer_html": "<p>The backend is designed to be Azure-portable but does not need to start there. <strong>Earlier containerization</strong> means more setup work now but a smoother eventual cutover. <strong>Later containerization</strong> means faster v1 progress but a riskier migration. <span class=\"pill warn\">Depends on Optum tenant readiness.</span></p>"
+        },
+        {
+          "question": "What other open questions does the full spec call out?",
+          "answer_html": "<p>Eight total in §10 of the spec. The remaining five: DB-to-git sync pattern (explicit action vs. auto-commit), Cloudflare build status (webhook vs. polling), CSS injection strategy for the rendered preview pane, structured markdown dialect spec for round-tripping, and clipboard payload format for cross-session item copy-paste.</p><p>None of these block Sprint 0; all should be resolved before the sprint they touch.</p>"
+        }
+      ]
+    }
+  ]
+}

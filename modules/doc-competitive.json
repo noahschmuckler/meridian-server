@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "doc-competitive",
+  "default_title": "Competitive Positioning — Strategic Analysis",
+  "landing_intro": "Strategic analysis of Meridian's competitive landscape, market positioning, and 90-day priorities. Distilled from the full competitive positioning document for rapid review. Covers the 2x2 market map, JTBD anchor, moat thesis, competitor stances, Blue Ocean ERRC, and Crossing the Chasm requirements. Tap any item for detail.",
+  "checklist_section_label": "Strategic position — confirm all four",
+  "checklist": [
+    {
+      "item_id": "two-by-two",
+      "position": 1,
+      "statement": "2x2 position confirmed — Meridian occupies the action + patient-specific quadrant, a genuinely thin cell where Epic BPAs earn 49-96% override rates",
+      "faq_ref": "market-position"
+    },
+    {
+      "item_id": "jtbd-anchor",
+      "position": 2,
+      "statement": "JTBD anchor defined — \"Help me move this visit forward in 4 minutes with nothing missed\" is the uncontested job",
+      "faq_ref": "jtbd-moat"
+    },
+    {
+      "item_id": "moat-identified",
+      "position": 3,
+      "statement": "Moat identified — clinician-authored content library + authoring pipeline, not UI or LLM reasoning (both commodity)",
+      "faq_ref": "jtbd-moat"
+    },
+    {
+      "item_id": "ninety-day-set",
+      "position": 4,
+      "statement": "90-day priorities set — SOC 2 observation started, Cloudflare BAA gap addressed, Navina teardown completed, visit-velocity positioning doc written",
+      "faq_ref": "priorities"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Strategic framing validated — execute on priorities",
+    "narrative_html": "The competitive map, JTBD anchor, and moat thesis are defined. Meridian's positioning is clear: <strong>own the workflow layer, be promiscuous about data/model/distribution layers above and below.</strong> The Blue Ocean ERRC confirms what to eliminate (reference depth, interruptive alerts) and what to create (visit-start manifest, compose-layer pre-prompt builder). <strong>Execution risk is now in the enterprise envelope, not the product.</strong>",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Active threats and blockers — 8 items to track",
+  "escalation": [
+    {
+      "item_id": "navina-threat",
+      "position": 1,
+      "statement": "Navina is the closest head-on competitor — pre-visit summary + VBC coding/risk-adjustment overlaps directly with Meridian's planned roadmap",
+      "faq_ref": "competitors"
+    },
+    {
+      "item_id": "abridge-threat",
+      "position": 2,
+      "statement": "Abridge Contextual Reasoning Engine could subsume Meridian if ambient capture adds structured post-encounter checklists and care-gap tiles — and Abridge already has Kaiser as a customer",
+      "faq_ref": "competitors"
+    },
+    {
+      "item_id": "epic-ai-commoditization",
+      "position": 3,
+      "statement": "Epic Cosmos + Showroom keeps compressing the third-party CDS margin — any feature that can be a BPA eventually becomes one",
+      "faq_ref": "competitors"
+    },
+    {
+      "item_id": "no-outcomes-evidence",
+      "position": 4,
+      "statement": "No outcomes evidence yet — no pilot data, no process-measure improvement, no workflow-time study; the CDS literature is clear that \"plausibly helpful\" does not sell",
+      "faq_ref": "chasm"
+    },
+    {
+      "item_id": "soc2-not-started",
+      "position": 5,
+      "statement": "SOC 2 Type II observation not yet started — the clock matters more than the content, and the observation period takes 6-12 months",
+      "faq_ref": "chasm"
+    },
+    {
+      "item_id": "cloudflare-baa-gap",
+      "position": 6,
+      "statement": "Cloudflare Pages BAA gap blocks all enterprise PHI paths — options are AWS/Azure with BAA or a Cloudflare enterprise contract",
+      "faq_ref": "chasm"
+    },
+    {
+      "item_id": "single-founder-risk",
+      "position": 7,
+      "statement": "Single-founder with no institutional backing — health systems buy from vendors with reference customers and organizational depth",
+      "faq_ref": "market-position"
+    },
+    {
+      "item_id": "chatbot-fda-risk",
+      "position": 8,
+      "statement": "Chatbot feature risks slipping from non-device CDS to device CDS if it generates recommendations without source-reviewable reasoning — addressed in Meridian Coach v1 by the soft-steer pattern (routes clinical questions to modules, refuses recommendations); posture must be preserved if behavior is ever expanded",
+      "faq_ref": "priorities"
+    }
+  ],
+  "context_strip": {
+    "label": "Source document",
+    "text": "Distilled from docs/COMPETITIVE_POSITIONING.md (April 2026). Draws on Wardley mapping, Porter's Five Forces, Blue Ocean ERRC, Jobs-to-be-Done, and Crossing the Chasm frameworks. Academic citations: Ancker 2017 (BPA overrides), Roshanov 2013 and Kwan 2020 (CDS effectiveness)."
+  },
+  "footer_note": "Strategic analysis — April 2026. Full document: docs/COMPETITIVE_POSITIONING.md. Items to verify against live sources are listed in Section 12 of the source document.",
+  "faqs": [
+    {
+      "faq_id": "market-position",
+      "topic": "Market Position",
+      "title": "Where does Meridian sit in the CDS market?",
+      "referenced_by": ["two-by-two", "single-founder-risk"],
+      "items": [
+        {
+          "question": "What is the 2x2 competitive map?",
+          "answer_html": "<p>The CDS market sorts on two axes: <strong>reference vs. action</strong> and <strong>generic vs. patient-specific</strong>.</p><p><span class=\"pill\">Reference + Generic</span> UpToDate, DynaMed, ClinicalKey, OpenEvidence, Glass</p><p><span class=\"pill\">Reference + Patient-specific</span> Epic Synopsis/Storyboard, Navina pre-visit summary</p><p><span class=\"pill\">Action + Generic</span> AHRQ CDS Connect, Gawande checklists</p><p><span class=\"pill green\">Action + Patient-specific</span> <strong>Meridian</strong>, Epic BPAs (poorly), ClinicalPath (oncology only)</p><p>The action + patient-specific quadrant is genuinely thin. Epic BPAs technically occupy it but earn <strong>49-96% override rates</strong> (Ancker <em>JAMIA</em> 2017) — a category failure that creates Meridian's opening.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#1-the-competitive-map-22\" target=\"_blank\">Full 2x2 analysis in source document</a></p>"
+        },
+        {
+          "question": "What are Meridian's key strengths?",
+          "answer_html": "<p><span class=\"pill green\">Physician-authored</span> Word-to-JSON pipeline lets a clinician ship a module in an afternoon — no Chronicles committee needed.</p><p><span class=\"pill green\">Non-device CDS posture</span> Meets all four FDA 2022 criteria today (no device signals, HCP-to-HCP info, recommendations not directives, source-reviewable).</p><p><span class=\"pill green\">Compose layer</span> Structured patient context + checkbox pre-prompt builder + clipboard handoff to OE — a genuinely novel UX pattern worth treating as protectable design.</p><p><span class=\"pill green\">Architectural simplicity</span> Single HTML file, Cloudflare Pages, no DB required. Cheap to run, fast to iterate, easy to audit, trivial to demo.</p>"
+        },
+        {
+          "question": "What are the key weaknesses?",
+          "answer_html": "<p><span class=\"pill warn\">No enterprise security posture</span> No BAA-covered hosting, no SOC 2, no HITRUST. Single biggest gate to PHI deployment.</p><p><span class=\"pill warn\">No audit trail</span> Client-side-only means no logging of who clicked what, no role gating, no server-side LLM calls.</p><p><span class=\"pill warn\">Content depth</span> ~6 modules vs. UpToDate's 12,000 topics. The answer is to not compete on breadth, but the gap is real.</p><p><span class=\"pill warn\">No outcomes evidence</span> No pilot data, no process-measure improvement study.</p><p><span class=\"pill warn\">Single-founder</span> No institutional backing for enterprise sales. Health systems buy from vendors with reference customers.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#2-swot\" target=\"_blank\">Full SWOT analysis</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "jtbd-moat",
+      "topic": "JTBD & Moat",
+      "title": "What is the positioning anchor and where is the moat?",
+      "referenced_by": ["jtbd-anchor", "moat-identified"],
+      "items": [
+        {
+          "question": "Why is the 4-minute visit-velocity job the right anchor?",
+          "answer_html": "<p>Three candidate jobs were evaluated:</p><p><span class=\"pill\">\"Help me decide\"</span> Competes with UpToDate, OE, Glass. Crowded.</p><p><span class=\"pill\">\"Help me defend my decision\"</span> Documentation/coding territory — drifts into Navina's turf.</p><p><span class=\"pill green\">\"Help me move this visit forward in 4 minutes with nothing missed\"</span> <strong>Uncontested.</strong> This is the front-loaded-checklist job.</p><p>Everything — copy, demos, module structure, the PREVENT calculator placement — should ladder to this framing. It also reframes the alert-fatigue critique: Meridian isn't adding interruptions, it's <em>replacing</em> them with a single pre-visit manifest.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#5-jobs-to-be-done-framing\" target=\"_blank\">JTBD analysis in source document</a></p>"
+        },
+        {
+          "question": "Where does the moat sit according to Wardley analysis?",
+          "answer_html": "<p>Five components ranked by commoditization:</p><p><span class=\"pill warn\">LLM reasoning</span> Racing toward commodity. <strong>Do not build here.</strong></p><p><span class=\"pill\">UI / checklist framework</span> Necessary but not defensible.</p><p><span class=\"pill green\">Patient-context compose layer</span> Defensible via design + patent potential.</p><p><span class=\"pill green\">Clinician-authored content library</span> <strong>Where the long-term moat sits.</strong></p><p><span class=\"pill\">Distribution (EHR / dashboard integration)</span> Owned by Epic; partner, don't fight.</p><p><strong>Implication:</strong> Invest in the authoring pipeline and content library. Treat the UI as a commodity you ship well. Treat LLMs as interchangeable downstream. The chatbot feature, while useful, is <em>not</em> the moat — resist over-investing.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#6-wardley-take--where-the-moat-goes\" target=\"_blank\">Full Wardley analysis</a></p>"
+        },
+        {
+          "question": "What does the Blue Ocean ERRC grid say?",
+          "answer_html": "<p><strong>Eliminate:</strong> Comprehensive reference depth (don't try to be UpToDate) + interruptive mid-visit alerts (front-load at visit start instead).</p><p><strong>Reduce:</strong> EHR-native integration effort (dashboard ingestion + deep-link, not full SMART/FHIR) + content governance committee weight (clinician ships a module in a doc).</p><p><strong>Raise:</strong> Patient-context specificity of every recommendation (every item should feel \"about Jane Doe\") + transparency of evidence and authorship.</p><p><strong>Create:</strong> Visit-start decision manifest (the \"pre-flight card\") + compose-layer pre-prompt builder (structured patient context to OE/any LLM handoff).</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#4-blue-ocean-errc-grid\" target=\"_blank\">Full ERRC grid</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "competitors",
+      "topic": "Competitor Stances",
+      "title": "Which competitors matter and what is the stance?",
+      "referenced_by": ["navina-threat", "abridge-threat", "epic-ai-commoditization"],
+      "items": [
+        {
+          "question": "What is the compete/partner/ignore framework?",
+          "answer_html": "<p><strong>Partner (link out):</strong> <span class=\"pill green\">UpToDate / DynaMed</span> — they're the reference layer; Meridian links citations. <span class=\"pill green\">OpenEvidence</span> — deep partner; treat the compose-layer handoff as a relationship to cultivate. <span class=\"pill green\">VisualDx</span> — complementary, cheap integration.</p><p><strong>Compete by contrast:</strong> <span class=\"pill warn\">Epic BPAs / Synopsis</span> — frame as \"the CDS that doesn't interrupt you.\" <span class=\"pill warn\">Navina</span> — closest adjacent product in VBC; study and differentiate on visit-velocity vs. coding-capture.</p><p><strong>Watch closely, pursue partnership:</strong> <span class=\"pill\">Abridge / DAX / Ambience</span> — scribes + Meridian together are stronger than either alone; scribe trigger to Meridian module open is a natural handoff.</p><p><strong>Ignore:</strong> Isabel / Glass (different job), ClinicalPath (oncology-locked), Regard / Pieces (inpatient), Hippocratic AI (patient-facing).</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#9-competitor-by-competitor-partner--compete--ignore\" target=\"_blank\">Full competitor breakdown</a></p>"
+        },
+        {
+          "question": "Why is Navina the threat to watch?",
+          "answer_html": "<p>Navina is the <strong>single closest neighbor</strong> in the 2x2 map. Their pre-visit summary + VBC coding/risk-adjustment capability overlaps directly with Meridian's planned roadmap. The differentiator thesis: Meridian is anchored on <em>visit-velocity</em> (\"move this visit forward in 4 minutes\"), while Navina is anchored on <em>coding-capture</em> (\"don't miss billable items\").</p><p><strong>90-day action:</strong> Complete a one-page feature matrix + differentiator thesis. Refresh quarterly.</p>"
+        },
+        {
+          "question": "What is the Abridge risk scenario?",
+          "answer_html": "<p>If Abridge's Contextual Reasoning Engine adds <strong>structured post-encounter outputs</strong> — problem-specific checklists, care-gap tiles — it partially subsumes Meridian. Abridge already has Kaiser as a customer, creating direct exposure in Meridian's target region.</p><p>The partnership thesis: scribes capture conversation but <em>don't structure pre-visit decisions</em>. Meridian is complementary today. A scribe-triggered module suggestion (\"I heard you discussing lipids — open Lipid Management?\") is the natural integration surface. The recommendation is to <strong>formalize the Abridge/DAX integration story</strong> before scaling beyond the first two customers.</p>"
+        },
+        {
+          "question": "How does Porter's Five Forces read?",
+          "answer_html": "<p><span class=\"pill warn\">Buyer power: very high</span> Health systems are concentrated, procurement-heavy, and have free alternatives (Epic native, UpToDate already paid for).</p><p><span class=\"pill\">Supplier power: medium-rising</span> LLM APIs are commoditizing, but regulated content (NEJM, JAMA via OE) is not.</p><p><span class=\"pill warn\">Substitutes: high</span> Epic BPAs, UpToDate, OE, and ambient scribes all partially substitute.</p><p><span class=\"pill warn\">New entrants: very high</span> Low technical barrier; high regulatory/distribution barrier. Expect 2-3 new LLM-CDS startups per quarter.</p><p><span class=\"pill\">Rivalry: moderate but intensifying</span> Scribe vendors moving into CDS is the most important shift.</p><p><strong>Implication:</strong> Margin accrues to whoever owns distribution (Epic) or proprietary content (UpToDate). Meridian has neither. To defend margin, pick <em>workflow orchestration</em> as the layer to own and make the authoring pipeline the moat.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#3-porters-five-forces-compressed\" target=\"_blank\">Full Porter's analysis</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "chasm",
+      "topic": "Crossing the Chasm",
+      "title": "What does the whole product need for enterprise adoption?",
+      "referenced_by": ["no-outcomes-evidence", "soc2-not-started", "cloudflare-baa-gap"],
+      "items": [
+        {
+          "question": "What is the whole product bundle for the first pragmatist buyer?",
+          "answer_html": "<p>Customers #1-2 (Optum/Kaiser region) are early adopters who tolerate rough edges. Customer #3 is a pragmatist and needs the full envelope:</p><p><span class=\"pill warn\">SOC 2 Type II attestation</span> 6-12 month observation period — start now.</p><p><span class=\"pill warn\">HITRUST r2</span> Full certification or a credible dated roadmap procurement can point to.</p><p><span class=\"pill warn\">BAA-covered hosting</span> Cloudflare Pages BAA gap is the current blocker. AWS/Azure with BAA or Cloudflare enterprise contract.</p><p><span class=\"pill warn\">Audit logging + role-based access</span> Enterprises will ask for all three: who clicked what, role gating, server-side LLM control.</p><p><span class=\"pill warn\">Reference customer with published outcome</span> Process-measure study (e.g., time-to-decision, % hard-stops resolved pre-visit).</p><p><span class=\"pill\">Admin console</span> Local module governance for health system IT.</p><p><span class=\"pill\">Training collateral + implementation playbook</span></p><p><span class=\"pill\">Support SLA</span></p><p><strong>The chasm-crossing project is not product features — it's the envelope around the product.</strong></p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#8-crossing-the-chasm--the-whole-product-for-the-first-pragmatist-buyer\" target=\"_blank\">Full Crossing the Chasm analysis</a></p>"
+        },
+        {
+          "question": "What CDS stack layer should Meridian own?",
+          "answer_html": "<p>The CDS stack has five layers: <strong>data, model, content, workflow, distribution</strong>.</p><p><span class=\"pill\">Data</span> Owned by Epic (Cosmos), OE's licensed corpus.</p><p><span class=\"pill\">Model</span> Commodity — Anthropic, OpenAI, Google, MedLM.</p><p><span class=\"pill\">Content</span> Owned by UpToDate, DynaMed, ClinicalKey.</p><p><span class=\"pill green\">Workflow</span> <strong>Meridian's chosen battleground.</strong> Thin field — ClinicalPath (narrow), Navina (adjacent), Epic BPAs (hated).</p><p><span class=\"pill\">Distribution</span> Owned by Epic, Microsoft (DAX), Abridge.</p><p>Meridian wins by <strong>owning the workflow layer and being promiscuous about everything above and below it.</strong> Link out to OE for reasoning. Pull from dashboards for data. Publish content in an open-ish format. Don't try to be an EHR.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#7-stack-fight-positioning\" target=\"_blank\">Full stack-fight analysis</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "priorities",
+      "topic": "90-Day Priorities",
+      "title": "What are the prioritized 90-day recommendations?",
+      "referenced_by": ["ninety-day-set", "chatbot-fda-risk"],
+      "items": [
+        {
+          "question": "What should happen in the next 90 days?",
+          "answer_html": "<p>Seven prioritized actions:</p><p><strong>1.</strong> <span class=\"pill warn\">Start SOC 2 Type II observation.</span> The clock matters more than the content.</p><p><strong>2.</strong> <span class=\"pill warn\">Solve the Cloudflare BAA gap.</span> AWS/Azure with BAA, or Cloudflare enterprise contract. No enterprise PHI path without this.</p><p><strong>3.</strong> Add author name + last-reviewed date to every module. One-line change, massive trust signal.</p><p><strong>4.</strong> Write a \"visit-velocity\" positioning doc anchored on the 4-minute JTBD. Use it to prune feature ideas — anything that doesn't serve the visit-start manifest gets deprioritized.</p><p><strong>5.</strong> Do a Navina teardown. One-page feature matrix + differentiator thesis. Refresh quarterly.</p><p><strong>6.</strong> <span class=\"pill green\">Publish the CDS Hooks patient-view service.</span> Shipped 2026-04-18. Register with an Epic sandbox tenant for cross-EHR interop.</p><p><strong>7.</strong> <span class=\"pill green\">Meridian Coach v1 shipped</span> as a scoped assistant — soft-steer routing to modules, refusal of clinical recommendations, redirect to OpenEvidence. This is the <em>deliberate</em> answer to the per-module chatbot question: bounded in scope, FDA-safe by design, complements rather than competes with Dragon/Abridge. Only remaining gate is a BAA-covered API key (Anthropic enterprise or Bedrock) for PHI contexts.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#11-prioritized-recommendations\" target=\"_blank\">Full recommendations list</a></p>"
+        },
+        {
+          "question": "What needs to happen before the first enterprise pilot?",
+          "answer_html": "<p><strong>8.</strong> <span class=\"pill green\">Coach citation discipline enforced in v1.</span> System prompt refuses to quote, paraphrase, or recommend; every substantive clinical question routes to a module the clinician can independently review. Preserve this posture in every future expansion.</p><p><strong>9.</strong> Instrument for a process-measure study. Pick one outcome (e.g., time-to-decision for lipid management, % of hard-stops resolved pre-visit) and measure from pilot day 1.</p><p><strong>10.</strong> Publish one module via a specialty-society partnership — AAFP, SHM, or ACEP. Distribution + credibility in one move.</p><p><strong>11.</strong> Add a one-tap \"this doesn't fit my patient\" signal (Andon cord pattern). Deviation data is product data <em>and</em> safety cover.</p>"
+        },
+        {
+          "question": "What about scaling beyond the first two customers?",
+          "answer_html": "<p><strong>12.</strong> HITRUST r2 roadmap — not full certification, but a dated plan procurement can point to.</p><p><strong>13.</strong> Decide platform vs. product. If clinician-authoring is the moat, governance for outside contributors becomes a real question. Pick intentionally.</p><p><strong>14.</strong> Formalize the Abridge/DAX integration story. Even a one-pager. Scribes are the fastest-moving front in physician AI and Meridian's relationship to them defines a lot of its 2027 narrative.</p><p><a href=\"/docs/viewer.html?file=COMPETITIVE_POSITIONING.md#11-prioritized-recommendations\" target=\"_blank\">All 14 recommendations in source document</a></p>"
+        }
+      ]
+    }
+  ]
+}

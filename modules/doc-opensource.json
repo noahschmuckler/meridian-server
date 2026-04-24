@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "doc-opensource",
+  "default_title": "Open Source Strategy \u2014 IP Ownership & Licensing Decision",
+  "landing_intro": "Should Meridian be open-sourced? The answer depends on a threshold question that hasn't been resolved: who owns the IP? This module distills the strategic analysis into the key decision points, stress-tested arguments on both sides, and a recommended posture that captures the upside without premature commitment. The strongest single line: the realistic downside of OS is obscurity, not theft; the realistic upside is survival beyond your tenure.",
+  "checklist_section_label": "Open source readiness \u2014 confirm all four",
+  "checklist": [
+    {
+      "item_id": "ip-framed",
+      "position": 1,
+      "statement": "IP ownership question framed \u2014 if built on Optum time/equipment/workflows, Optum likely owns the IP; resolve before any OS decision",
+      "faq_ref": "threshold"
+    },
+    {
+      "item_id": "license-chosen",
+      "position": 2,
+      "statement": "License model chosen \u2014 open-core: Apache 2.0 for framework, CC-BY-SA 4.0 for clinical content, Optum-specific modules private",
+      "faq_ref": "licensing"
+    },
+    {
+      "item_id": "governance-drafted",
+      "position": 3,
+      "statement": "Governance template drafted \u2014 GOVERNANCE.md with \"maintainers have final say; roadmap owned by Dr. Schmuckler\" contract",
+      "faq_ref": "risks"
+    },
+    {
+      "item_id": "timeline-gated",
+      "position": 4,
+      "statement": "Timeline gated to 3 conditions \u2014 (a) Optum IP signoff, (b) first non-Optum pilot site, (c) stable module schema v2",
+      "faq_ref": "recommendation"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Recommended posture: don't OS yet, declare intent with conditions",
+    "narrative_html": "The recommended posture is to <strong>not open-source yet</strong> \u2014 no buyers, no external contributors asking, no regulatory clarity, no IP resolution with Optum. Opening now is a whimper. Instead, publish on the site: <em>\"Will open-source the framework layer when we hit X\"</em> where X = Optum IP signoff + first non-Optum pilot + stable schema v2. This gives all the goodwill benefits with none of the premature commitment. <strong>Avoid AGPL</strong> \u2014 Bahmni's 2025 reversal (AGPL\u2192MPL/MIT) is the current-year evidence.",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Risks & unresolved questions",
+  "escalation": [
+    {
+      "item_id": "ip-unresolved",
+      "position": 1,
+      "statement": "IP ownership unresolved \u2014 if Optum owns it, \"should we OS?\" is not your question to answer; it must go through Optum OSS governance (opensource.optum.com)",
+      "faq_ref": "threshold"
+    },
+    {
+      "item_id": "osehra-cautionary",
+      "position": 2,
+      "statement": "OSEHRA cautionary tale \u2014 850+ members, collapsed in 2020 when the VA (anchor tenant) left for Cerner; single-sponsor OS in healthcare dies when the sponsor loses interest",
+      "faq_ref": "risks"
+    },
+    {
+      "item_id": "maintainer-burnout",
+      "position": 3,
+      "statement": "Maintainer burnout risk \u2014 \"Doctors Who Code\" warns of stall-guilt-abandon arc; Linux Foundation 2024: 60% of maintainers unpaid",
+      "faq_ref": "risks"
+    },
+    {
+      "item_id": "optum-strategic",
+      "position": 4,
+      "statement": "Optum strategic interest unclear \u2014 is Meridian (a) internal differentiator, (b) PR/recruiting asset, (c) category-defining platform? Answer dictates license",
+      "faq_ref": "threshold"
+    },
+    {
+      "item_id": "security-myth",
+      "position": 5,
+      "statement": "\"Security through goodwill\" is a myth \u2014 OS code is more attackable in discovery phase; Linus's Law only works with enough eyes, which most projects don't have",
+      "faq_ref": "stress-test"
+    },
+    {
+      "item_id": "copycat-risk",
+      "position": 6,
+      "statement": "Copycat risk is real but asymmetric \u2014 defense is speed + clinical credibility, not secrecy; a physician-built product with a UC director's name is harder to replicate than code",
+      "faq_ref": "stress-test"
+    },
+    {
+      "item_id": "regulatory-visibility",
+      "position": 7,
+      "statement": "Regulatory exposure grows with visibility \u2014 FDA non-device posture holds today, but widely-adopted public tool invites closer scrutiny",
+      "faq_ref": "risks"
+    },
+    {
+      "item_id": "moat-question",
+      "position": 8,
+      "statement": "Competitive moat concern \u2014 OS gives trigger schema + UX patterns to Navina for free; counterargument: moat is clinical judgment + physician trust + Optum distribution, not code",
+      "faq_ref": "stress-test"
+    },
+    {
+      "item_id": "content-scaling",
+      "position": 9,
+      "statement": "Content scaling bottleneck \u2014 module roadmap bottlenecked on one physician; other physicians contributing modules is the only path to breadth",
+      "faq_ref": "stress-test"
+    },
+    {
+      "item_id": "agpl-warning",
+      "position": 10,
+      "statement": "Avoid AGPL \u2014 Bahmni relicensed AGPL\u2192MPL/MIT in Nov 2025 explicitly to grow adoption; AGPL costs more adoption than it buys in capture protection",
+      "faq_ref": "licensing"
+    }
+  ],
+  "context_strip": {
+    "label": "Current state",
+    "text": "Pre-enterprise, pre-Epic integration, solo builder. No IP resolution with Optum. No external contributors asking. GitHub repo exists (noahschmuckler/meridian) but is not positioned as an open-source project."
+  },
+  "footer_note": "Source: docs/OPEN_SOURCE_STRATEGY.md \u2014 April 2026. Full document includes Apache 2.0 landscape analysis, OSEHRA case study, and five philosophical decision questions for the group.",
+  "faqs": [
+    {
+      "faq_id": "threshold",
+      "topic": "Threshold Question",
+      "title": "Who decides whether to open-source?",
+      "referenced_by": ["ip-framed", "ip-unresolved", "optum-strategic"],
+      "items": [
+        {
+          "question": "Why is IP ownership the threshold question?",
+          "answer_html": "<p>If Meridian was built on Optum time, equipment, or against Optum/Kaiser workflows and data concepts, <strong>Optum likely owns the IP under your employment agreement.</strong> \"Should we open-source?\" may not be your question to answer \u2014 it's a question <em>to bring to</em> Optum's OSS governance.</p><p>Optum already runs <a href=\"https://opensource.optum.com/\">opensource.optum.com</a> and has a published contribution process. Treating this as a personal decision when it's actually a corporate one is the fastest way to lose control of the project entirely. <span class=\"pill warn\">Resolve this first.</span></p><p><a href=\"/docs/viewer.html?file=OPEN_SOURCE_STRATEGY.md#0-threshold-question--whose-decision-is-it\">Threshold question on GitHub</a></p>"
+        },
+        {
+          "question": "What does Optum's strategic interest look like?",
+          "answer_html": "<p>Four possible framings \u2014 the answer dictates licensing:</p><p><span class=\"pill\">A. Internal differentiator</span> \u2014 Meridian gives Optum clinicians an edge. Keep closed.<br><span class=\"pill\">B. PR/recruiting asset</span> \u2014 one more Optum OS repo. Incremental value only unless positioned deliberately.<br><span class=\"pill\">C. Category-defining platform</span> \u2014 requires executive sponsorship and OS release.<br><span class=\"pill green\">D. Open-core hybrid</span> \u2014 framework open, Optum-specific content private. Best of both.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "stress-test",
+      "topic": "Stress-Tested Arguments",
+      "title": "What survives scrutiny on both sides?",
+      "referenced_by": ["security-myth", "copycat-risk", "moat-question", "content-scaling"],
+      "items": [
+        {
+          "question": "Which pro-OS arguments hold up?",
+          "answer_html": "<p><span class=\"pill green\">Trust is table stakes</span> \u2014 auditable source is increasingly expected by health-system buyers. Metriport's thesis is that OSS wins enterprise healthcare deals.</p><p><span class=\"pill green\">Clinical content scales through contribution</span> \u2014 the module roadmap is bottlenecked on one physician. Other physicians contributing modules is the only path to breadth. The DOCX\u2192JSON pipeline makes this accessible to physicians who can write a Word document.</p><p><span class=\"pill green\">It forecloses internal-tool death</span> \u2014 internal tools die when the builder changes roles. OS + external adopters = institutional resilience beyond your Optum tenure.</p><p><span class=\"pill green\">Standards alignment is free</span> \u2014 building against CDS Hooks / SMART on FHIR in the open signals you're not a walled garden.</p><p><strong>The strongest single line:</strong> <em>The realistic downside of OS for Meridian is obscurity, not theft. The realistic upside is survival beyond your tenure.</em></p><p><a href=\"/docs/viewer.html?file=OPEN_SOURCE_STRATEGY.md#4-strongest-arguments-for-going-os\">Full arguments on GitHub</a></p>"
+        },
+        {
+          "question": "Which arguments don't survive?",
+          "answer_html": "<p><span class=\"pill warn\">\"Security through goodwill\"</span> \u2014 this is a myth. OS code is more attackable in the discovery phase. OpenSSF 2025 warns of state-actor supply-chain attacks on OSS. Linus's Law only works with enough eyes, which most projects don't have. The real security story is BAA + audit backend + HITRUST.</p><p><span class=\"pill warn\">\"PR deluge\"</span> \u2014 unlikely. Almost no OS project has this problem. The far more common failure is crickets.</p><p><span class=\"pill warn\">\"Attracting top-tier dev talent\"</span> \u2014 partially real, but Meridian's technical surface is small (single-file HTML + clinical JSON). You'd attract <em>clinical content contributors</em> more than senior engineers \u2014 which may be more valuable, but is a different bet.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "licensing",
+      "topic": "Licensing",
+      "title": "What license model is recommended?",
+      "referenced_by": ["license-chosen", "agpl-warning"],
+      "items": [
+        {
+          "question": "What is the open-core recommendation?",
+          "answer_html": "<p><span class=\"pill green\">Apache 2.0</span> for the framework (rendering engine, module schema, CDS Hooks integration) \u2014 permissive, Optum-friendly, maximum adoption.</p><p><span class=\"pill green\">CC-BY-SA 4.0</span> for clinical content JSON \u2014 so clinical edits must flow back to the community.</p><p><span class=\"pill\">Private</span> for Optum-specific modules and payer rules.</p><p>This is the open-core pattern that actually works in healthcare. The framework is the growth engine; the institution-specific content is the business value.</p>"
+        },
+        {
+          "question": "Why avoid AGPL?",
+          "answer_html": "<p><strong>Bahmni relicensed AGPL\u2192MPL/MIT in November 2025</strong>, explicitly to grow adoption. AGPL's copyleft requirement scared away enterprise adopters who couldn't (or wouldn't) comply. This is the current-year evidence that AGPL costs more adoption than it buys in capture protection.</p><p>Apache 2.0 is the modern default for healthcare interop/CDS: CDS Hooks, OpenCDS, and most FHIR tooling use it. <span class=\"pill warn\">AGPL is actively losing share in healthcare.</span></p><p><a href=\"/docs/viewer.html?file=OPEN_SOURCE_STRATEGY.md#1-the-landscape-condensed\">Licensing landscape on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "recommendation",
+      "topic": "Recommended Posture",
+      "title": "What should we do right now?",
+      "referenced_by": ["timeline-gated"],
+      "items": [
+        {
+          "question": "What is the recommended posture?",
+          "answer_html": "<p><strong>Don't open-source yet.</strong> No buyers, no external contributors asking, no regulatory clarity, no IP resolution with Optum. Opening now is a whimper.</p><p>Instead, posture it as <em>\"will open-source the framework layer when we hit X.\"</em> Published on the site. X = three conditions:</p><p><span class=\"pill green\">1.</span> Optum IP signoff.<br><span class=\"pill green\">2.</span> First non-Optum pilot site.<br><span class=\"pill green\">3.</span> Stable module schema v2.</p><p>This gives all the goodwill benefits with none of the premature commitment.</p><p><a href=\"/docs/viewer.html?file=OPEN_SOURCE_STRATEGY.md#8-recommended-posture\">Recommendation on GitHub</a></p>"
+        },
+        {
+          "question": "What are the five philosophical questions for the group?",
+          "answer_html": "<p><span class=\"pill\">1.</span> Is Meridian a product or a framework? Products stay closed. Frameworks open up. Open-core splits the difference.</p><p><span class=\"pill\">2.</span> Is the clinical content a moat or a contribution surface? If the former, closed. If the latter, open is the only way to scale.</p><p><span class=\"pill\">3.</span> What's the 3-year horizon for your personal involvement? If you might move roles, OS is the <em>only</em> way it survives without you.</p><p><span class=\"pill\">4.</span> Does Optum want Meridian as (a) internal differentiator, (b) PR/recruiting asset, or (c) category-defining platform?</p><p><span class=\"pill\">5.</span> Are you willing to say \"no\" to PRs, issues, and forks you disagree with? Kind physicians make bad BDFLs.</p><p><a href=\"/docs/viewer.html?file=OPEN_SOURCE_STRATEGY.md#7-decision-points--the-philosophical-questions-for-the-group\">Decision questions on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "risks",
+      "topic": "Risks & Governance",
+      "title": "What are the dominant failure modes, and how does governance mitigate them?",
+      "referenced_by": ["osehra-cautionary", "maintainer-burnout", "regulatory-visibility", "governance-drafted"],
+      "items": [
+        {
+          "question": "What does the OSEHRA cautionary tale teach?",
+          "answer_html": "<p><strong>OSEHRA</strong> (Open Source Electronic Health Record Alliance) had 850+ members and collapsed in 2020 when the VA \u2014 the anchor tenant \u2014 left for Cerner. The lesson: <span class=\"pill warn\">single-sponsor OS in healthcare dies when the sponsor loses interest.</span></p><p>For Meridian, this means: don't open-source until there's at least one non-Optum adopter. A second site is the minimum viable signal that the project can survive a sponsor exit.</p><p><a href=\"/docs/viewer.html?file=OPEN_SOURCE_STRATEGY.md#1-the-landscape-condensed\">OSEHRA reference on GitHub</a></p>"
+        },
+        {
+          "question": "How real is maintainer burnout?",
+          "answer_html": "<p>Very real. <strong>Linux Foundation 2024 OSPO data: 60% of maintainers are unpaid.</strong> \"Doctors Who Code\" explicitly warns of the stall-guilt-abandon arc for clinician developers. Issues, security disclosures, CVE responses become unpaid second-job work unless staffed.</p><p>Mitigation: a clearly-scoped project with a documented \"maintainers respond within 2 weeks, contributions via PR only\" contract is sustainable. You don't owe OSS your nights and weekends. <strong>The scope constraint matters more than the license choice.</strong></p>"
+        },
+        {
+          "question": "What governance model works for a clinician-led project?",
+          "answer_html": "<p>Apache 2.0 + a published <code>GOVERNANCE.md</code> with clear rules:</p><p><span class=\"pill green\">Maintainers have final say</span> \u2014 roadmap owned by Dr. Schmuckler.<br><span class=\"pill green\">Contributions via PR only</span> \u2014 no direct commits from external contributors.<br><span class=\"pill green\">Maintainers respond within 2 weeks</span> \u2014 sustainable cadence, not a second job.<br><span class=\"pill green\">Clinical content requires physician sign-off</span> \u2014 non-negotiable for a clinical tool.</p><p>The projects that lose direction are the ones that <em>don't</em> write this down. Direction drift is real but manageable via governance. The 90% solution is documenting the norms.</p>"
+        }
+      ]
+    }
+  ]
+}

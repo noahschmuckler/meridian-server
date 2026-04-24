@@ -1,0 +1,249 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "lipid-management",
+  "default_title": "Lipid Management — CV Risk & Statin Prescribing",
+  "landing_intro": "Clinical decision support for lipid management and cardiovascular risk reduction in primary care. Use this module when evaluating a new patient on lipid therapy, initiating statins, or reviewing a patient not at LDL goal. Content is based on the AHA/ACC PREVENT Calculator (2023) and the 2018 AHA/ACC Cholesterol Guidelines.",
+  "checklist_section_label": "Before you decide — verify all four",
+  "checklist": [
+    {
+      "item_id": "risk-tier",
+      "position": 1,
+      "statement": "ASCVD risk tier calculated using PREVENT Calculator",
+      "faq_ref": "risk-tier"
+    },
+    {
+      "item_id": "statin-indication",
+      "position": 2,
+      "statement": "Statin indication addressed and documented",
+      "faq_ref": "statin-indication"
+    },
+    {
+      "item_id": "ldl-target",
+      "position": 3,
+      "statement": "LDL target identified and compared to current value",
+      "faq_ref": "ldl-target"
+    },
+    {
+      "item_id": "med-plan",
+      "position": 4,
+      "statement": "Medication plan documented with next follow-up",
+      "faq_ref": "med-plan"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Lipid management reviewed — criteria met",
+    "narrative_html": "<p>Risk tier calculated, statin indication addressed, LDL goal identified, and medication plan documented. Patient is either at goal or has an active intensification plan in place. Follow-up interval appropriate to risk tier.</p>",
+    "smartphrase": ".lipidreview"
+  },
+  "escalation_section_label": "Escalate if any apply",
+  "escalation": [
+    {
+      "item_id": "ldl-190",
+      "position": 1,
+      "statement": "LDL ≥190 mg/dL regardless of calculated risk score",
+      "faq_ref": "ldl-190"
+    },
+    {
+      "item_id": "not-at-goal",
+      "position": 2,
+      "statement": "Not at LDL goal on maximally tolerated statin",
+      "faq_ref": "not-at-goal"
+    },
+    {
+      "item_id": "statin-hesitant",
+      "position": 3,
+      "statement": "Borderline/intermediate risk patient is statin-hesitant",
+      "faq_ref": "statin-hesitant"
+    },
+    {
+      "item_id": "very-high-risk",
+      "position": 4,
+      "statement": "Patient meets criteria for Very High Risk reclassification",
+      "faq_ref": "very-high-risk"
+    },
+    {
+      "item_id": "advanced-markers",
+      "position": 5,
+      "statement": "Advanced lipid markers indicated (ApoB, Lp(a))",
+      "faq_ref": "advanced-markers"
+    }
+  ],
+  "context_strip": {
+    "label": "Organizational Standard",
+    "text": "AHA/ACC PREVENT Calculator is the required organizational risk stratification tool, replacing Pooled Cohort Equations. Epic BPA integration targeting October/November 2026. Until live, calculate manually at acc.org/PREVENT. SUPD (Statin Use in Persons with Diabetes) is a tracked VBC metric — HEDIS benchmark ~90%. All diabetic patients must have statin therapy addressed and documented at each visit."
+  },
+  "footer_note": "Based on CV & Lipid Management Protocol (Draft, May 2026), Dr. Scott Hines MD — RBE East, Value-Based & Clinical Standards. ApoB, Lp(a), and CAC coverage confirmation pending — verify with payer before ordering. Not a substitute for clinical judgment. Module version 1.0.",
+  "faqs": [
+    {
+      "faq_id": "risk-tier",
+      "topic": "Risk Stratification",
+      "title": "Calculating ASCVD risk with the PREVENT Calculator",
+      "referenced_by": [
+        "risk-tier"
+      ],
+      "items": [
+        {
+          "question": "Why is PREVENT replacing the Pooled Cohort Equations?",
+          "answer_html": "<p>PREVENT incorporates kidney function (eGFR) and metabolic factors, and removes race as a variable — reducing known overestimation in certain populations. It is the 2023 AHA/ACC standard and Crystal Run's required organizational tool.</p>"
+        },
+        {
+          "question": "What are the four risk tiers and their thresholds?",
+          "answer_html": "<p><strong>Low: </strong>&lt;5% — no statin indicated. <strong>Borderline: </strong>5–7.5% — shared decision-making; statin reasonable if LDL ≥70 plus risk enhancers. <strong>Intermediate: </strong>7.5–20% — initiate statin. <strong>High: </strong>&gt;20% — high-intensity statin, no shared decision-making required.</p>"
+        },
+        {
+          "question": "What are risk-enhancing factors for borderline-risk patients?",
+          "answer_html": "<p>Family history of premature ASCVD, hs-CRP ≥2 mg/L, ABI &lt;0.9, elevated Lp(a) or ApoB. Presence of any of these at borderline risk (5–7.5%) with LDL ≥70 mg/dL supports statin initiation.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "statin-indication",
+      "topic": "Statin Indication",
+      "title": "When and how to initiate statin therapy",
+      "referenced_by": [
+        "statin-indication"
+      ],
+      "items": [
+        {
+          "question": "When is high-intensity statin indicated without shared decision-making?",
+          "answer_html": "<p><strong>Two automatic indications: </strong>(1) 10-year risk &gt;20%, or (2) LDL ≥190 mg/dL regardless of risk score. Both are standard of care — document and initiate without requiring patient agreement process beyond standard informed consent.</p>"
+        },
+        {
+          "question": "When is shared decision-making required?",
+          "answer_html": "<p>All borderline-risk patients (5–7.5%). Document the conversation, the patient's preference, and the clinical factors considered. CAC score may support or defer initiation — CAC of 0 supports deferral; CAC &gt;100 or ≥75th percentile supports initiation.</p>"
+        },
+        {
+          "question": "What is the SUPD requirement for diabetic patients?",
+          "answer_html": "<p>Statin Use in Persons with Diabetes is a HEDIS-tracked VBC metric with an organizational benchmark of ~90%. Every diabetic patient must have statin therapy addressed and documented at each visit, even if the patient declines or is intolerant.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "ldl-target",
+      "topic": "LDL Targets",
+      "title": "LDL goals by risk tier",
+      "referenced_by": [
+        "ldl-target"
+      ],
+      "items": [
+        {
+          "question": "What are the LDL targets by tier?",
+          "answer_html": "<p><strong>Very High Risk: </strong>&lt;55 mg/dL. <strong>High Risk: </strong>&lt;70 mg/dL. <strong>Intermediate Risk: </strong>&lt;70–100 mg/dL depending on risk-enhancing factors. <strong>Borderline Risk: </strong>Shared decision-making — statin reasonable when LDL ≥70 plus risk enhancers.</p>"
+        },
+        {
+          "question": "What defines Very High Risk?",
+          "answer_html": "<p>Established ASCVD plus a second major cardiovascular event, OR one prior ASCVD event plus any of the following: diabetes, CKD, poorly controlled hypertension, current smoking, or LDL ≥100 mg/dL on maximally tolerated statin. Note: prior MI alone is High Risk; any comorbidity escalates to Very High Risk.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "med-plan",
+      "topic": "Medication Plan",
+      "title": "Documenting the medication plan and follow-up",
+      "referenced_by": [
+        "med-plan"
+      ],
+      "items": [
+        {
+          "question": "What must be included in the medication plan documentation?",
+          "answer_html": "<p>Current statin name and intensity (low / moderate / high), whether patient is at LDL goal, next step if not at goal (intensify statin, add ezetimibe, or refer), and planned follow-up interval. Fasting lipid panel at 4–12 weeks after any change is standard.</p>"
+        },
+        {
+          "question": "What statin intensity classifications are used?",
+          "answer_html": "<p><strong>High-intensity: </strong>Rosuvastatin 20–40 mg, Atorvastatin 40–80 mg. <strong>Moderate-intensity: </strong>Rosuvastatin 5–10 mg, Atorvastatin 10–20 mg, Simvastatin 20–40 mg. <strong>Low-intensity: </strong>Simvastatin 10 mg, Pravastatin 10–20 mg — generally insufficient for high or very high risk patients.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "ldl-190",
+      "topic": "LDL ≥190",
+      "title": "Managing severely elevated LDL",
+      "referenced_by": [
+        "ldl-190"
+      ],
+      "items": [
+        {
+          "question": "What action is required for LDL ≥190 mg/dL?",
+          "answer_html": "<p>Initiate high-intensity statin immediately — no shared decision-making required, no risk score threshold applies. Consider evaluation for familial hypercholesterolemia (FH). If LDL remains ≥100 mg/dL on maximally tolerated statin, add ezetimibe and consider PCSK9 inhibitor referral to cardiology.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "not-at-goal",
+      "topic": "Not at LDL Goal",
+      "title": "Escalation pathway when LDL goal is not met",
+      "referenced_by": [
+        "not-at-goal"
+      ],
+      "items": [
+        {
+          "question": "What is the escalation sequence when a patient is not at LDL goal?",
+          "answer_html": "<p><strong>Step 1: </strong>Confirm adherence and maximize statin dose. <strong>Step 2: </strong>Add ezetimibe 10 mg daily — proven LDL reduction of 15–20%. <strong>Step 3: </strong>If still not at goal, refer to cardiology for PCSK9 inhibitor consideration (alirocumab, evolocumab). PCSK9 inhibitors require prior authorization and documented statin intolerance or failure.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "statin-hesitant",
+      "topic": "Statin-Hesitant Patient",
+      "title": "Using CAC scoring to guide shared decision-making",
+      "referenced_by": [
+        "statin-hesitant"
+      ],
+      "items": [
+        {
+          "question": "When is CAC scoring appropriate?",
+          "answer_html": "<p>Ages 40–75 with borderline to intermediate risk (5–20%) who are hesitant about statin initiation. CAC of 0 supports deferral with reassessment in 5–7 years. CAC &gt;100 or ≥75th percentile for age/sex supports initiation. Document the CAC result and the patient's decision in the chart.</p>"
+        },
+        {
+          "question": "Is CAC covered by insurance?",
+          "answer_html": "<p>Coverage confirmation is pending with the payer team. Verify before ordering. Cost is typically $75–150 out of pocket when not covered.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "very-high-risk",
+      "topic": "Very High Risk Reclassification",
+      "title": "When to escalate from High to Very High Risk",
+      "referenced_by": [
+        "very-high-risk"
+      ],
+      "items": [
+        {
+          "question": "What triggers Very High Risk reclassification?",
+          "answer_html": "<p>Established ASCVD plus a second major event, OR any prior ASCVD event combined with: diabetes, CKD, poorly controlled hypertension, current smoking, or LDL ≥100 mg/dL on maximally tolerated statin. Reclassification changes LDL target from &lt;70 to &lt;55 mg/dL and makes PCSK9 inhibitor referral appropriate if goal is not met.</p>"
+        },
+        {
+          "question": "Is cardiology referral required for Very High Risk patients?",
+          "answer_html": "<p>Not automatically required, but strongly consider referral when LDL goal (&lt;55 mg/dL) is not being met on maximally tolerated statin plus ezetimibe.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "advanced-markers",
+      "topic": "Advanced Lipid Markers",
+      "title": "ApoB and Lp(a) — when and how to order",
+      "referenced_by": [
+        "advanced-markers"
+      ],
+      "items": [
+        {
+          "question": "When are ApoB and Lp(a) indicated?",
+          "answer_html": "<p><strong>ApoB: </strong>Indicated for High and Very High Risk patients to assess residual risk beyond LDL, particularly when LDL appears controlled but cardiovascular risk remains unclear. <strong>Lp(a): </strong>Indicated once per lifetime for all patients with premature ASCVD, strong family history, or LDL ≥190 not fully explained by diet/secondary causes.</p>"
+        },
+        {
+          "question": "Is ordering ApoB or Lp(a) currently approved?",
+          "answer_html": "<p><strong>Coverage and indications are pending confirmation with the payer team. </strong>Do not embed in order sets or SmartSets until confirmed. Manual ordering with documented clinical indication is acceptable in the interim.</p>"
+        }
+      ]
+    }
+  ],
+  "references": [
+    "Khan SS, et al. Novel Prediction Equations for Absolute Risk Assessment of Total Cardiovascular Disease Incorporating Cardiovascular-Kidney-Metabolic Health. Circulation. 2023;148(24):1982–2004.",
+    "Grundy SM, et al. 2018 AHA/ACC Guideline on the Management of Blood Cholesterol. JACC. 2019;73(24):e285–e350.",
+    "Goff DC Jr, et al. 2013 ACC/AHA Guideline on the Assessment of Cardiovascular Risk. Journal of the American College of Cardiology. 2014;63(25 Pt B):2935–2959.",
+    "2022 ACC Expert Consensus Decision Pathway on Novel Therapies for Cardiovascular Risk Reduction.",
+    "European Atherosclerosis Society Lp(a) Consensus Statement, 2022.",
+    "Budoff MJ, et al. Coronary Artery Calcium: ACC/AHA Position Statement. JACC. 2018.",
+    "NCQA HEDIS Measures — updated annually at ncqa.org."
+  ]
+}

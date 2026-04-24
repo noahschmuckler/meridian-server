@@ -1,0 +1,229 @@
+{
+  "schema_version": "1.0.0",
+  "module_id": "doc-interop",
+  "default_title": "Interop Strategy — Dragon Copilot & Scribe-CDS Convergence",
+  "landing_intro": "Meridian sits at the convergence of ambient AI scribes, EHR-native CDS, and third-party clinical decision support. Dragon Copilot (100K+ clinicians), Abridge CRE (Kaiser 25K physicians), and Epic-native AI (160–200 projects) are all moving toward patient-specific action lists. This module maps the threat picture, five durable differentiators, and a phased integration posture that keeps Meridian relevant without coupling to any single platform.",
+  "checklist_section_label": "Interop readiness — confirm all four",
+  "checklist": [
+    {
+      "item_id": "cds-hooks-live",
+      "position": 1,
+      "statement": "CDS Hooks service live — /cds-services/meridian-manifest implements HL7 CDS Hooks 2.0 patient-view with FHIR prefetch consumption",
+      "faq_ref": "phase-a"
+    },
+    {
+      "item_id": "smart-launch",
+      "position": 2,
+      "statement": "SMART on FHIR launch ready — PKCE OAuth2 handshake, Patient/Condition/MedicationRequest/Observation fetch, read-only posture",
+      "faq_ref": "phase-a"
+    },
+    {
+      "item_id": "dragon-stub",
+      "position": 3,
+      "statement": "Dragon Copilot agent stub created — Copilot Studio manifest + OpenAPI schema in dragon-agent/; deployment not yet executed",
+      "faq_ref": "phase-b"
+    },
+    {
+      "item_id": "scribe-positioning",
+      "position": 4,
+      "statement": "Scribe-downstream positioning defined — \"Meridian-after-Abridge\" framing; /api/modules/match is the callable contract for any scribe partner",
+      "faq_ref": "phase-c"
+    }
+  ],
+  "green_zone": {
+    "zone_label": "Phase A mostly implemented — interop layer is callable",
+    "narrative_html": "The EHR-agnostic interop layer (Phase A) is built: trigger schema in <code>modules/index.json</code>, <code>/api/modules/match</code> endpoint, CDS Hooks service, and SMART on FHIR launch. The Dragon agent stub (Phase B) exists but is not deployed. Scribe partnerships (Phase C) require no additional build — only outreach. <strong>Five durable differentiators</strong> guide every feature decision: push-based manifest, per-provider authoring, cross-EHR, scribe-downstream, and citation-traceable.",
+    "smartphrase": ""
+  },
+  "escalation_section_label": "Threats & gaps — monitor and act",
+  "escalation": [
+    {
+      "item_id": "dragon-threat",
+      "position": 1,
+      "statement": "Dragon Copilot threat — 100K+ clinicians, Information Assist integrates OpenEvidence natively; 20–50% real-world adoption ceiling is the counterweight",
+      "faq_ref": "threat-landscape"
+    },
+    {
+      "item_id": "abridge-threat",
+      "position": 2,
+      "statement": "Abridge CRE threat — Kaiser 25K physicians, Best in KLAS 2025–2026, emits structured problems/orders from ambient audio; simultaneously highest-value partnership target",
+      "faq_ref": "threat-landscape"
+    },
+    {
+      "item_id": "epic-ai-commodity",
+      "position": 3,
+      "statement": "Epic AI commoditization — Art + Cosmos + CoMET + Agent Factory will own \"AI-native CDS for Epic shops\" by 2027; Meridian's lane is cross-EHR and non-interruptive",
+      "faq_ref": "threat-landscape"
+    },
+    {
+      "item_id": "auth-gap",
+      "position": 4,
+      "statement": "Auth not implemented — CORS is allow_origins=[\"*\"], no Bearer/Entra scheme on /api/modules/match or /cds-services/*",
+      "faq_ref": "phase-c"
+    },
+    {
+      "item_id": "no-partner-outreach",
+      "position": 5,
+      "statement": "No partner outreach yet — OpenEvidence (cheapest), Microsoft (highest-leverage), Abridge (highest-stakes/Kaiser overlap) all uncontacted",
+      "faq_ref": "phase-c"
+    },
+    {
+      "item_id": "dragon-registration",
+      "position": 6,
+      "statement": "Dragon agent not registered — manifest exists but not submitted to Healthcare Agent Service; 3–6 month marketplace listing cycle",
+      "faq_ref": "phase-b"
+    },
+    {
+      "item_id": "fhir-coverage-gap",
+      "position": 7,
+      "statement": "FHIR lab code coverage incomplete — current SMART_LAB_CODE_MAP covers 6 labs; full module matching needs uACR, creatinine, potassium, phosphorus, PTH, ferritin, etc.",
+      "faq_ref": "phase-c"
+    },
+    {
+      "item_id": "counter-indicator-dragon",
+      "position": 8,
+      "statement": "Strategy invalidation risk — if Dragon opens Information Assist to customer-authored knowledge sources with per-provider ranking, differentiator 3.2 collapses",
+      "faq_ref": "differentiators"
+    },
+    {
+      "item_id": "counter-indicator-epic",
+      "position": 9,
+      "statement": "Strategy invalidation risk — if Epic ships a provider-customizable pre-visit manifest inside Art, differentiator 3.1 collapses",
+      "faq_ref": "differentiators"
+    },
+    {
+      "item_id": "anti-goals",
+      "position": 10,
+      "statement": "Anti-goals enforced — no free-form unbounded chatbot (Meridian Coach v1 is the bounded form: refuses clinical recommendations, routes to modules), don't pursue Agent Factory, don't Epic-couple, don't clone Navina HCC/coding, don't match Dragon on content breadth",
+      "faq_ref": "differentiators"
+    }
+  ],
+  "context_strip": {
+    "label": "Build state",
+    "text": "Phase A implemented (trigger schema, /api/modules/match, CDS Hooks, SMART launch). Meridian Coach v1 shipped (Anthropic Claude Haiku 4.5 behind /api/agent/message, same contract as FastAPI). Phase B stubbed (dragon-agent/ directory). Phase C requires outreach only. Last updated 2026-04-22."
+  },
+  "footer_note": "Source: docs/INTEROP_STRATEGY.md — April 2026. Full document includes 50+ primary sources, vendor deployment counts, and HIMSS 2026 announcements.",
+  "faqs": [
+    {
+      "faq_id": "threat-landscape",
+      "topic": "Threat Landscape",
+      "title": "Who are the three major threats?",
+      "referenced_by": [
+        "dragon-threat",
+        "abridge-threat",
+        "epic-ai-commodity"
+      ],
+      "items": [
+        {
+          "question": "What is Dragon Copilot's current state?",
+          "answer_html": "<p><strong>GA March 2025.</strong> Folds Dragon Medical One (dictation) + DAX Copilot (ambient) into one product. HIMSS 2026 re-positioning: \"agentic clinical assistant.\" >100,000 clinicians, 600+ orgs, 58 languages.</p><p><strong>Information Assist</strong> pulls from UpToDate, <span class=\"pill\">OpenEvidence</span>, Elsevier ClinicalKey, CDC, FDA, MedlinePlus. Produces conversational orders, note summaries, referral letters.</p><p><strong>Extensibility</strong> is the strategic opening: Partner REST APIs, DAXKit SDK, Healthcare Agent Service in Copilot Studio, three temporal hooks (pre/during/post encounter), 17 launch partners including <span class=\"pill warn\">OpenEvidence and Optum</span>.</p><p><strong>Counterweight:</strong> real-world adoption is <span class=\"pill warn\">20–50%</span>. KLAS Best in Ambient AI went to Abridge in 2025 and 2026, not Dragon.</p><p><a href=\"/docs/viewer.html?file=INTEROP_STRATEGY.md#21-microsoft-dragon-copilot\">Dragon Copilot analysis on GitHub</a></p>"
+        },
+        {
+          "question": "Why is Abridge both a threat and a partnership target?",
+          "answer_html": "<p><strong>Abridge CRE</strong> (Feb 2025, post $250M Series D) emits structured problems, predicted orders, and care gaps from ambient audio. First \"Pal\" in Epic's Workshop program. Largest ambient deployment: Kaiser Permanente, <span class=\"pill\">40 hospitals, 600 offices, 25K physicians</span>.</p><p><strong>Threat:</strong> Abridge CDS is explicitly \"closing care gaps at the point of conversation\" — Meridian's core territory.</p><p><strong>Partnership:</strong> A Meridian module triggered <em>from</em> an Abridge conversation is a wedge Epic-native CDS cannot close (because Epic's native scribe competes with Abridge). This is the <strong>\"Meridian-after-Abridge\"</strong> positioning.</p><p><a href=\"/docs/viewer.html?file=INTEROP_STRATEGY.md#22-abridge-contextual-reasoning-engine-cre--abridge-cds\">Abridge analysis on GitHub</a></p>"
+        },
+        {
+          "question": "How does Epic-native AI affect the landscape?",
+          "answer_html": "<p>160–200 active AI projects. >85% of Epic's customer base uses at least one Epic AI feature. Key surfaces:</p><p><span class=\"pill\">Art</span> — ambient charting + conversational Q&A + Cosmos \"similar patients.\"<br><span class=\"pill\">CoMET</span> — generative medical-event transformer trained on 300M patients.<br><span class=\"pill warn\">Agent Factory</span> — no-code agent builder. <strong>Customer-local, not an ISV channel.</strong></p><p>Epic is closing Workshop → Toolbox/Showroom. BPA override rates (49–96%) are Meridian's marketing moat: <em>\"the CDS that doesn't interrupt you.\"</em></p><p><a href=\"/docs/viewer.html?file=INTEROP_STRATEGY.md#23-epic-native-ai\">Epic AI analysis on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "differentiators",
+      "topic": "Durable Differentiators",
+      "title": "What are the five durable differentiators?",
+      "referenced_by": [
+        "counter-indicator-dragon",
+        "counter-indicator-epic",
+        "anti-goals"
+      ],
+      "items": [
+        {
+          "question": "What are the five differentiators?",
+          "answer_html": "<p>Every feature decision should ladder to one of these:</p><p><span class=\"pill green\">3.1 Push-based, visit-start manifest</span> — fires before the encounter opens. Dragon is ambient/pull; Abridge triggers on conversation; Epic BPAs fire late. Hard Stops panel is P0.</p><p><span class=\"pill green\">3.2 Per-provider / per-org authoring</span> — clinician-authored decision trees. DOCX→JSON pipeline + triggers in index.json. Neither Dragon nor Epic lets a UC medical director author their own manifest.</p><p><span class=\"pill green\">3.3 Cross-EHR / EHR-agnostic</span> — works with Oracle, Meditech, Athena, eCW. Epic-native tools do not. <strong>Do not Epic-couple the roadmap.</strong></p><p><span class=\"pill green\">3.4 Scribe-downstream, not scribe-competing</span> — Meridian becomes the module the scribe's structured output opens. <code>/api/modules/match</code> is the callable contract.</p><p><span class=\"pill green\">3.5 Citation-traceable, FDA non-device CDS</span> — every recommendation is source-reviewable. <strong>Meridian Coach v1 is the live exemplar</strong>: the soft-steer pattern refuses to generate clinical recommendations, routes clinical questions to the relevant module (which the clinician reviews in full), and redirects pure-clinical questions to OpenEvidence. This preserves criterion #4 by construction, not by disclaimer.</p><p><a href=\"/docs/viewer.html?file=INTEROP_STRATEGY.md#3-five-durable-differentiators\">Differentiators on GitHub</a></p>"
+        },
+        {
+          "question": "What are the anti-goals?",
+          "answer_html": "<p>Things we should <strong>not</strong> do:</p><p><span class=\"pill green\">Coach v1 is the bounded shape of the chatbot</span> — not the anti-goal. It refuses to generate clinical recommendations, routes to modules, redirects to OpenEvidence. This is the deliberate answer to the \"don't ship a free-form chatbot\" rule: ship a <em>tightly-scoped</em> one.</p><p><span class=\"pill warn\">No free-form chatbot that generates clinical recommendations</span> — would violate FDA criterion #4 and directly compete with Dragon Information Assist without advantage. Coach must never drift here.<br><span class=\"pill warn\">Do not pursue Agent Factory</span> — customer-local, not a third-party channel.<br><span class=\"pill warn\">Do not depend on Workshop</span> — being deprecated.<br><span class=\"pill warn\">Don't clone Navina HCC/coding</span> — that quadrant is owned (3M patients, KLAS #1).<br><span class=\"pill warn\">Don't retrofit PHI onto Cloudflare Pages</span> — BAA gap blocks enterprise.<br><span class=\"pill warn\">Do not Epic-couple</span> — cross-EHR is differentiator #3.<br><span class=\"pill warn\">Don't match Dragon on breadth</span> — win on authorship, structure, and push-timing.</p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "phase-a",
+      "topic": "Phase A — EHR-Agnostic Layer",
+      "title": "What is the Phase A interop layer?",
+      "referenced_by": [
+        "cds-hooks-live",
+        "smart-launch"
+      ],
+      "items": [
+        {
+          "question": "What was built in Phase A?",
+          "answer_html": "<p>Four components, all implemented 2026-04-18:</p><p><span class=\"pill green\">Trigger schema</span> — machine-readable triggers in <code>modules/index.json</code> (problem keywords, med regex, lab thresholds, priority). Single source of truth for frontend panel, match endpoint, and CDS Hooks service.</p><p><span class=\"pill green\">/api/modules/match</span> — POST with patient context JSON or GET with <code>?mrn=</code>. Returns ranked <code>[{module_id, title, reason, priority, category}]</code> + OE pre-prompt.</p><p><span class=\"pill green\">CDS Hooks service</span> — <code>/cds-services/meridian-manifest</code>, HL7 2.0 <code>patient-view</code> handler. Consumes FHIR prefetch bundles, returns cards with deep-links.</p><p><span class=\"pill green\">SMART on FHIR launch</span> — PKCE OAuth2, Patient/Condition/MedicationRequest/Observation fetch, FHIR→Meridian shape mapping. Read-only by design.</p><p><a href=\"/docs/viewer.html?file=INTEROP_STRATEGY.md#phase-a--ehr-agnostic-interop-layer-mostly-implemented-2026-04-18-see-6\">Phase A details on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "phase-b",
+      "topic": "Phase B — Dragon Copilot Agent",
+      "title": "What is the Dragon Copilot agent?",
+      "referenced_by": [
+        "dragon-stub",
+        "dragon-registration"
+      ],
+      "items": [
+        {
+          "question": "What does the Dragon agent do?",
+          "answer_html": "<p>Wraps Phase A and turns Meridian into a Dragon Copilot-resident card surface. Two skills:</p><p><span class=\"pill\">pre_encounter_manifest(patient)</span> — POSTs to <code>/api/modules/match</code>; returns the visit-start manifest as cards Dragon renders in its pre-encounter hook.</p><p><span class=\"pill\">open_module(module_id, patient_id)</span> — returns a deep-link URL Dragon surfaces as a button.</p><p><strong>Registration path:</strong> Healthcare Agent Service in Copilot Studio → tenant-admin install at Optum/CRH → Microsoft commercial marketplace listing. <span class=\"pill warn\">3–6 months from build to marketplace listing</span>, gated on Phase A backend standing up on BAA-covered infrastructure.</p><p><a href=\"https://github.com/noahschmuckler/meridian/blob/main/dragon-agent/README.md\">Dragon agent README on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "phase-c",
+      "topic": "Phase C — Scribe Partnerships & Open Gaps",
+      "title": "How does scribe-partner integration work, and what remains unresolved?",
+      "referenced_by": [
+        "scribe-positioning",
+        "auth-gap",
+        "no-partner-outreach",
+        "fhir-coverage-gap"
+      ],
+      "items": [
+        {
+          "question": "Which scribe partners should be pursued?",
+          "answer_html": "<p>Once the CDS Hooks service and <code>/api/modules/match</code> are externally available, scribes can call Meridian post-encounter. Priority order:</p><p><span class=\"pill green\">Abridge</span> — highest-value target because of Kaiser overlap. Partnership conversation, not a build task.</p><p><span class=\"pill\">Ambience / Suki / DeepScribe / Heidi / Glass</span> — same mechanism. Heidi's community prompt marketplace is a distribution-channel model worth studying. Glass Health is the closest functional competitor (ambient + native CDS + differential dx).</p><p><span class=\"pill\">OpenEvidence</span> — already the deep-link target; with BAAs now free (April 2025), cultivate before Dragon's embedded OE consumption erodes the relationship.</p>"
+        },
+        {
+          "question": "What is the 'Meridian-after-Abridge' positioning?",
+          "answer_html": "<p>If Abridge captures a conversation and emits structured problems/orders, Meridian becomes the module those signals open. This is the <strong>\"Meridian-after-Abridge\"</strong> wedge — and it's a position Epic-native CDS cannot close, because Epic's native scribe <em>competes</em> with Abridge.</p><p>The <code>/api/modules/match</code> contract is the mechanism: POST patient context (from any source), get back ranked modules + deep-links. No Abridge-specific build required — just a partnership conversation.</p><p><a href=\"/docs/viewer.html?file=INTEROP_STRATEGY.md#phase-c--scribe-partner-integration-no-build-required-beyond-phase-a\">Scribe partnership details on GitHub</a></p>"
+        },
+        {
+          "question": "What are the key open questions across the interop surface?",
+          "answer_html": "<p><span class=\"pill warn\">Auth design</span> — CORS is <code>*</code>, no Bearer scheme. Static API key? OAuth2 client credentials? Tenant-scoped JWT? Decision needed before PHI flows.</p><p><span class=\"pill warn\">Trigger schema versioning</span> — if external services depend on the match contract, schema changes need versioning discipline. Not yet defined.</p><p><span class=\"pill warn\">FHIR lab code coverage</span> — 6 labs mapped; full module matching needs uACR, creatinine, potassium, phosphorus, PTH, ferritin, B12, folate, TSH.</p><p><span class=\"pill warn\">Hard stops in match response</span> — currently returns modules + priority + reason but not hard stops. Should aggregate them for Dragon agent cards.</p><p><span class=\"pill warn\">Partner outreach sequencing</span> — OpenEvidence (cheapest), Microsoft (highest-leverage, longest cycle), Abridge (highest-stakes, Kaiser overlap). Which first?</p><p><a href=\"/docs/viewer.html?file=INTEROP_STRATEGY.md#9-open-questions\">Open questions on GitHub</a></p>"
+        }
+      ]
+    },
+    {
+      "faq_id": "ai-coach-interop",
+      "topic": "AI Coach — Interop",
+      "title": "How does Meridian Coach fit into the interop story?",
+      "referenced_by": [
+        "anti-goals"
+      ],
+      "items": [
+        {
+          "question": "Is Meridian Coach the \"AI-native CDS\" threat to Meridian itself?",
+          "answer_html": "<p>No — it's the <em>bounded</em>, first-party answer to that question. Coach v1 deliberately does not compete with Dragon Information Assist or Epic Art. It doesn't answer clinical questions; it navigates users to Meridian modules and coaches them on using the modules themselves. That keeps the moat (physician-authored content + push-based manifest + cross-EHR) intact and adds the one user-facing surface that new users consistently ask for.</p>"
+        },
+        {
+          "question": "What needs to happen for Coach to work with Dragon/Abridge?",
+          "answer_html": "<p>Nothing today — Coach lives entirely inside Meridian's own UI. For Phase 2+ scenarios where a scribe surface wants to embed Coach's Q&A capability, the same <code>/api/agent/message</code> SSE contract can be called from a Dragon Copilot Studio skill or an Abridge embed. Same backend, same tools, different frontend.</p><p>Alternative path: a <strong>Copilot Studio agent</strong> that implements the Coach contract natively — tighter M365 integration (SSO, Purview audit, Teams surfacing) at the cost of model-choice control. Credible Phase 2 option if enterprise demands it.</p>"
+        },
+        {
+          "question": "What about future sub-agents and literature verification?",
+          "answer_html": "<p><strong>Sub-agents per subject area</strong> become worth building when the module registry outgrows a single generalist prompt (roughly 30–50 modules). A lightweight router triages the user's question and hands off to the right specialist. Not needed yet at ~15 modules.</p><p><strong>Literature-verification agents</strong> are a separate, background workstream: periodic checks of each module against OpenEvidence/PubMed/guidelines, surfacing suggested updates when evidence shifts. <strong>Dr. Varun Malik has already built agents that do exactly this</strong> in his own work — natural starting point for reuse or design inspiration. Keeps Meridian modules current without manual re-review cadence.</p>"
+        }
+      ]
+    }
+  ]
+}
